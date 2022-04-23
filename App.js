@@ -7,7 +7,7 @@ export default function App() {
 
   async function handleClick() {
     console.log("button clicked");
-    fetch("http://localhost:8000/test")
+    fetch("http://localhost:8000/api/test/something")
       .then((response) => (response = response.json()))
       .then((response) => {
         console.log(response.data);
