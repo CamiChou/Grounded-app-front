@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "../styles.js";
 import { Text, View, Button } from "react-native";
+import apiKeys from "../config/apiKeys.js";
+import { back } from "react-native/Libraries/Animated/src/Easing";
 
 export default function ExtraScreen() {
   const [string, setString] = React.useState("Hello World");
 
   async function handleClick() {
-    console.log("button clicked");
-    fetch("http://128.97.250.43:8000/api/test/something")
+    fetch(`http://${apiKeys.backendEndpoint}/api/test/something`)
       .then((response) => (response = response.json()))
       .then((response) => {
         console.log(response.data);
