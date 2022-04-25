@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Grounded-app-front",
-    "slug": "Grounded-app-front",
+    "name": "quickstarter",
+    "slug": "quickstarter",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
