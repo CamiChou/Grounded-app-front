@@ -74,6 +74,7 @@ export async function login() {
   try {
     const result = await Google.logInAsync({
       iosClientId: apiKeys.authClient.iosID,
+      androidClientId: apiKeys.authClient.androidID,
       scopes: ["profile", "email"],
     });
 
