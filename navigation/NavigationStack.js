@@ -8,6 +8,7 @@ import HomeScreen from "../screens/HomeScreen";
 import ExtraScreen from "../screens/ExtraScreen";
 import UserProfileScreen from "../screens/UserProfileScreen";
 import firebase from "firebase";
+import LogoScreen from "../screens/LogoScreen";
 
 export default function NavigationStack() {
   const { user, setUser } = useContext(AuthContext);
@@ -33,13 +34,24 @@ export default function NavigationStack() {
   return (
     <NavigationContainer>
       {user ? (
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Extra" component={ExtraScreen} />
+        <Stack.Navigator initialRouteName="Logo">
           <Stack.Screen
+            options={{ headerShown: false }}
+            name="Logo"
+            component={LogoScreen}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
             options={{
               headerLeft: () => <></>,
             }}
+          />
+          <Stack.Screen name="Extra" component={ExtraScreen} />
+          <Stack.Screen
+            // options={{
+            //   headerLeft: () => <></>,
+            // }}
             name="UserProfile"
             component={UserProfileScreen}
           />

@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles.js";
 import { Text, View, Button, Image } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
