@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles.js";
 import { Text, View, Button, Image } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
   const [userName, setUserName] = useState("");
   const [profilePic, setProfilePic] = useState(null);
@@ -17,8 +19,11 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <Text>Welcome {userName}</Text>
       <Image style={styles.profileImage} source={{ uri: profilePic }} />
-
-      <Button onPress={logout} title="Log Out" />
+      <Button
+        title="Continue"
+        onPress={() => navigation.navigate("UserProfile")}
+      />
+      <Button title="Log Out" onPress={logout} />
     </View>
   );
 }

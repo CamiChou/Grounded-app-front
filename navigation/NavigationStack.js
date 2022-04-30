@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeStack from "./HomeStack";
 import AuthStack from "./AuthStack";
 import { AuthContext } from "./AuthProvider";
 import { ActivityIndicator } from "react-native";
+import HomeScreen from "../screens/HomeScreen";
+import ExtraScreen from "../screens/ExtraScreen";
+import UserProfileScreen from "../screens/UserProfileScreen";
 import firebase from "firebase";
 
 export default function NavigationStack() {
@@ -12,14 +14,15 @@ export default function NavigationStack() {
   const [initializing, setInitializing] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  //handle user state changes
+  // Handle user state changes
   useEffect(() => {
     const subscriber = firebase.auth().onAuthStateChanged(function (user) {
       setUser(user);
       if (initializing) setInitializing(false);
       setLoading(false);
     });
-    return subscriber; // unsubscribe on unmount
+
+    return subscriber;
   }, []);
 
   if (loading) {
@@ -29,7 +32,21 @@ export default function NavigationStack() {
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
-      {user ? <HomeStack /> : <AuthStack />}
+      {user ? (
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Extra" component={ExtraScreen} />
+          <Stack.Screen
+            options={{
+              headerLeft: () => <></>,
+            }}
+            name="UserProfile"
+            component={UserProfileScreen}
+          />
+        </Stack.Navigator>
+      ) : (
+        <AuthStack />
+      )}
     </NavigationContainer>
   );
 }
