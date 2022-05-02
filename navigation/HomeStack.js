@@ -3,6 +3,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import HomeScreen from "../screens/HomeScreen";
 import ExtraScreen from "../screens/ExtraScreen";
 import UserProfileScreen from "../screens/UserProfileScreen";
+import CreateProfile from "../screens/CreateProfile";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
@@ -43,6 +44,7 @@ export default function HomeStack() {
           ),
         }}
       />
+
     </Tab.Navigator>
   );
 }

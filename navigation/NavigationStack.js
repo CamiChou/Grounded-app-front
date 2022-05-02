@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeStack from "./HomeStack";
+import CreateProfileStack from "./CreateProfileStack";
 import AuthStack from "./AuthStack";
 import { AuthContext } from "./AuthProvider";
 import { ActivityIndicator } from "react-native";
@@ -29,7 +30,7 @@ export default function NavigationStack() {
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
-      {user ? <HomeStack /> : <AuthStack />}
+      {user ? <CreateProfileStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }
