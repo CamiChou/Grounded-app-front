@@ -22,14 +22,14 @@ export default StyleSheet.create({
   },
   styledContainer: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#0d0d0d",
     alignItems: "center",
     paddingTop: 50,
   },
   pageTitle: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "#3a6140",
+    color: "#7cbf8c",
     paddingTop: 10,
     paddingBottom: 10,
   },
@@ -41,11 +41,12 @@ export default StyleSheet.create({
     fontSize: 20,
     padding: 10,
     textAlign: "center",
+    color: '#7cbf8c'
   },
   textBox: {
     top: 20,
     width: 250,
-    borderColor: 'black',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 15,
   },
