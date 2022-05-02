@@ -44,7 +44,7 @@ export default function CreateProfile({navigation}) {
 
           <View style={styles.createButton}>
             <AwesomeButtonRick onPress={() => {
-                Alert.alert(username);
+                console.log(username);
                 navigation.navigate('Home', {screen: 'Home'}) }} type="anchor" width={150} textSize={20}>Create</AwesomeButtonRick>
             {/* <AwesomeButton onPress={() => Alert.alert('Created')} color="#1d692f" title="Create!" /> */}
           </View>
