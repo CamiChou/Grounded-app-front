@@ -21,6 +21,10 @@ export default function HomeScreen({ navigation }) {
         title="Continue"
         onPress={() => navigation.navigate("UserProfile")}
       />
+      <Button
+        title="Test camera"
+        onPress={() => navigation.navigate("Camera")}
+      />
       <Button title="Log Out" onPress={logout} />
     </View>
   );

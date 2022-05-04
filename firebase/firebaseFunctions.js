@@ -37,8 +37,6 @@ const onSignIn = (googleUser) => {
         googleUser.idToken,
         googleUser.accessToken
       );
-
-      console.log(credential);
       firebase
         .auth()
         .signInWithCredential(credential)

@@ -9,6 +9,7 @@ import ExtraScreen from "../screens/ExtraScreen";
 import UserProfileScreen from "../screens/UserProfileScreen";
 import firebase from "firebase";
 import LogoScreen from "../screens/LogoScreen";
+import CameraScreen from "../screens/CameraScreen";
 
 export default function NavigationStack() {
   const { user, setUser } = useContext(AuthContext);
@@ -55,6 +56,7 @@ export default function NavigationStack() {
             name="UserProfile"
             component={UserProfileScreen}
           />
+          <Stack.Screen name="Camera" component={CameraScreen} />
         </Stack.Navigator>
       ) : (
         <AuthStack />
