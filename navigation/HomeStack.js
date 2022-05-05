@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import HomeScreen from "../screens/HomeScreen";
 import ExtraScreen from "../screens/ExtraScreen";
 import UserProfileScreen from "../screens/UserProfileScreen";
-import CreateProfile from "../screens/CreateProfile";
+import IconScreen from "../screens/IconScreen";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
@@ -44,7 +44,19 @@ export default function HomeStack() {
           ),
         }}
       />
-
+      <Tab.Screen
+        name="Icon"
+        component={IconScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }

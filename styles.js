@@ -1,6 +1,8 @@
 import { CurrentRenderContext } from "@react-navigation/core";
 import { StyleSheet } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
+import { Dimensions } from "react-native";
+const { width, height } = Dimensions.get("screen");
 
 export default StyleSheet.create({
   container: {
@@ -41,17 +43,54 @@ export default StyleSheet.create({
     fontSize: 20,
     padding: 10,
     textAlign: "center",
-    color: '#7cbf8c'
+    color: "#7cbf8c",
   },
   textBox: {
     top: 20,
     width: 250,
-    borderColor: 'white',
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 15,
   },
   createButton: {
-    paddingTop: 70, 
+    paddingTop: 70,
+  },
+  background: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
+  avatar: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    height: "20%",
+    width: "25%",
+    padding: 50,
+    marginLeft: "2%",
+    marginRight: "2%",
+    marginBottom: "2%",
+    resizeMode: "contain",
+  },
+  avatar2: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    height: "20%",
+    width: "25%",
+    padding: 50,
+    marginLeft: "2%",
+    marginRight: "2%",
+    marginBottom: "2%",
+  },
+  headline_text: {
+    color: "black",
+    fontSize: 30,
+    fontWeight: "bold",
+    marginTop: "10%",
+    marginLeft: "10%",
+    marginRight: "10%",
+  },
 });
