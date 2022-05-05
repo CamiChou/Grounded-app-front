@@ -6,7 +6,7 @@ export default function LogoScreen({ navigation }) {
   return (
     <View
       style={styles.container}
-      onTouchStart={() => navigation.navigate("Home")}
+      onTouchStart={() => navigation.navigate("AvatarScreen")}
     >
       <View
         style={{

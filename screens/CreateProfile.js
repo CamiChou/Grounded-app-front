@@ -66,7 +66,7 @@ export default function CreateProfile({ navigation }) {
           <AwesomeButtonRick
             onPress={() => {
               updateDisplayName(user.uid, username);
-              navigation.navigate("Home", { screen: "Home" });
+              navigation.navigate("HomeStack");
             }}
             type="anchor"
             width={150}

@@ -3,7 +3,7 @@ import styles from "../styles.js";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function IconScreen() {
+export default function IconScreen({ navigation }) {
   //Stuff you do when the page loads before it displays
 
   return (
@@ -117,11 +117,7 @@ export default function IconScreen() {
           }}
         />
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          alert("you clicked me");
-        }}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate("CreateProfile")}>
         <MaterialCommunityIcons
           style={styles.avatar2}
           name="arrow-right"
