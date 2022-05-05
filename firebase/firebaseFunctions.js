@@ -1,6 +1,7 @@
 import firebase from "firebase";
 import apiKeys from "../config/apiKeys";
 import * as Google from "expo-google-app-auth";
+import {createUser} from '../firebase/usersApi';
 
 let app = !firebase.apps.length
   ? firebase.initializeApp(apiKeys.firebaseConfig)
@@ -46,7 +47,7 @@ const onSignIn = (googleUser) => {
           console.log("Signed in!");
 
           if (result.additionalUserInfo.isNewUser) {
-            setProfile(result);
+            createUser(result);
           }
         })
         .catch(function (error) {
@@ -61,14 +62,6 @@ const onSignIn = (googleUser) => {
     }
   });
 };
-
-function setProfile(result) {
-  db.collection("users").doc(result.user.uid).set({
-    uid: result.user.uid,
-    profilePic: result.user.photoURL,
-    displayName: result.user.displayName,
-  });
-}
 
 export async function login() {
   try {

@@ -24,7 +24,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "#0d0d0d",
     alignItems: "center",
-    paddingTop: 50,
+    paddingTop: 0,
   },
   pageTitle: {
     fontSize: 30,

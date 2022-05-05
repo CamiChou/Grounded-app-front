@@ -28,9 +28,17 @@ export default function NavigationStack() {
   }
 
   const Stack = createStackNavigator();
+
+  if (user){
+    return (
+    <NavigationContainer>
+      {user.username == null || user.username == "" ? <CreateProfileStack /> : <HomeStack />}
+    </NavigationContainer>
+    )
+  }
   return (
     <NavigationContainer>
-      {user ? <CreateProfileStack /> : <AuthStack />}
+      {user ? <HomeStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }
