@@ -46,7 +46,7 @@ const onSignIn = (googleUser) => {
           console.log("Signed in!");
 
           if (result.additionalUserInfo.isNewUser) {
-            setProfile(result);
+            createUser(result);
           }
         })
         .catch(function (error) {
@@ -62,18 +62,11 @@ const onSignIn = (googleUser) => {
   });
 };
 
-function setProfile(result) {
-  db.collection("users").doc(result.user.uid).set({
-    uid: result.user.uid,
-    profilePic: result.user.photoURL,
-    displayName: result.user.displayName,
-  });
-}
-
 export async function login() {
   try {
     const result = await Google.logInAsync({
       iosClientId: apiKeys.authClient.iosID,
+      androidClientId: apiKeys.authClient.androidID,
       scopes: ["profile", "email"],
     });
 
@@ -95,4 +88,24 @@ export async function logout() {
   } catch (e) {
     console.error(e);
   }
+}
+
+export function createUser(result) {
+  db.collection("users")
+    .doc(result.user.uid)
+    .set({
+      uid: result.user.uid,
+      profilePic: result.user.photoURL,
+      displayName: result.user.displayName,
+    })
+    .then(() => console.log("user created: " + result.user.displayName));
+}
+
+export function updateDisplayName(userId, name, displayNameUpdated) {
+  db.collection("users")
+    .doc(userId)
+    .update({
+      displayName: name,
+    })
+    .then(() => console.log("username updated to " + name + "!"));
 }
