@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     setUserName(user.displayName);
     setProfilePic(user.photoURL);
-  }, []); //ComponentDidMount
+  }, []);
 
   return (
     <View style={styles.container}>

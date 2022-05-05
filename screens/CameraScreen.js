@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, View, TouchableOpacity, ImageBackground } from "react-native";
 import { Camera } from "expo-camera";
+import { AuthContext } from "../navigation/AuthProvider";
+import { uploadCloudStorage } from "../firebase/firebaseFunctions";
 
 export default function CameraScreen() {
+  const { user, logout } = useContext(AuthContext);
   const [hasPermission, setHasPermission] = useState(null);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
@@ -16,6 +19,7 @@ export default function CameraScreen() {
   }, []);
 
   async function uploadImageAsync(uri) {
+    console.log(uri, user.uid);
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.onload = function () {
@@ -29,13 +33,14 @@ export default function CameraScreen() {
       xhr.open("GET", uri, true);
       xhr.send(null);
     });
-    const ref = fireStorage.ref().child(new Date().toISOString());
-    const snapshot = await ref.put(blob);
-    blob.close();
+
+    // const ref = fireStorage.ref().child(new Date().toISOString());
+    // const snapshot = await ref.put(blob);
+    // blob.close();
+    await uploadCloudStorage(blob, user);
   }
 
   const takePicture = async () => {
-    console.log(camera);
     if (!camera) return;
     let photo = await camera.takePictureAsync();
     setPreviewVisible(true);
