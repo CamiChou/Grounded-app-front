@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     setUserName(user.displayName);
     setProfilePic(user.photoURL);
-  }, []); //ComponentDidMount
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -20,6 +20,10 @@ export default function HomeScreen({ navigation }) {
       <Button
         title="Continue"
         onPress={() => navigation.navigate("UserProfile")}
+      />
+      <Button
+        title="Test camera"
+        onPress={() => navigation.navigate("Camera")}
       />
       <Button title="Log Out" onPress={logout} />
     </View>

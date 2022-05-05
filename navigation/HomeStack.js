@@ -7,6 +7,7 @@ import DiscoverScreen from "../screens/DiscoverScreen";
 import PostScreen from "../screens/PostScreen";
 import MapScreen from "../screens/MapScreen";
 import JournalScreen from "../screens/JournalScreen";
+import CameraScreen from "../screens/CameraScreen";
 
 export default function HomeStack() {
   const Tab = createMaterialBottomTabNavigator();
@@ -62,6 +63,19 @@ export default function HomeStack() {
       <Tab.Screen
         name="Journal"
         component={JournalScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Camera"
+        component={CameraScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons

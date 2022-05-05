@@ -9,6 +9,7 @@ import HomeScreen from "../screens/HomeScreen";
 import UserProfileScreen from "../screens/UserProfileScreen";
 import firebase from "firebase";
 import LogoScreen from "../screens/LogoScreen";
+import CameraScreen from "../screens/CameraScreen";
 import CreateProfile from "../screens/CreateProfile";
 import IconScreen from "../screens/IconScreen";
 
