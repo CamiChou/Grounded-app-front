@@ -11,6 +11,16 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  mapContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  map: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+  },
   signinButton: {
     alignItems: "center",
     backgroundColor: "#b3d0ff",
