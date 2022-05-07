@@ -8,6 +8,8 @@ import PostScreen from "../screens/PostScreen";
 import MapScreen from "../screens/MapScreen";
 import JournalScreen from "../screens/JournalScreen";
 import CameraScreen from "../screens/CameraScreen";
+import { Calendar } from "react-native-calendars";
+import CalendarScreen from "../screens/CalendarScreen";
 
 export default function HomeStack() {
   const Tab = createMaterialBottomTabNavigator();
@@ -86,6 +88,19 @@ export default function HomeStack() {
           ),
         }}
       />
+      {/* <Tab.Screen
+        name="Calendar"
+        component={CalendarScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      /> */}
     </Tab.Navigator>
   );
 }

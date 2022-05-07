@@ -6,6 +6,7 @@ export default function JournalScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Journal Screen</Text>
+      <Button title="My Calendar" onPress={() => navigation.navigate("Calendar")}/>
     </View>
   );
 }
