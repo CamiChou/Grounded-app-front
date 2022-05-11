@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles.js";
 import { Text, View, Button, Image } from "react-native";
+import { addFollowing } from "../firebase/firebaseFunctions.js";
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
@@ -12,14 +13,16 @@ export default function HomeScreen({ navigation }) {
     setUserName(user.displayName);
     setProfilePic(user.photoURL);
   }, []);
-
+  
   return (
     <View style={styles.container}>
       <Text>Welcome {userName}</Text>
       <Image style={styles.profileImage} source={{ uri: profilePic }} />
       <Button
-        title="Continue"
-        onPress={() => navigation.navigate("UserProfile")}
+        title="Follow"
+        onPress={() => 
+          addFollowing(user.uid, user)
+        }
       />
       <Button
         title="Test camera"

@@ -13,20 +13,16 @@ import { AuthContext } from "../navigation/AuthProvider.js";
 import AwesomeButtonRick from "react-native-really-awesome-button/src/themes/rick";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { updateDisplayName } from "../firebase/firebaseFunctions";
 
 export default function CreateProfile({ navigation }) {
   const { user, logout } = useContext(AuthContext);
   const [profilePic, setProfilePic] = useState(null);
   const [text, onChangeText] = React.useState(null);
-
   const [username, setUsername] = useState(null);
 
   useEffect(() => {
     setProfilePic(user.photoURL);
   }, []); //ComponentDidMount
-
-  console.log(user.displayName);
 
   return (
     <SafeAreaView style={styles.styledContainer}>
@@ -65,7 +61,10 @@ export default function CreateProfile({ navigation }) {
         <View style={styles.createButton}>
           <AwesomeButtonRick
             onPress={() => {
-              updateDisplayName(user.uid, username);
+              user.updateProfile({
+                displayName: username,
+              })
+              .then(() => console.log("username updated to " + username));
               navigation.navigate("HomeStack");
             }}
             type="anchor"

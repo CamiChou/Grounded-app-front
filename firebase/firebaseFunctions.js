@@ -124,7 +124,6 @@ export async function uploadCloudStorage(blob, user) {
     }
   );
 }
-
 export function createUser(result) {
   db.collection("users")
     .doc(result.user.uid)
@@ -132,15 +131,22 @@ export function createUser(result) {
       uid: result.user.uid,
       profilePic: result.user.photoURL,
       displayName: result.user.displayName,
+      following: null,
+      friends: null,
     })
     .then(() => console.log("user created: " + result.user.displayName));
 }
 
-export function updateDisplayName(userId, name, displayNameUpdated) {
+export function addFollowing(currentUser, userToFollow) {
+
+  // let userRef = db.collection("users").doc(currentUser).add();
+  // userRef.setValueAsync(new (userToFollow))
+  console.log(userToFollow)
   db.collection("users")
-    .doc(userId)
+    .doc(currentUser)
     .update({
-      displayName: name,
+      following: userToFollow,
     })
-    .then(() => console.log("username updated to " + name + "!"));
+    .then(() => console.log("now following" + userToFollow));
+    
 }
