@@ -7,6 +7,7 @@ import {
   Image,
   SafeAreaView,
   TextInput,
+  TouchableOpacity,
   Alert,
 } from "react-native";
 import { AuthContext } from "../navigation/AuthProvider.js";
@@ -20,11 +21,22 @@ export default function CreateProfile({ navigation }) {
   const { user, logout } = useContext(AuthContext);
   const [profilePic, setProfilePic] = useState(null);
   const [text, onChangeText] = React.useState(null);
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] =  useState('');
 
   useEffect(() => {
     setProfilePic(user.photoURL);
   }, []); //ComponentDidMount
+ 
+  const checkTextInput = () => {
+    //Check for the Name TextInput
+    if (!username.trim()) {
+      return false;
+    }
+    //Checked Successfully
+    //Do whatever you want
+    return(true);
+  };
+
 
   return (
     <SafeAreaView style={styles.styledContainer}>
@@ -61,24 +73,30 @@ export default function CreateProfile({ navigation }) {
         {/* create button --> navigates to homestack after press */}
         {/* but should probably change it so that it only navigates when username is !null (and possibly not taken? if we're doing unique usernames)*/}
         <View style={styles.createButton}>
-          <AwesomeButtonRick
-            onPress={() => {
-              // change displayname for user in firebase
-              user.updateProfile({
-                displayName: username,
-              })
-              .then(() => console.log("username updated to " + username));
-              // change display name for "users" table 
-              changeDisplayName(user.uid, username);
-              // navigate to home
-              navigation.navigate("HomeStack");
+          <AwesomeButtonRick onPress={() => {
+              if (checkTextInput() == false)
+              {
+                alert('Please Enter Username');
+              }
+              else {
+                // change displayname for user in firebase
+                user.updateProfile({
+                  displayName: username,
+                })
+                .then(() => console.log("username updated to " + username));
+                // change display name for "users" table 
+                changeDisplayName(user.uid, username);
+                // navigate to home
+                navigation.navigate("HomeStack");
+              }
             }}
             type="anchor"
             width={150}
             textSize={20}
           >
-            Create
-          </AwesomeButtonRick>
+              Press Here
+              </AwesomeButtonRick>
+
           {/* <AwesomeButton onPress={() => Alert.alert('Created')} color="#1d692f" title="Create!" /> */}
         </View>
       </View>

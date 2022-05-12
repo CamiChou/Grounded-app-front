@@ -162,10 +162,6 @@ export function addFollowing(currentUser, userToFollow) {
       console.log("now following " + data['displayName'])
     })
   });
-  (db.collection("users").doc(currentUser).get().then((doc) => {
-    const data = doc.data();
-    console.log(data);
-  }))
 }
 
 // export function addFriend(currentUser, userToFriend) {
