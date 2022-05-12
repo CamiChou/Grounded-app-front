@@ -3,17 +3,19 @@ import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles.js";
 import { Text, View, Button, Image } from "react-native";
 import { addFollowing } from "../firebase/firebaseFunctions.js";
+import { useIsFocused } from '@react-navigation/native'
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
   const [userName, setUserName] = useState("");
   const [profilePic, setProfilePic] = useState(null);
+  const isFocused = useIsFocused()
 
   useEffect(() => {
     setUserName(user.displayName);
     setProfilePic(user.photoURL);
-  }, []);
-  
+  }, [isFocused]);
+
   return (
     <View style={styles.container}>
       <Text>Welcome {userName}</Text>
@@ -21,7 +23,7 @@ export default function HomeScreen({ navigation }) {
       <Button
         title="Follow"
         onPress={() => 
-          addFollowing(user.uid, user)
+          addFollowing(user.uid, user.uid)
         }
       />
       <Button

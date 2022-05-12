@@ -13,6 +13,8 @@ import { AuthContext } from "../navigation/AuthProvider.js";
 import AwesomeButtonRick from "react-native-really-awesome-button/src/themes/rick";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { changeDisplayName } from "../firebase/firebaseFunctions.js"
+
 
 export default function CreateProfile({ navigation }) {
   const { user, logout } = useContext(AuthContext);
@@ -61,10 +63,14 @@ export default function CreateProfile({ navigation }) {
         <View style={styles.createButton}>
           <AwesomeButtonRick
             onPress={() => {
+              // change displayname for user in firebase
               user.updateProfile({
                 displayName: username,
               })
               .then(() => console.log("username updated to " + username));
+              // change display name for "users" table 
+              changeDisplayName(user.uid, username);
+              // navigate to home
               navigation.navigate("HomeStack");
             }}
             type="anchor"
