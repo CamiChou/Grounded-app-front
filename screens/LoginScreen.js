@@ -28,7 +28,7 @@ export default function LoginScreen() {
     <View style={styles.container}>
       <View style={{fontSize: 30, paddingTop: 50, alignItems: "center"}}>
         <Text>A Quote of Nature:</Text>
-        <Text style={{textAlign: "center", paddingLeft: 20, paddingRight: 20, fontStyle: "italic"}}>{quote}</Text>
+        <Text numberOfLines={3} style={{height: 50, textAlign: "center", paddingLeft: 20, paddingRight: 20, fontStyle: "italic"}}>{quote}</Text>
       </View>
       <View style={styles.container}>
         <View style= {{paddingBottom: 100, alignItems:"center"}}>
