@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import styles from "../styles.js";
-import { Text, View, Button, Image } from "react-native";
-import { logo } from "../assets/logo.png";
+import React from "react";
+import styles from "../styles/styles.js";
+import { View, Image } from "react-native";
 
 export default function LogoScreen({ navigation }) {
   return (

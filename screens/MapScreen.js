@@ -1,72 +1,98 @@
-import React, { useState, useEffect, useContext, useMemo } from "react";
-import styles from "../styles.js";
+import React, { useState, useEffect, useMemo } from "react";
+import styles from "../styles/styles.js";
+import mapStyles from "../styles/mapStyles.js";
 import { TextInput, View, SafeAreaView, Image, Text } from "react-native";
 import MapView from "react-native-maps";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function MapScreen({ navigation }) {
+export default function MapScreen() {
   const mylocationmarker = require("../assets/mylocationmarker.png");
   const savedlocationmarker = require("../assets/savedlocationmarker.png");
-  const myLocations = [
-    {
-      title: "Bruh",
-      coordinate: { latitude: 34.0695413, longitude: -118.44499 },
-      description: "This is a place",
-    },
-    {
-      title: "Wow",
-      coordinate: { latitude: 34.071413, longitude: -118.44499 },
-      description: "This is also a place",
-    },
-  ];
-  const savedLocations = [
-    {
-      title: "Bruh2",
-      coordinate: { latitude: 34.0695413, longitude: -118.44699 },
-      description: "This is a place",
-    },
-    {
-      title: "Wow",
-      coordinate: { latitude: 34.071413, longitude: -118.44699 },
-      description: "This is also a place",
-    },
-  ];
 
-  function loadMarkers() {
-    let res = [];
-    if (mode !== 2) {
-      res = myLocations.map((marker, index) => (
-        <MapView.Marker
-          key={`mylocation${index}`}
-          coordinate={marker.coordinate}
-          title={marker.title}
-          description={marker.description}
-          image={mylocationmarker}
-        />
-      ));
-    }
-    if (mode !== 1) {
-      res = res.concat(
-        savedLocations.map((marker, index) => (
-          <MapView.Marker
-            key={`savedlocation${index}`}
-            coordinate={marker.coordinate}
-            title={marker.title}
-            description={marker.description}
-            image={savedlocationmarker}
-          />
-        ))
-      );
-    }
-    return res.filter((marker) => marker.props.title.indexOf(search) > -1);
+  const [mode, toggleMode] = useState(0); // 0 = both 1 = my location, 2 = saved location
+  const [search, setSearch] = useState(""); // Current search filter
+  const [myLocations, setMyLocations] = useState([]); // My locations
+  const [savedLocations, setSavedLocations] = useState([]); // Saved locations
+  const mapMarkers = useMemo(
+    () => loadMarkers(myLocations, savedLocations),
+    [myLocations, savedLocations]
+  );
+  const filteredMarkers = useMemo(
+    () => filterMarkers(mapMarkers, mode, search),
+    [mapMarkers, mode, search]
+  );
+
+  useEffect(() => {
+    // TODO: API call to get user's markers
+    setMyLocations([
+      {
+        title: "Bruh",
+        coordinate: { latitude: 34.0695413, longitude: -118.44499 },
+        description: "This is a place",
+      },
+      {
+        title: "Wow",
+        coordinate: { latitude: 34.071413, longitude: -118.44499 },
+        description: "This is also a place",
+      },
+    ]);
+    setSavedLocations([
+      {
+        title: "Bruh2",
+        coordinate: { latitude: 34.0695413, longitude: -118.44699 },
+        description: "This is a place",
+      },
+      {
+        title: "Wow",
+        coordinate: { latitude: 34.071413, longitude: -118.44699 },
+        description: "This is also a place",
+      },
+    ]);
+  }, []);
+
+  // Helper function to generate markers from the user data
+  function generateMarkers(data, type, typeNum, image) {
+    return data.map((marker, index) => (
+      <MapView.Marker
+        key={`${type}${index}`}
+        coordinate={marker.coordinate}
+        title={marker.title}
+        description={marker.description}
+        image={image}
+        type={typeNum}
+      />
+    ));
   }
 
-  const [mode, toggleMode] = useState(0);
-  const [search, setSearch] = useState("");
-  const markers = useMemo(() => loadMarkers(), [myLocations, savedLocations]);
+  // Load all markers for the map with current filtering
+  function loadMarkers(myLocationData, savedLocationData) {
+    let res = generateMarkers(
+      myLocationData,
+      "mylocation",
+      1,
+      mylocationmarker
+    );
+    return res.concat(
+      generateMarkers(
+        savedLocationData,
+        "savedlocation",
+        2,
+        savedlocationmarker
+      )
+    );
+  }
+
+  // Filter markers based on mode and search
+  function filterMarkers(markers, filterMode, currSearch) {
+    return markers.filter(
+      (marker) =>
+        marker.props.title.indexOf(currSearch) > -1 &&
+        (filterMode === 0 || marker.props.type === filterMode)
+    );
+  }
 
   return (
-    <SafeAreaView style={styles.mapContainer}>
+    <SafeAreaView style={mapStyles.mapContainer}>
       <MapView
         initialRegion={{
           latitude: 34.0695413,
@@ -74,25 +100,25 @@ export default function MapScreen({ navigation }) {
           latitudeDelta: 0.0042,
           longitudeDelta: 0.0041,
         }}
-        style={styles.map}
+        style={mapStyles.map}
       >
-        {markers}
+        {filteredMarkers}
       </MapView>
       <View style={{ position: "absolute", top: 30, width: "100%" }}>
         <TextInput
-          style={styles.mapSearch}
+          style={mapStyles.mapSearch}
           value={search}
           onChange={(e) => setSearch(e.nativeEvent.text)}
           placeholder={"Search"}
           placeholderTextColor={"#666"}
         />
       </View>
-      <View style={styles.buttonToggleContainer}>
+      <View style={mapStyles.buttonToggleContainer}>
         <TouchableOpacity
           style={[
-            styles.buttonToggle,
-            styles.topToggle,
-            styles[
+            mapStyles.buttonToggle,
+            mapStyles.topToggle,
+            mapStyles[
               mode === 0
                 ? "inactiveMapToggle"
                 : mode === 1
@@ -103,16 +129,16 @@ export default function MapScreen({ navigation }) {
           onPress={() => toggleMode(mode === 1 ? 0 : 1)}
         >
           <Image
-            style={styles.toggleIcon}
+            style={mapStyles.toggleIcon}
             source={mylocationmarker}
             resizeMode="contain"
           ></Image>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
-            styles.buttonToggle,
-            styles.bottomToggle,
-            styles[
+            mapStyles.buttonToggle,
+            mapStyles.bottomToggle,
+            mapStyles[
               mode === 0
                 ? "inactiveMapToggle"
                 : mode === 2
@@ -123,22 +149,22 @@ export default function MapScreen({ navigation }) {
           onPress={() => toggleMode(mode === 2 ? 0 : 2)}
         >
           <Image
-            style={styles.toggleIcon}
+            style={mapStyles.toggleIcon}
             source={savedlocationmarker}
             resizeMode="contain"
           ></Image>
         </TouchableOpacity>
       </View>
-      <View style={styles.buttonToggleLabelContainer}>
+      <View style={mapStyles.buttonToggleLabelContainer}>
         <View
-          style={[styles.buttonToggleLabel, mode === 2 ? styles.hidden : ""]}
+          style={[mapStyles.buttonToggleLabel, mode === 2 ? styles.hidden : ""]}
         >
-          <Text style={styles.buttonToggleText}>My Locations</Text>
+          <Text style={mapStyles.buttonToggleText}>My Locations</Text>
         </View>
         <View
-          style={[styles.buttonToggleLabel, mode === 1 ? styles.hidden : ""]}
+          style={[mapStyles.buttonToggleLabel, mode === 1 ? styles.hidden : ""]}
         >
-          <Text style={styles.buttonToggleText}>Saved Locations</Text>
+          <Text style={mapStyles.buttonToggleText}>Saved Locations</Text>
         </View>
       </View>
     </SafeAreaView>
