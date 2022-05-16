@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, useMemo } from "react";
 import styles from "../styles.js";
 import { TextInput, View, SafeAreaView, Image, Text } from "react-native";
 import MapView from "react-native-maps";
-import { Button } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function MapScreen({ navigation }) {
@@ -81,39 +80,14 @@ export default function MapScreen({ navigation }) {
       </MapView>
       <View style={{ position: "absolute", top: 30, width: "100%" }}>
         <TextInput
-          style={{
-            borderRadius: 10,
-            margin: 30,
-            color: "#000",
-            borderColor: "#666",
-            backgroundColor: "#FFF",
-            borderWidth: 1,
-            height: 45,
-            paddingHorizontal: 10,
-            fontSize: 18,
-          }}
+          style={styles.mapSearch}
           value={search}
           onChange={(e) => setSearch(e.nativeEvent.text)}
           placeholder={"Search"}
           placeholderTextColor={"#666"}
         />
       </View>
-      <View
-        style={{
-          position: "absolute",
-          top: 160,
-          left: 30,
-          width: "12%",
-          height: "7%",
-          borderRadius: 12,
-          opacity: 1.0,
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          opacity: 0.8,
-          flexDirection: "column",
-        }}
-      >
+      <View style={styles.buttonToggleContainer}>
         <TouchableOpacity
           style={[
             styles.buttonToggle,
@@ -122,8 +96,8 @@ export default function MapScreen({ navigation }) {
               mode === 0
                 ? "inactiveMapToggle"
                 : mode === 1
-                ? "activeMapToggle"
-                : "inactiveMapToggle"
+                ? "inactiveMapToggle"
+                : "activeMapToggle"
             ],
           ]}
           onPress={() => toggleMode(mode === 1 ? 0 : 1)}
@@ -142,8 +116,8 @@ export default function MapScreen({ navigation }) {
               mode === 0
                 ? "inactiveMapToggle"
                 : mode === 2
-                ? "activeMapToggle"
-                : "inactiveMapToggle"
+                ? "inactiveMapToggle"
+                : "activeMapToggle"
             ],
           ]}
           onPress={() => toggleMode(mode === 2 ? 0 : 2)}
@@ -154,6 +128,18 @@ export default function MapScreen({ navigation }) {
             resizeMode="contain"
           ></Image>
         </TouchableOpacity>
+      </View>
+      <View style={styles.buttonToggleLabelContainer}>
+        <View
+          style={[styles.buttonToggleLabel, mode === 2 ? styles.hidden : ""]}
+        >
+          <Text style={styles.buttonToggleText}>My Locations</Text>
+        </View>
+        <View
+          style={[styles.buttonToggleLabel, mode === 1 ? styles.hidden : ""]}
+        >
+          <Text style={styles.buttonToggleText}>Saved Locations</Text>
+        </View>
       </View>
     </SafeAreaView>
   );
