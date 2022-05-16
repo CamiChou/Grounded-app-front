@@ -21,6 +21,33 @@ export default StyleSheet.create({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
   },
+  buttonToggle: {
+    alignSelf: "center",
+    width: "100%",
+    height: "50%",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  activeMapToggle: {
+    backgroundColor: "#C4C4C4",
+  },
+  inactiveMapToggle: {
+    backgroundColor: "#FFFFFF",
+  },
+  topToggle: {
+    borderTopRightRadius: 12,
+    borderTopLeftRadius: 12,
+  },
+  bottomToggle: {
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 12,
+  },
+  toggleIcon: {
+    width: "100%",
+    height: undefined,
+    aspectRatio: 1,
+  },
   signinButton: {
     alignItems: "center",
     backgroundColor: "#b3d0ff",
