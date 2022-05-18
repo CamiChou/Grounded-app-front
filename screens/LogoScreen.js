@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import styles from "../styles.js";
-import { Text, View, Button, Image } from "react-native";
+import React from "react";
+import styles from "../styles/styles.js";
+import { View, Image } from "react-native";
 
 export default function LogoScreen({ navigation }) {
   
@@ -9,13 +9,13 @@ export default function LogoScreen({ navigation }) {
       style={styles.container}
       onTouchStart={() => navigation.navigate("AvatarScreen")}
     >
-      <View
+      <Image
+        source={require("../assets/logo.png")}
         style={{
-          backgroundColor: "#0f0f0f",
           width: "30%",
           height: "15%",
         }}
-      ></View>
+      ></Image>
     </View>
   );
 }
