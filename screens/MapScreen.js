@@ -2,24 +2,20 @@ import React, { useState, useEffect, useMemo } from "react";
 import styles from "../styles/styles.js";
 import mapStyles from "../styles/mapStyles.js";
 import { TextInput, View, SafeAreaView, Image, Text } from "react-native";
-import MapView, {Marker} from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import * as Location from 'expo-location';
+import * as Location from "expo-location";
 
 export default function MapScreen() {
   const mylocationmarker = require("../assets/mylocationmarker.png");
   const savedlocationmarker = require("../assets/savedlocationmarker.png");
 
-  //temporarily creating a pin here to show current location
-  const [pin, setPin] = React.useState({
-    latitude: 34.07165,
-    longitude: -118.45129,
-  });
-
+  const [pin, setPin] = React.useState(null); // Create a pin here to show current location
   const [mode, toggleMode] = useState(0); // 0 = both 1 = my location, 2 = saved location
   const [search, setSearch] = useState(""); // Current search filter
   const [myLocations, setMyLocations] = useState([]); // My locations
   const [savedLocations, setSavedLocations] = useState([]); // Saved locations
+
   const mapMarkers = useMemo(
     () => loadMarkers(myLocations, savedLocations),
     [myLocations, savedLocations]
@@ -55,28 +51,28 @@ export default function MapScreen() {
         description: "This is also a place",
       },
     ]);
-    //to set pin location priya testing
+    // To set pin location priya testing
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
         return;
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      console.log(location);
+      console.log(location.coords);
 
       setPin({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-      }); //end of the additional code but there is additional code in the style sheet for the gold pin on lines 127-132
+      }); // End of the additional code but there is additional code in the style sheet for the gold pin on lines 127-132
     })();
   }, []);
 
   // Helper function to generate markers from the user data
   function generateMarkers(data, type, typeNum, image) {
     return data.map((marker, index) => (
-      <MapView.Marker
+      <Marker
         key={`${type}${index}`}
         coordinate={marker.coordinate}
         title={marker.title}
@@ -125,12 +121,15 @@ export default function MapScreen() {
         }}
         style={mapStyles.map}
       >
-        <Marker 
-        coordinate={{pin}}
-        title="Test Marker"
-        description="to test if the my location works- priya"
-        pinColor="gold"
-        ></Marker>
+        {pin && (
+          <Marker
+            coordinate={pin}
+            title="Test MapView.Marker"
+            description="to test if the my location works- priya"
+            pinColor="gold"
+          />
+        )}
+
         {filteredMarkers}
       </MapView>
       <View style={{ position: "absolute", top: 30, width: "100%" }}>
