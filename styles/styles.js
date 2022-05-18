@@ -1,8 +1,4 @@
-import { CurrentRenderContext } from "@react-navigation/core";
 import { StyleSheet } from "react-native";
-import { BorderlessButton } from "react-native-gesture-handler";
-import { Dimensions } from "react-native";
-const { width, height } = Dimensions.get("screen");
 
 export default StyleSheet.create({
   container: {
@@ -10,6 +6,9 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  hidden: {
+    opacity: 0,
   },
   signinButton: {
     alignItems: "center",

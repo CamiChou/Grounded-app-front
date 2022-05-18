@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../navigation/AuthProvider";
-import styles from "../styles.js";
+import styles from "../styles/styles.js";
 import { Text, View, Button, Image } from "react-native";
 
 export default function HomeScreen({ navigation }) {
