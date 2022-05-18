@@ -3,6 +3,7 @@ import styles from "../styles/styles.js";
 import { View, Image } from "react-native";
 
 export default function LogoScreen({ navigation }) {
+  
   return (
     <View
       style={styles.container}

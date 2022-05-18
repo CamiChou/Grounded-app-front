@@ -8,6 +8,7 @@ let app = !firebase.apps.length
 
 let db = firebase.firestore();
 const storageRef = firebase.storage().ref();
+
 export { db };
 
 console.log("Firebase set up!");
@@ -124,7 +125,6 @@ export async function uploadCloudStorage(blob, user) {
     }
   );
 }
-
 export function createUser(result) {
   db.collection("users")
     .doc(result.user.uid)
@@ -136,11 +136,40 @@ export function createUser(result) {
     .then(() => console.log("user created: " + result.user.displayName));
 }
 
-export function updateDisplayName(userId, name, displayNameUpdated) {
+
+export function changeDisplayName(currentUser, name) {
   db.collection("users")
-    .doc(userId)
+    .doc(currentUser)
     .update({
       displayName: name,
-    })
-    .then(() => console.log("username updated to " + name + "!"));
+    });
 }
+
+export function addFollowing(currentUser, userToFollow) {
+  // (db.collection("users").doc(currentUser).get().then((doc) => {
+  //   const data = doc.data();
+  //   console.log(data['displayName']);
+  // }))
+  
+  db.collection("users")
+    .doc(currentUser)
+    .set({
+      following: firebase.firestore.FieldValue.arrayUnion(userToFollow),
+    }, {merge: true})
+    .then(() => {
+    db.collection("users").doc(userToFollow).get().then((doc) => {
+      const data = doc.data();
+      console.log("now following " + data['displayName'])
+    })
+  });
+}
+
+// export function addFriend(currentUser, userToFriend) {
+//   console.log(userToFollow)
+//   db.collection("users")
+//     .doc(currentUser)
+//     .set({
+//       following: userToFollow,
+//     }, {merge: true})
+//     .then(() => console.log("now following " + userToFollow));
+// }
