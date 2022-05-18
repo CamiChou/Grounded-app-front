@@ -4,6 +4,7 @@ import mapStyles from "../styles/mapStyles.js";
 import { TextInput, View, SafeAreaView, Image, Text } from "react-native";
 import MapView, {Marker} from "react-native-maps";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import * as Location from 'expo-location';
 
 export default function MapScreen() {
   const mylocationmarker = require("../assets/mylocationmarker.png");

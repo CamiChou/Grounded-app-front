@@ -5,7 +5,6 @@ import styles from "./styles/styles.js";
 import NavigationStack from "./navigation/NavigationStack";
 import Providers from "./navigation/index";
 import { LogBox } from "react-native";
-import * as Location from 'expo-location';
 
 export default function App() {
   LogBox.ignoreLogs(["AsyncStorage"]);
