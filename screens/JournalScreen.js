@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import styles from "../styles.js";
+import styles from "../styles/styles.js";
 import { Text, View, Button, Image } from "react-native";
 
 export default function JournalScreen({ navigation }) {

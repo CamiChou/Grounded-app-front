@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles.js";
+import styles from "../styles/styles.js";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
