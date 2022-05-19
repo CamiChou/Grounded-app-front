@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -12,26 +13,24 @@ export default StyleSheet.create({
   },
   signinButton: {
     alignItems: "center",
-    backgroundColor: "#b3d0ff",
-    padding: 20,
-    borderRadius: 20,
+    top: 400,
   },
   profileImage: {
-    height: 250,
-    width: 250,
+    top: 30,
+    height: 300,
+    width: 300,
     borderRadius: 75,
   },
   styledContainer: {
     flex: 1,
-    backgroundColor: "#0d0d0d",
     alignItems: "center",
-    paddingTop: 0,
+    paddingTop: 100,
   },
   pageTitle: {
-    fontSize: 30,
+    fontSize: 60,
     fontWeight: "bold",
-    color: "#7cbf8c",
-    paddingTop: 10,
+    color: "#709467",
+    paddingTop: 40,
     paddingBottom: 10,
   },
   logoImage: {
@@ -41,18 +40,23 @@ export default StyleSheet.create({
   textInput: {
     fontSize: 20,
     padding: 10,
+    top: 40,
+    right: 20,
     textAlign: "center",
     color: "#7cbf8c",
+    width: 300,
+    borderRadius: 15,
+    backgroundColor: "#E5F5EF"
   },
   textBox: {
     top: 20,
     width: 250,
-    borderColor: "white",
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 15,
   },
   createButton: {
-    paddingTop: 70,
+    paddingTop: 90,
+    left: 80,
   },
   background: {
     display: "flex",
@@ -62,10 +66,11 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
+  nextButton: {
+    bottom: 180,
+    right: 90,
+  },
   avatar: {
-    flexDirection: "row",
-    flexWrap: "wrap",
     height: "20%",
     width: "25%",
     padding: 50,
@@ -74,22 +79,29 @@ export default StyleSheet.create({
     marginBottom: "2%",
     resizeMode: "contain",
   },
-  avatar2: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    height: "20%",
-    width: "25%",
-    padding: 50,
-    marginLeft: "2%",
-    marginRight: "2%",
-    marginBottom: "2%",
-  },
   headline_text: {
-    color: "black",
-    fontSize: 30,
+    color: "#455340",
+    marginTop: 60,
+    fontSize: 35,
     fontWeight: "bold",
-    marginTop: "10%",
-    marginLeft: "10%",
-    marginRight: "10%",
+    right: 98,
   },
+  avatargrid: {
+    flexDirection: "row",
+    right: 90,
+    marginTop: 50,
+  },
+  logInText:{
+    flexDirection: "row",
+    top: 420,
+    left: 80,
+  },
+  loginTitle:{
+    fontSize: 60,
+    top: 300,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#709467",
+    fontFamily: 'Inika_400Regular',
+  }
 });

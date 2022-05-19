@@ -1,7 +1,8 @@
 import firebase from "firebase";
 import apiKeys from "../config/apiKeys";
 import * as Google from "expo-google-app-auth";
-
+import React, { setFile } from "react";
+import {setImageUrl} from "../screens/HomeScreen"
 let app = !firebase.apps.length
   ? firebase.initializeApp(apiKeys.firebaseConfig)
   : firebase.app();
@@ -146,11 +147,6 @@ export function changeDisplayName(currentUser, name) {
 }
 
 export function addFollowing(currentUser, userToFollow) {
-  // (db.collection("users").doc(currentUser).get().then((doc) => {
-  //   const data = doc.data();
-  //   console.log(data['displayName']);
-  // }))
-  
   db.collection("users")
     .doc(currentUser)
     .set({
@@ -164,12 +160,17 @@ export function addFollowing(currentUser, userToFollow) {
   });
 }
 
-// export function addFriend(currentUser, userToFriend) {
-//   console.log(userToFollow)
-//   db.collection("users")
-//     .doc(currentUser)
-//     .set({
-//       following: userToFollow,
-//     }, {merge: true})
-//     .then(() => console.log("now following " + userToFollow));
-// }
+// qr code? 
+export function addFriend(currentUser, userToFriend) {
+  db.collection("users")
+    .doc(currentUser)
+    .set({
+      friends: firebase.firestore.FieldValue.arrayUnion(userToFriend),
+    }, {merge: true})
+    .then(() => {
+      db.collection("users").doc(userToFriend).get().then((doc) => {
+        const data = doc.data();
+        console.log("now friends with " + data['displayName'])
+      })
+    });
+}

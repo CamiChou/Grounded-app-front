@@ -5,6 +5,7 @@ import {
   View,
   Button,
   Image,
+  ImageBackground,
   SafeAreaView,
   TextInput,
   TouchableOpacity,
@@ -39,67 +40,67 @@ export default function CreateProfile({ navigation }) {
 
 
   return (
-    <SafeAreaView style={styles.styledContainer}>
-      <View style={styles.styledContainer}>
+      <ImageBackground source={require("../assets/background.jpeg")} style={{width: "100%", height: "110%", position: 'absolute', top: -50}}>
         {/* example logo */}
-        <Image
-          style={styles.logoImage}
-          source={{
-            uri: "https://images.squarespace-cdn.com/content/v1/5f3b0e3f572a30394b94a212/1597705994012-1GI1SWXYAC6JPDVMCDJ3/Ikigai+Logo.png?format=1500w",
-          }}
-        />
+        <View style={styles.styledContainer}>
 
-        {/* page title */}
-        <Text style={styles.pageTitle}>Create Profile</Text>
+          {/* page title */}
+          <Text style={styles.pageTitle}>grounded</Text>
 
-        {/* avatar */}
-        <Image
-          style={styles.profileImage}
-          source={{
-            uri: "https://images.theconversation.com/files/104935/original/image-20151208-4898-1tvnkf7.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
-          }}
-        />
-
-        {/* username input */}
-        <View style={styles.textBox}>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(val) => setUsername(val)}
-            placeholder="username"
-            placeholderTextColor="#7cbf8c"
+          {/* avatar */}
+          <Image
+            style={styles.profileImage}
+            source={
+              require("../assets/ikigai.png")
+            }
           />
-        </View>
 
-        {/* create button --> navigates to homestack after press */}
-        {/* but should probably change it so that it only navigates when username is !null (and possibly not taken? if we're doing unique usernames)*/}
-        <View style={styles.createButton}>
-          <AwesomeButtonRick onPress={() => {
-              if (checkTextInput() == false)
-              {
-                alert('Please Enter Username');
-              }
-              else {
-                // change displayname for user in firebase
-                user.updateProfile({
-                  displayName: username,
-                })
-                .then(() => console.log("username updated to " + username));
-                // change display name for "users" table 
-                changeDisplayName(user.uid, username);
-                // navigate to home
-                navigation.navigate("HomeStack");
-              }
-            }}
-            type="anchor"
-            width={150}
-            textSize={20}
-          >
-              Press Here
-              </AwesomeButtonRick>
+          {/* username input */}
+          <View style={styles.textBox}>
+          <TextInput
+              style={styles.textInput}
+              onChangeText={(val) => setUsername(val)}
+              placeholder="   Username"
+              placeholderTextColor="#98AD8B"
+              textAlign='left'
+              fontStyle= 'italic'
+            />
+          </View>
 
-          {/* <AwesomeButton onPress={() => Alert.alert('Created')} color="#1d692f" title="Create!" /> */}
-        </View>
-      </View>
-    </SafeAreaView>
+          {/* create button --> navigates to homestack after press */}
+          {/* but should probably change it so that it only navigates when username is !null (and possibly not taken? if we're doing unique usernames)*/}
+          <View style={styles.createButton}>
+            <AwesomeButtonRick onPress={() => {
+                if (checkTextInput() == false)
+                {
+                  alert('Please Enter Username');
+                }
+                else {
+                  // change displayname for user in firebase
+                  user.updateProfile({
+                    displayName: username,
+                  })
+                  .then(() => console.log("username updated to " + username));
+                  // change display name for "users" table 
+                  changeDisplayName(user.uid, username);
+                  // navigate to home
+                  navigation.navigate("HomeStack");
+                }
+              }}
+              type="anchor"
+              width={150}
+              backgroundColor="#E5F5EF"
+              borderColor="#709467"
+              backgroundShadow="#709467"
+              backgroundDarker="#709467"
+              textSize={20}
+            >
+                Create!
+                </AwesomeButtonRick>
+
+            {/* <AwesomeButton onPress={() => Alert.alert('Created')} color="#1d692f" title="Create!" /> */}
+          </View>
+          </View>
+        </ImageBackground>
   );
 }
