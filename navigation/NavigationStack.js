@@ -14,6 +14,7 @@ import CameraScreen from "../screens/CameraScreen";
 import CreateProfile from "../screens/CreateProfile";
 import IconScreen from "../screens/IconScreen";
 import { Calendar } from "react-native-calendars";
+import JournalFeedScreen from "../screens/JournalFeedScreen"
 
 export default function NavigationStack() {
   const { user, setUser } = useContext(AuthContext);
@@ -66,6 +67,14 @@ export default function NavigationStack() {
         <Stack.Screen
           name="Calendar"
           component={CalendarScreen}
+          options={{
+            headerLeft: () => <></>,
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="TempJournalFeed"
+          component={JournalFeedScreen}
           options={{
             headerLeft: () => <></>,
             headerShown: false,

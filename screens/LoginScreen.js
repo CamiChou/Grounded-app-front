@@ -4,24 +4,27 @@ import { Text, View, TouchableOpacity } from "react-native";
 import { AuthContext } from "../navigation/AuthProvider.js";
 import quotes from "../quotes.json"
 
-function getRandomQuote(quoteArr)
-{
-    const randomNumber = Math.floor(Math.random() * quoteArr.quotes.length);
-    const currentQuote = quoteArr.quotes[randomNumber];
-    return currentQuote;
-}
-
 export default function LoginScreen() {
   const text = JSON.parse(JSON.stringify(quotes));
   const [quote, setQuote] = useState(getRandomQuote(text));
   const [seconds, setSeconds] = useState(0);
   const { login } = useContext(AuthContext);
+  function getRandomQuote(quoteArr)
+  {
+    const randomNumber = Math.floor(Math.random() * quoteArr.quotes.length);
+    const currentQuote = quoteArr.quotes[randomNumber];
+    console.log("set new quote");
+    return currentQuote;
+  }
 
   useEffect(() => {
-    setInterval(() => {
-      setQuote(quote => getRandomQuote(text));
+    const interval = setInterval(() => {
+      const newQuote = getRandomQuote(text);
+      setQuote(newQuote);
     }, 10000);
-    // return () => clearTimeout(quoteGenerator);
+    return function cleanup() {
+      clearInterval(interval);
+    };
   }, []);
   
   return (

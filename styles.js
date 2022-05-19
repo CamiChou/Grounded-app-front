@@ -117,5 +117,14 @@ export default StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
+  },
+  journalIcon: {
+    margin: 4,
+    borderRadius: 4,
+    height: 45,
+    width: 45,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
