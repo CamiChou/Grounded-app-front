@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import styles from "../styles.js";
+import styles from "../styles/styles.js";
 import { Modal, Text, View, Button, Image } from "react-native";
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars'
+import { Calendar, CalendarList, Agenda } from "react-native-calendars";
+// const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-export function getDay(date)
-{
-  return new Date((date + "T00:00:00").replace(/-/g, '\/').replace(/T.+/, '')).toDateString();
+function getDay(date) {
+  return new Date(
+    (date + "T00:00:00").replace(/-/g, "/").replace(/T.+/, "")
+  ).toDateString();
 }
 
 export default function CalendarScreen({ navigation }) {
@@ -27,11 +29,11 @@ export default function CalendarScreen({ navigation }) {
           scrollEnabled={true}
           // Enable or disable vertical scroll indicator. Default = false
           showScrollIndicator={true}
-          onDayPress={day => {
-              setDay(getDay(day.dateString));
-              setModalVisible(true);
+          onDayPress={(day) => {
+            setDay(getDay(day.dateString));
+            setModalVisible(true);
           }}
-          />
+        />
         <Modal
           animationType="fade"
           transparent={true}
