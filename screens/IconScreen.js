@@ -118,6 +118,7 @@ export default function IconScreen({ navigation }) {
         />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("CreateProfile")}>
+        <Text>HHello</Text>
         <MaterialCommunityIcons
           style={styles.avatar2}
           name="arrow-right"

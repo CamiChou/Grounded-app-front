@@ -4,13 +4,13 @@ import mapStyles from "../styles/mapStyles.js";
 import { TextInput, View, SafeAreaView, Image, Text } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import * as Location from "expo-location";
+//import * as Location from "expo-location";
 
 export default function MapScreen() {
   const mylocationmarker = require("../assets/mylocationmarker.png");
   const savedlocationmarker = require("../assets/savedlocationmarker.png");
 
-  const [pin, setPin] = React.useState(null); // Create a pin here to show current location
+  //const [pin, setPin] = React.useState(null); // Create a pin here to show current location
   const [mode, toggleMode] = useState(0); // 0 = both 1 = my location, 2 = saved location
   const [search, setSearch] = useState(""); // Current search filter
   const [myLocations, setMyLocations] = useState([]); // My locations
@@ -51,8 +51,9 @@ export default function MapScreen() {
         description: "This is also a place",
       },
     ]);
-    // To set pin location priya testing
-    (async () => {
+    // To set pin location priya testing 
+    //UPDATE it works! incorporoated into camera screen now can probably delete these lines (lines 54 to 70, and 125 to 132, and line 13)- priya
+    /*(async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
@@ -65,8 +66,8 @@ export default function MapScreen() {
       setPin({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-      }); // End of the additional code but there is additional code in the style sheet for the gold pin on lines 127-132
-    })();
+      }); // End of the additional code but there is additional code in the style sheet for the gold pin on lines 127-132 (update can be delted!)
+    })();*/
   }, []);
 
   // Helper function to generate markers from the user data
