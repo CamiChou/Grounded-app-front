@@ -102,6 +102,5 @@ export default StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     color: "#709467",
-    fontFamily: 'Inika_400Regular',
   }
 });

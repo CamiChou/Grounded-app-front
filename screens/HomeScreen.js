@@ -5,42 +5,51 @@ import { Text, View, Button, Image } from "react-native";
 import { addFollowing, showimage } from "../firebase/firebaseFunctions.js";
 import { useIsFocused } from '@react-navigation/native'
 import firebase from "firebase";
-// import 'firebase/storage'; 
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
-  const [userName, setUserName] = useState("");
-  const [profilePic, setProfilePic] = useState(null);
   const isFocused = useIsFocused()
   const [imageUrl, setImageUrl] = useState();
   const storageRef = firebase.storage().ref();
+  const db = firebase.firestore();
+  const [userData, setUserData] = useState(null);
+
+  // get user data
+  const getUser = async() => {
+    await db.collection("users")
+    .doc(user.uid)
+    .get().then((documentSnapchat) => {
+      if (documentSnapchat.exists) {
+        console.log('User Data', documentSnapchat.data());
+        setUserData(documentSnapchat.data())
+      }
+    });
+  }
+  // get example photo 
+  const getImage = async() => {
+    await storageRef.child("rK9tNZCypvS39WHieNjl5MGc5EN2/20220507T004515746Z").getDownloadURL().then(function(url) {
+      setImageUrl(url);
+      }).catch(function(error) {
+        console.log(error)
+    });
+  }
+  const getUserPost = async(user, path) => {
+    await storageRef.child(user + "/" + path).getDownloadURL().then(function(url) {
+      return(url);
+      }).catch(function(error) {
+        console.log(error)
+    });
+  }
 
   useEffect(() => {
-    setUserName(user.displayName);
-    setProfilePic(user.photoURL);
-    const getImage = async() => {
-      await storageRef.child("rK9tNZCypvS39WHieNjl5MGc5EN2/20220507T004515746Z").getDownloadURL().then(function(url) {
-        setImageUrl(url);
-        }).catch(function(error) {
-          console.log(error)
-      });
-    }
-    getImage();
+    // getImage();
+    getUser();
 
-    // for any post
-    const getUserPost = async(user, path) => {
-      await storageRef.child(user + "/" + path).getDownloadURL().then(function(url) {
-        return(url);
-        }).catch(function(error) {
-          console.log(error)
-      });
-    }
   }, [isFocused]);
-
   return (
     <View style={styles.container}>
-      <Text>Welcome {userName}</Text>
-      <Image style={styles.profileImage} source={{ uri: imageUrl }} />
+      <Text>Welcome {userData ? userData.displayName : 'None'}</Text>
+      <Image style={styles.profileImage} source={{uri: userData ? userData.profilePic : 'https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png'}}/>
       <Button
         title="Follow"
         onPress={() => 

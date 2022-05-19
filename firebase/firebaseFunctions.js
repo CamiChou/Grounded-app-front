@@ -145,6 +145,13 @@ export function changeDisplayName(currentUser, name) {
       displayName: name,
     });
 }
+export function changeProfilePic(currentUser, photo) {
+  db.collection("users")
+    .doc(currentUser)
+    .update({
+      profilePic: photo,
+    });
+}
 
 export function addFollowing(currentUser, userToFollow) {
   db.collection("users")

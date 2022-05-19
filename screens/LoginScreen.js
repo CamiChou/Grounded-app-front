@@ -26,7 +26,7 @@ export default function LoginScreen() {
     </View>
     <View style={styles.logInText}>
       <Text style={{fontSize:17}}>Already have an account?</Text>
-      <Text style={{fontSize:17, fontStyle:"italic", textDecorationLine:true, color:"white"}}>  Log In</Text>
+      <Text style={{fontSize:17, fontStyle:"italic", textDecorationLine:"underline", color:"white"}}  onPress={() => login()}>  Log In</Text>
     </View>
     </ImageBackground>
   );
