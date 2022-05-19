@@ -77,9 +77,14 @@ export default function MapScreen() {
         coordinate={marker.coordinate}
         title={marker.title}
         description={marker.description}
-        image={image}
         type={typeNum}
-      />
+      >
+        <Image
+          source={image}
+          resizeMode="contain"
+          style={{ width: 40, height: 40 }}
+        ></Image>
+      </Marker>
     ));
   }
 
