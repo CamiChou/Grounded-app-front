@@ -9,7 +9,7 @@ export default function JournalFeedScreen({ route, navigation }) {
     <View style={[styles.container, {backgroundColor: "#eee"}]}>
         <Text>Temporary Journal Feed</Text>
         <Text>This is the feed for the following date:</Text>
-        <Text>selDate</Text>
+        <Text>{selDate}</Text>
     </View>
   );
 }
