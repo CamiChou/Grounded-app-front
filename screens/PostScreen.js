@@ -10,7 +10,7 @@ export default function PostScreen({ navigation }) {
     {
       id: 1,
       user: "John Doe",
-      image: require("../assets/logo.png"),
+      image: require("../assets/tempPic.jpg"),
       location: { longitude: -122.03, latitude: 37.42 },
       caption: "This is a caption",
       time: "1 hour ago",
@@ -19,7 +19,7 @@ export default function PostScreen({ navigation }) {
     {
       id: 2,
       user: "John Doey",
-      image: require("../assets/logo.png"),
+      image: require("../assets/tempPic.jpg"),
       location: { longitude: -122.03, latitude: 37.42 },
       caption: "This is a caption",
       time: "1 hour ago",
@@ -28,7 +28,7 @@ export default function PostScreen({ navigation }) {
     {
       id: 3,
       user: "John Doeyy",
-      image: require("../assets/logo.png"),
+      image: require("../assets/tempPic.jpg"),
       location: { longitude: -122.03, latitude: 37.42 },
       caption: "This is a caption",
       time: "1 hour ago",
@@ -37,7 +37,7 @@ export default function PostScreen({ navigation }) {
     {
       id: 4,
       user: "John Doeyy",
-      image: require("../assets/logo.png"),
+      image: require("../assets/tempPic.jpg"),
       location: { longitude: -122.03, latitude: 37.42 },
       caption: "This is a caption",
       time: "1 hour ago",
