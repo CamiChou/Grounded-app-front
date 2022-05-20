@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import styles from "../styles.js";
+import styles from "../styles/styles.js";
 import { TouchableOpacity, Text, View, Button, Image } from "react-native";
 import { getDay } from "./CalendarScreen.js";
 
