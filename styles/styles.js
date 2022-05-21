@@ -1,4 +1,11 @@
 import { StyleSheet } from "react-native";
+import {
+  Inika_400Regular,
+} from '@expo-google-fonts/inika'
+import {
+  Inter_400Regular,
+} from '@expo-google-fonts/inter'
+
 
 export default StyleSheet.create({
   container: {
@@ -92,4 +99,12 @@ export default StyleSheet.create({
     marginLeft: "10%",
     marginRight: "10%",
   },
+  top_text:{
+    color: "#709467",
+    fontSize: 18,
+    fontWeight: "bold",
+    position: "absolute",
+    left: 10,
+    top: 20,
+  }
 });
