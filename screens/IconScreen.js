@@ -41,7 +41,7 @@ export default function IconScreen({ navigation }) {
               user.updateProfile({
                 photoURL: "../assets/avatars/avatar1.png",
               });
-              changeProfile("../assets/avatars/avatar1.png");
+              changeProfilePic("../assets/avatars/avatar1.png");
               avatarSelected = true;
             }}>
               <Image
