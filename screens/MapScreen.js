@@ -9,8 +9,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export default function MapScreen() {
   const mylocationmarker = require("../assets/mylocationmarker.png");
   const savedlocationmarker = require("../assets/savedlocationmarker.png");
-
-  //const [pin, setPin] = React.useState(null); // Create a pin here to show current location
   const [mode, toggleMode] = useState(0); // 0 = both 1 = my location, 2 = saved location
   const [search, setSearch] = useState(""); // Current search filter
   const [myLocations, setMyLocations] = useState([]); // My locations
@@ -51,23 +49,6 @@ export default function MapScreen() {
         description: "This is also a place",
       },
     ]);
-    // To set pin location priya testing 
-    //UPDATE it works! incorporoated into camera screen now can probably delete these lines (lines 54 to 70, and 125 to 132, and line 13)- priya
-    /*(async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      console.log(location.coords);
-
-      setPin({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      }); // End of the additional code but there is additional code in the style sheet for the gold pin on lines 127-132 (update can be delted!)
-    })();*/
   }, []);
 
   // Helper function to generate markers from the user data
@@ -127,14 +108,6 @@ export default function MapScreen() {
         }}
         style={mapStyles.map}
       >
-        {pin && (
-          <Marker
-            coordinate={pin}
-            title="Test MapView.Marker"
-            description="to test if the my location works- priya"
-            pinColor="gold"
-          />
-        )}
 
         {filteredMarkers}
       </MapView>
@@ -153,9 +126,9 @@ export default function MapScreen() {
             mapStyles.buttonToggle,
             mapStyles.topToggle,
             mapStyles[
-              mode === 0
-                ? "inactiveMapToggle"
-                : mode === 1
+            mode === 0
+              ? "inactiveMapToggle"
+              : mode === 1
                 ? "inactiveMapToggle"
                 : "activeMapToggle"
             ],
@@ -173,9 +146,9 @@ export default function MapScreen() {
             mapStyles.buttonToggle,
             mapStyles.bottomToggle,
             mapStyles[
-              mode === 0
-                ? "inactiveMapToggle"
-                : mode === 2
+            mode === 0
+              ? "inactiveMapToggle"
+              : mode === 2
                 ? "inactiveMapToggle"
                 : "activeMapToggle"
             ],
