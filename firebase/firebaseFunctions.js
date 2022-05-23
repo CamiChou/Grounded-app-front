@@ -90,7 +90,8 @@ export async function logout() {
   }
 }
 
-export async function uploadCloudStorage(blob, user) {
+export async function uploadCloudStorage(blob, user, pin) {
+  console.log(pin);
   const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
   const uploadTask = storageRef.child(`${user.uid}/${timestamp}.jpg`).put(blob);
 

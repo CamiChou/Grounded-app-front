@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, ImageBackground } from "react-native";
 import { Camera } from "expo-camera";
 import { AuthContext } from "../navigation/AuthProvider";
 import { uploadCloudStorage } from "../firebase/firebaseFunctions";
+import * as Location from "expo-location";
 
 export default function CameraScreen() {
   const { user, logout } = useContext(AuthContext);
@@ -10,14 +11,31 @@ export default function CameraScreen() {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [pin, setPin] = React.useState(null); // pri Create a pin here to show current location
 
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === "granted");
     })();
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+  
+      let location = await Location.getCurrentPositionAsync({});
+      console.log(location.coords);
+  
+      setPin({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      }); // End of the additional code but there is additional code in the style sheet for the gold pin on lines 127-132
+    })();  
   }, []);
 
+  
   async function uploadImageAsync(uri) {
     console.log(uri, user.uid);
     const blob = await new Promise((resolve, reject) => {
@@ -37,7 +55,8 @@ export default function CameraScreen() {
     // const ref = fireStorage.ref().child(new Date().toISOString());
     // const snapshot = await ref.put(blob);
     // blob.close();
-    await uploadCloudStorage(blob, user);
+//here
+    await uploadCloudStorage(blob, user, pin);
   }
 
   const takePicture = async () => {
