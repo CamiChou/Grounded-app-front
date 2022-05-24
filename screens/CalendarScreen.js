@@ -15,9 +15,10 @@ export default function CalendarScreen({ navigation }) {
   const [selectedDay, setDay] = useState("");
 
   return (
-    <View style={[styles.container, {backgroundColor: "#eee"}]}>
-      <Text style={{paddingTop: 100}}>Journal Entries</Text>
-      <View style={[styles.container, {marginTop: 50, marginBottom: 100}]}>
+    
+    <View style={[styles.container, {flex: 1, backgroundColor: "#eee"}]}>
+      <Text style={{paddingTop: 200, fontSize: 25}}>Journal Entries</Text>
+      <View style={{backgroundColor: "#fff", width: '90%', marginLeft: 0, marginRight: 0, marginTop: 50, marginBottom: '35%', paddingHorizontal: 45, borderRadius: 50}}>
         <CalendarList
           // Callback which gets executed when visible months change in scroll view. Default = undefined
           onVisibleMonthsChange={(months) => {console.log('now these months are visible', months);}}
