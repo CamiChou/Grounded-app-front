@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text, View, TouchableOpacity, ImageBackground } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+} from "react-native";
 import { Camera } from "expo-camera";
 import { AuthContext } from "../navigation/AuthProvider";
 import { uploadCloudStorage } from "../firebase/firebaseFunctions";
 import * as Location from "expo-location";
+import { Icon } from "react-native-elements";
 
 export default function CameraScreen() {
   const { user, logout } = useContext(AuthContext);
@@ -11,6 +18,7 @@ export default function CameraScreen() {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const [pin, setPin] = React.useState(null); // pri Create a pin here to show current location
 
   useEffect(() => {
@@ -24,18 +32,17 @@ export default function CameraScreen() {
         setErrorMsg("Permission to access location was denied");
         return;
       }
-  
+
       let location = await Location.getCurrentPositionAsync({});
       console.log(location.coords);
-  
+
       setPin({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       }); // End of the additional code but there is additional code in the style sheet for the gold pin on lines 127-132
-    })();  
+    })();
   }, []);
 
-  
   async function uploadImageAsync(uri) {
     console.log(uri, user.uid);
     const blob = await new Promise((resolve, reject) => {
@@ -55,11 +62,12 @@ export default function CameraScreen() {
     // const ref = fireStorage.ref().child(new Date().toISOString());
     // const snapshot = await ref.put(blob);
     // blob.close();
-//here
+    //here
     await uploadCloudStorage(blob, user, pin);
   }
 
   const takePicture = async () => {
+    console.log(await camera.getAvailablePictureSizesAsync());
     if (!camera) return;
     let photo = await camera.takePictureAsync();
     setPreviewVisible(true);
@@ -84,6 +92,19 @@ export default function CameraScreen() {
               flex: 1,
             }}
           >
+
+            <TouchableOpacity
+              style={{
+                color: "#fff",
+                fontSize: 20,
+                width: 350,
+                height: 350,
+                borderColor: "#fff",
+                borderWidth: 2,
+                marginTop: 200,
+                marginLeft: 20,
+              }}
+            />
             <View
               style={{
                 flex: 1,
@@ -103,7 +124,6 @@ export default function CameraScreen() {
                   style={{
                     width: 130,
                     height: 40,
-
                     alignItems: "center",
                     borderRadius: 4,
                   }}
@@ -114,7 +134,7 @@ export default function CameraScreen() {
                       fontSize: 20,
                     }}
                   >
-                    Re-take
+                    Retake
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -141,6 +161,7 @@ export default function CameraScreen() {
         ) : (
           <Camera
             style={{ flex: 1 }}
+            flashMode={flash}
             type={type}
             ref={(r) => {
               camera = r;
@@ -156,8 +177,38 @@ export default function CameraScreen() {
               <TouchableOpacity
                 style={{
                   position: "absolute",
-                  top: "5%",
-                  left: "5%",
+                  top: "10%",
+                  left: "4%",
+                }}
+                onPress={() => { }}
+              >
+                <Icon name="close" color="white" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  position: "absolute",
+                  top: "10%",
+                  left: "15%",
+                }}
+                onPress={() => {
+                  setFlash(
+                    flash === Camera.Constants.FlashMode.on
+                      ? Camera.Constants.FlashMode.off
+                      : Camera.Constants.FlashMode.on
+                  );
+                }}
+              >
+                {flash === Camera.Constants.FlashMode.on ? (
+                  <Icon name="flash-on" color="yellow" />
+                ) : (
+                  <Icon name="flash-off" color="yellow" />
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  position: "absolute",
+                  top: "10%",
+                  left: "27%",
                 }}
                 onPress={() => {
                   setType(
@@ -167,12 +218,7 @@ export default function CameraScreen() {
                   );
                 }}
               >
-                <Text
-                  style={{ fontSize: 20, marginBottom: 10, color: "white" }}
-                >
-                  {" "}
-                  Flip{" "}
-                </Text>
+                <Icon name="flip-camera-ios" color="white" />
               </TouchableOpacity>
               <View
                 style={{
@@ -201,7 +247,13 @@ export default function CameraScreen() {
                       borderRadius: 50,
                       backgroundColor: "#fff",
                     }}
-                  />
+                  >
+                    <Image style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: 50,
+                    }} source={require("../assets/logo.png")} resizeMode="contain" />
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>

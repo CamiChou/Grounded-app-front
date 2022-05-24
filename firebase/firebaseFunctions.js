@@ -22,7 +22,7 @@ const isUserEqual = (googleUser, firebaseUser) => {
   for (let i = 0; i < providerData.length; i++) {
     if (
       providerData[i].providerId ===
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
       providerData[i].uid === googleUser.getBasicProfile().getId()
     ) {
       return true;
@@ -133,6 +133,7 @@ export function createUser(result) {
       uid: result.user.uid,
       profilePic: result.user.photoURL,
       displayName: result.user.displayName,
+      photos: []
     })
     .then(() => console.log("user created: " + result.user.displayName));
 }
@@ -151,18 +152,18 @@ export function addFollowing(currentUser, userToFollow) {
   //   const data = doc.data();
   //   console.log(data['displayName']);
   // }))
-  
+
   db.collection("users")
     .doc(currentUser)
     .set({
       following: firebase.firestore.FieldValue.arrayUnion(userToFollow),
-    }, {merge: true})
+    }, { merge: true })
     .then(() => {
-    db.collection("users").doc(userToFollow).get().then((doc) => {
-      const data = doc.data();
-      console.log("now following " + data['displayName'])
-    })
-  });
+      db.collection("users").doc(userToFollow).get().then((doc) => {
+        const data = doc.data();
+        console.log("now following " + data['displayName'])
+      })
+    });
 }
 
 // export function addFriend(currentUser, userToFriend) {
