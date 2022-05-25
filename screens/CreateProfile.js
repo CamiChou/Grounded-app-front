@@ -40,7 +40,7 @@ export default function CreateProfile({ navigation }) {
 
 
   return (
-      <ImageBackground source={require("../assets/background.jpeg")} style={{width: "100%", height: "110%", position: 'absolute', top: -50}}>
+      <ImageBackground source={require("../assets/background.jpeg")} style={{width: "100%", height: "110%", position: 'absolute', top: -50}} imageStyle={{opacity: 0.5}}>
         {/* example logo */}
         <View style={styles.styledContainer}>
 
@@ -84,7 +84,7 @@ export default function CreateProfile({ navigation }) {
                   // change display name for "users" table 
                   changeDisplayName(user.uid, username);
                   // navigate to home
-                  navigation.navigate("HomeStack");
+                  navigation.navigate("AvatarScreen");
                 }
               }}
               type="anchor"

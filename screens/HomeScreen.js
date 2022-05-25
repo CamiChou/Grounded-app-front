@@ -79,7 +79,7 @@ export default function HomeScreen({ navigation }) {
       />
       <Button title="Log Out" onPress={logout} />
 
-      <Button title="view Image" id="viewbtn" onPress={() => showimage('rK9tNZCypvS39WHieNjl5MGc5EN2')} />
+      {/* <Button title="view Image" id="viewbtn" onPress={() => showimage('rK9tNZCypvS39WHieNjl5MGc5EN2')} /> */}
     </View >
   );
 }

@@ -39,9 +39,9 @@ export default function IconScreen({ navigation }) {
           <View >
             <TouchableOpacity onPress={() => {
               user.updateProfile({
-                photoURL: "../assets/avatars/avatar1.png",
+                photoURL: "../assets/avatars/avatar1png",
               });
-              changeProfilePic("../assets/avatars/avatar1.png");
+              changeProfilePic(user.uid, "../assets/avatars/avatar1.png");
               avatarSelected = true;
             }}>
               <Image
@@ -165,7 +165,7 @@ export default function IconScreen({ navigation }) {
 
         <AwesomeButtonRick onPress={() => {
           if (avatarSelected == true){
-            navigation.navigate("CreateProfile");
+            navigation.navigate("HomeStack");
           }
           else {
             alert('Please select an avatar');

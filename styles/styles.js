@@ -16,8 +16,9 @@ export default StyleSheet.create({
     top: 400,
   },
   profileImage: {
-    width: "100%",
-    height: "100%",
+    width: 250,
+    height: 250,
+    top: 20,
   },
   profileImageContainer: {
     top: 30,
@@ -53,13 +54,13 @@ export default StyleSheet.create({
     backgroundColor: "#E5F5EF"
   },
   textBox: {
-    top: 20,
+    top: 40,
     width: 250,
     borderWidth: 0,
     borderRadius: 15,
   },
   createButton: {
-    paddingTop: 90,
+    paddingTop: 100,
     left: 80,
   },
   background: {
