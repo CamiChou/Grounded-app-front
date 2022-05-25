@@ -16,6 +16,10 @@ export default StyleSheet.create({
     top: 400,
   },
   profileImage: {
+    width: "100%",
+    height: "100%",
+  },
+  profileImageContainer: {
     top: 30,
     height: 300,
     width: 300,
@@ -91,12 +95,12 @@ export default StyleSheet.create({
     right: 90,
     marginTop: 50,
   },
-  logInText:{
+  logInText: {
     flexDirection: "row",
     top: 420,
     left: 80,
   },
-  loginTitle:{
+  loginTitle: {
     fontSize: 60,
     top: 300,
     textAlign: "center",

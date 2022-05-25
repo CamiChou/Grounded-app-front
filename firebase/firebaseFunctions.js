@@ -1,8 +1,7 @@
 import firebase from "firebase";
 import apiKeys from "../config/apiKeys";
 import * as Google from "expo-google-app-auth";
-import React, { setFile } from "react";
-import {setImageUrl} from "../screens/HomeScreen"
+
 let app = !firebase.apps.length
   ? firebase.initializeApp(apiKeys.firebaseConfig)
   : firebase.app();
@@ -23,7 +22,7 @@ const isUserEqual = (googleUser, firebaseUser) => {
   for (let i = 0; i < providerData.length; i++) {
     if (
       providerData[i].providerId ===
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
       providerData[i].uid === googleUser.getBasicProfile().getId()
     ) {
       return true;
@@ -159,13 +158,13 @@ export function addFollowing(currentUser, userToFollow) {
     .doc(currentUser)
     .set({
       following: firebase.firestore.FieldValue.arrayUnion(userToFollow),
-    }, {merge: true})
+    }, { merge: true })
     .then(() => {
-    db.collection("users").doc(userToFollow).get().then((doc) => {
-      const data = doc.data();
-      console.log("now following " + data['displayName'])
-    })
-  });
+      db.collection("users").doc(userToFollow).get().then((doc) => {
+        const data = doc.data();
+        console.log("now following " + data['displayName'])
+      })
+    });
 }
 
 // qr code? 
@@ -174,7 +173,7 @@ export function addFriend(currentUser, userToFriend) {
     .doc(currentUser)
     .set({
       friends: firebase.firestore.FieldValue.arrayUnion(userToFriend),
-    }, {merge: true})
+    }, { merge: true })
     .then(() => {
       db.collection("users").doc(userToFriend).get().then((doc) => {
         const data = doc.data();

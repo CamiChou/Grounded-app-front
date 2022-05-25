@@ -14,30 +14,44 @@ export default function HomeScreen({ navigation }) {
   const db = firebase.firestore();
   const [userData, setUserData] = useState(null);
 
+  const profilePics = {
+    "../assets/avatars/avatar1.png": require("../assets/avatars/avatar1.png"),
+    "../assets/avatars/avatar2.png": require("../assets/avatars/avatar2.png"),
+    "../assets/avatars/avatar3.png": require("../assets/avatars/avatar3.png"),
+    "../assets/avatars/avatar4.png": require("../assets/avatars/avatar4.png"),
+    "../assets/avatars/avatar5.png": require("../assets/avatars/avatar5.png"),
+    "../assets/avatars/avatar6.png": require("../assets/avatars/avatar6.png"),
+    "../assets/avatars/avatar7.png": require("../assets/avatars/avatar7.png"),
+    "../assets/avatars/avatar8.png": require("../assets/avatars/avatar8.png"),
+    "../assets/avatars/avatar9.png": require("../assets/avatars/avatar9.png"),
+  }
+
+  const defaultProfilePic = { uri: 'https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png' }
+
   // get user data
-  const getUser = async() => {
+  const getUser = async () => {
     await db.collection("users")
-    .doc(user.uid)
-    .get().then((documentSnapchat) => {
-      if (documentSnapchat.exists) {
-        console.log('User Data', documentSnapchat.data());
-        setUserData(documentSnapchat.data())
-      }
-    });
+      .doc(user.uid)
+      .get().then((documentSnapchat) => {
+        if (documentSnapchat.exists) {
+          console.log('User Data', documentSnapchat.data());
+          setUserData(documentSnapchat.data())
+        }
+      });
   }
   // get example photo 
-  const getImage = async() => {
-    await storageRef.child("rK9tNZCypvS39WHieNjl5MGc5EN2/20220507T004515746Z").getDownloadURL().then(function(url) {
+  const getImage = async () => {
+    await storageRef.child("rK9tNZCypvS39WHieNjl5MGc5EN2/20220507T004515746Z").getDownloadURL().then(function (url) {
       setImageUrl(url);
-      }).catch(function(error) {
-        console.log(error)
+    }).catch(function (error) {
+      console.log(error)
     });
   }
-  const getUserPost = async(user, path) => {
-    await storageRef.child(user + "/" + path).getDownloadURL().then(function(url) {
-      return(url);
-      }).catch(function(error) {
-        console.log(error)
+  const getUserPost = async (user, path) => {
+    await storageRef.child(user + "/" + path).getDownloadURL().then(function (url) {
+      return (url);
+    }).catch(function (error) {
+      console.log(error)
     });
   }
 
@@ -46,13 +60,16 @@ export default function HomeScreen({ navigation }) {
     getUser();
 
   }, [isFocused]);
+
   return (
     <View style={styles.container}>
       <Text>Welcome {userData ? userData.displayName : 'None'}</Text>
-      <Image style={styles.profileImage} source={{uri: userData ? userData.profilePic : 'https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png'}}/>
+      <View style={styles.profileImageContainer}>
+        <Image style={styles.profileImage} resizeMode="contain" source={userData ? profilePics[userData.profilePic] : defaultProfilePic} />
+      </View>
       <Button
         title="Follow"
-        onPress={() => 
+        onPress={() =>
           addFollowing(user.uid, user.uid)
         }
       />
@@ -62,7 +79,7 @@ export default function HomeScreen({ navigation }) {
       />
       <Button title="Log Out" onPress={logout} />
 
-    <Button title="view Image" id="viewbtn"  onPress={() => showimage('rK9tNZCypvS39WHieNjl5MGc5EN2')}/>
-    </View>
+      <Button title="view Image" id="viewbtn" onPress={() => showimage('rK9tNZCypvS39WHieNjl5MGc5EN2')} />
+    </View >
   );
 }
