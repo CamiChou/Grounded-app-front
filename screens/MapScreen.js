@@ -4,13 +4,11 @@ import mapStyles from "../styles/mapStyles.js";
 import { TextInput, View, SafeAreaView, Image, Text } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import * as Location from "expo-location";
+//import * as Location from "expo-location";
 
 export default function MapScreen() {
   const mylocationmarker = require("../assets/mylocationmarker.png");
   const savedlocationmarker = require("../assets/savedlocationmarker.png");
-
-  const [pin, setPin] = React.useState(null); // Create a pin here to show current location
   const [mode, toggleMode] = useState(0); // 0 = both 1 = my location, 2 = saved location
   const [search, setSearch] = useState(""); // Current search filter
   const [myLocations, setMyLocations] = useState([]); // My locations
@@ -51,22 +49,6 @@ export default function MapScreen() {
         description: "This is also a place",
       },
     ]);
-    // To set pin location priya testing
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      console.log(location.coords);
-
-      setPin({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      }); // End of the additional code but there is additional code in the style sheet for the gold pin on lines 127-132
-    })();
   }, []);
 
   // Helper function to generate markers from the user data
@@ -77,9 +59,14 @@ export default function MapScreen() {
         coordinate={marker.coordinate}
         title={marker.title}
         description={marker.description}
-        image={image}
         type={typeNum}
-      />
+      >
+        <Image
+          source={image}
+          resizeMode="contain"
+          style={{ width: 40, height: 40 }}
+        ></Image>
+      </Marker>
     ));
   }
 
@@ -121,14 +108,6 @@ export default function MapScreen() {
         }}
         style={mapStyles.map}
       >
-        {pin && (
-          <Marker
-            coordinate={pin}
-            title="Test MapView.Marker"
-            description="to test if the my location works- priya"
-            pinColor="gold"
-          />
-        )}
 
         {filteredMarkers}
       </MapView>
@@ -147,9 +126,9 @@ export default function MapScreen() {
             mapStyles.buttonToggle,
             mapStyles.topToggle,
             mapStyles[
-              mode === 0
-                ? "inactiveMapToggle"
-                : mode === 1
+            mode === 0
+              ? "inactiveMapToggle"
+              : mode === 1
                 ? "inactiveMapToggle"
                 : "activeMapToggle"
             ],
@@ -167,9 +146,9 @@ export default function MapScreen() {
             mapStyles.buttonToggle,
             mapStyles.bottomToggle,
             mapStyles[
-              mode === 0
-                ? "inactiveMapToggle"
-                : mode === 2
+            mode === 0
+              ? "inactiveMapToggle"
+              : mode === 2
                 ? "inactiveMapToggle"
                 : "activeMapToggle"
             ],
