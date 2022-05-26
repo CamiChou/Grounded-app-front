@@ -58,6 +58,13 @@ export default StyleSheet.create({
     width: 250,
     borderWidth: 0,
     borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
   },
   createButton: {
     paddingTop: 100,
@@ -107,5 +114,57 @@ export default StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     color: "#709467",
+  }, 
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "#F6FFDA",
+    borderRadius: 40,
+    padding: 40,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    height: 480,
+    width: 350,
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 10,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  modalButtons: {
+    bottom: 170,
+    width: 250,
+    backgroundColor: "white",
+    borderColor: "#9DCA92",
+    borderWidth: 2,
+    marginBottom: 10,
+  },
+  textStyle: {
+    color: "black",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 30,
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  QRcode: {
+    bottom: 213,
   }
 });

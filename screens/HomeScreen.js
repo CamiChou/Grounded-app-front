@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles/styles.js";
-import { Text, View, Button, Image } from "react-native";
+import { Modal, Platform, Pressable, Text, View, Button, Image } from "react-native";
 import { addFollowing, showimage } from "../firebase/firebaseFunctions.js";
 import { useIsFocused } from '@react-navigation/native'
 import firebase from "firebase";
+import QRCode from 'react-native-qrcode-svg';
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
@@ -13,6 +14,7 @@ export default function HomeScreen({ navigation }) {
   const storageRef = firebase.storage().ref();
   const db = firebase.firestore();
   const [userData, setUserData] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const profilePics = {
     "../assets/avatars/avatar1.png": require("../assets/avatars/avatar1.png"),
@@ -79,7 +81,49 @@ export default function HomeScreen({ navigation }) {
       />
       <Button title="Log Out" onPress={logout} />
 
-      {/* <Button title="view Image" id="viewbtn" onPress={() => showimage('rK9tNZCypvS39WHieNjl5MGc5EN2')} /> */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onBackdropPress={() => setModalVisible(false)}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <Text style={styles.modalText}>My QR Code</Text>
+          <Image
+                source={require("../assets/codeFrame.png")}
+          />
+          <View style={styles.QRcode}>
+            <QRCode 
+                value={userData ? userData.uid : "none"}
+                size={197}
+              />
+          </View>
+            <Pressable
+              style={[styles.button, styles.modalButtons]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Scan QR Code</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.modalButtons]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Share Code Link</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={styles.textStyle}>Show Modal</Text>
+      </Pressable>
     </View >
   );
 }
