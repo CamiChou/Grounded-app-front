@@ -8,12 +8,17 @@ import PostScreen from "../screens/PostScreen";
 import MapScreen from "../screens/MapScreen";
 import JournalScreen from "../screens/JournalScreen";
 import CameraScreen from "../screens/CameraScreen";
+import { Image } from "react-native";
 
 export default function HomeStack() {
   const Tab = createMaterialBottomTabNavigator();
   return (
-    <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen
+    <Tab.Navigator initialRouteName="Home" 
+     activeColor="#9CC991"
+     inactiveColor="black"
+     barStyle={{ backgroundColor: '#F8F8F8', paddingBottom: 20,}}
+    >
+      <Tab.Screen 
         name="Home"
         component={HomeScreen}
         options={{
@@ -29,7 +34,7 @@ export default function HomeStack() {
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name="file-question"
+              name="earth"
               color={color}
               size={26}
             />
@@ -41,18 +46,16 @@ export default function HomeStack() {
         name="Post"
         component={PostScreen}
         options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="person" color={color} size={26} />
-          ),
+          tabBarIcon: () => (<Image source={require("./../assets/postButton.png")} style={{width: 100, height: 99, bottom: 50}} />)
         }}
-      />
+         />
       <Tab.Screen
         name="Map"
         component={MapScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name="account-box"
+              name="map"
               color={color}
               size={26}
             />
@@ -65,21 +68,8 @@ export default function HomeStack() {
         component={JournalScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="account-box"
-              color={color}
-              size={26}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Camera"
-        component={CameraScreen}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="account-box"
+            <MaterialIcons
+              name="person"
               color={color}
               size={26}
             />
