@@ -15,7 +15,7 @@ export default StyleSheet.create({
     alignItems: "center",
     top: 400,
   },
-  profileImage: {
+  logoImage: {
     width: 250,
     height: 250,
     top: 20,
@@ -38,9 +38,11 @@ export default StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 10,
   },
-  logoImage: {
-    height: 100,
-    width: 100,
+  profileImage: {
+    height: 250,
+    width: 250,
+    alignItems: "center",
+    left: 20,
   },
   textInput: {
     fontSize: 20,
@@ -116,7 +118,6 @@ export default StyleSheet.create({
     color: "#709467",
   }, 
   centeredView: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22
@@ -129,12 +130,12 @@ export default StyleSheet.create({
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
-      height: 2
+      width: 2,
+      height: 4
     },
     height: 480,
     width: 350,
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.5,
     shadowRadius: 4,
     elevation: 5
   },
@@ -144,19 +145,30 @@ export default StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#FAEDCD",
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    paddingTop: 5,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
   },
   modalButtons: {
     bottom: 170,
-    width: 250,
     backgroundColor: "white",
     borderColor: "#9DCA92",
     borderWidth: 2,
     marginBottom: 10,
+    padding: 5,
+    height: 44,
+    width: 289,
   },
   textStyle: {
     color: "black",
-    textAlign: "center"
+    fontSize: 18,
   },
   modalText: {
     marginBottom: 30,
@@ -166,5 +178,15 @@ export default StyleSheet.create({
   },
   QRcode: {
     bottom: 213,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    backgroundColor: "white",
+    padding: 15,
+    borderRadius: 15,
   }
 });

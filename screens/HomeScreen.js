@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles/styles.js";
-import { Modal, Platform, Pressable, Text, View, Button, Image } from "react-native";
+import { Platform, Pressable, Text, View, Button, Image } from "react-native";
 import { addFollowing, showimage } from "../firebase/firebaseFunctions.js";
 import { useIsFocused } from '@react-navigation/native'
 import firebase from "firebase";
 import QRCode from 'react-native-qrcode-svg';
+import Modal from "react-native-modal";
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
@@ -81,6 +82,7 @@ export default function HomeScreen({ navigation }) {
       />
       <Button title="Log Out" onPress={logout} />
 
+      {/* modal for qr code */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -98,22 +100,43 @@ export default function HomeScreen({ navigation }) {
                 source={require("../assets/codeFrame.png")}
           />
           <View style={styles.QRcode}>
+            {/* qr code just holds user uid for now  */}
             <QRCode 
                 value={userData ? userData.uid : "none"}
-                size={197}
+                size={160}
               />
           </View>
             <Pressable
               style={[styles.button, styles.modalButtons]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(false);
+                navigation.navigate("Camera");
+                }
+              }
             >
-              <Text style={styles.textStyle}>Scan QR Code</Text>
+              <View style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  left: 45,
+              }}>
+                <Image source={require("../assets/Camera.png")}/>
+                <Text style={styles.textStyle}>    Scan QR Code</Text>
+
+              </View>
             </Pressable>
             <Pressable
               style={[styles.button, styles.modalButtons]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => console.log("share code link button pressed")}
             >
-              <Text style={styles.textStyle}>Share Code Link</Text>
+              <View style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  left: 40,
+              }}>
+                <Image source={require("../assets/Share.png")}/>
+                <Text style={styles.textStyle}>  Share Code Link</Text>
+
+              </View>
             </Pressable>
           </View>
         </View>
@@ -122,7 +145,7 @@ export default function HomeScreen({ navigation }) {
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
       >
-        <Text style={styles.textStyle}>Show Modal</Text>
+        <Text style={{fontSize:15}}>Show QR</Text>
       </Pressable>
     </View >
   );

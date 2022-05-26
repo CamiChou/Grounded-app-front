@@ -49,7 +49,7 @@ export default function CreateProfile({ navigation }) {
 
           {/* avatar */}
           <Image
-            style={styles.profileImage}
+            style={styles.logoImage}
             source={
               require("../assets/ikigai.png")
             }
