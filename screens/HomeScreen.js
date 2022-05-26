@@ -113,7 +113,7 @@ export default function HomeScreen({ navigation }) {
         <Image style={styles.profileImage} resizeMode="contain" source={userData ? profilePics[userData.profilePic] : defaultProfilePic} />
       </View>
       
-      <Text style={{bottom: 270, fontSize: 30}}>{userData ? userData.displayName : 'None'}</Text>
+      <Text style={{bottom: 270, fontSize: 30, left: 10}}>{userData ? userData.displayName : 'None'}</Text>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
