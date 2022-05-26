@@ -146,13 +146,15 @@ export function changeDisplayName(currentUser, name) {
       displayName: name,
     });
 }
+export function changeProfilePic(currentUser, photo) {
+  db.collection("users")
+    .doc(currentUser)
+    .update({
+      profilePic: photo,
+    });
+}
 
 export function addFollowing(currentUser, userToFollow) {
-  // (db.collection("users").doc(currentUser).get().then((doc) => {
-  //   const data = doc.data();
-  //   console.log(data['displayName']);
-  // }))
-
   db.collection("users")
     .doc(currentUser)
     .set({
@@ -166,12 +168,17 @@ export function addFollowing(currentUser, userToFollow) {
     });
 }
 
-// export function addFriend(currentUser, userToFriend) {
-//   console.log(userToFollow)
-//   db.collection("users")
-//     .doc(currentUser)
-//     .set({
-//       following: userToFollow,
-//     }, {merge: true})
-//     .then(() => console.log("now following " + userToFollow));
-// }
+// qr code? 
+export function addFriend(currentUser, userToFriend) {
+  db.collection("users")
+    .doc(currentUser)
+    .set({
+      friends: firebase.firestore.FieldValue.arrayUnion(userToFriend),
+    }, { merge: true })
+    .then(() => {
+      db.collection("users").doc(userToFriend).get().then((doc) => {
+        const data = doc.data();
+        console.log("now friends with " + data['displayName'])
+      })
+    });
+}
