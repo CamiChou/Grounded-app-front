@@ -98,7 +98,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-
+      <Image style={{top: -75, width: "100%"}} source={require("../assets/ellipse.png")} ></Image>
       
       {/* <View style={styles.barcodebox}>
         <BarCodeScanner
@@ -109,13 +109,21 @@ export default function HomeScreen({ navigation }) {
 
       {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />} */}
 
-      <Text>Welcome {userData ? userData.displayName : 'None'}</Text>
-
       <View style={styles.profileImageContainer}>
         <Image style={styles.profileImage} resizeMode="contain" source={userData ? profilePics[userData.profilePic] : defaultProfilePic} />
       </View>
+      
+      <Text style={{bottom: 270, fontSize: 30}}>{userData ? userData.displayName : 'None'}</Text>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={{fontSize:15}}>Show QR</Text>
+      </Pressable>
+      <Text style={{top: -220, fontSize: 19}}>Friends / Following</Text>
+
       <Button
-        title="Follow"
+        title="Test follow"
         onPress={() =>
           addFollowing(user.uid, user.uid)
         }
@@ -185,12 +193,6 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
       </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={{fontSize:15}}>Show QR</Text>
-      </Pressable>
     </View >
   );
 }

@@ -6,7 +6,6 @@ export default function JournalScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image style={{top: -320, width: "100%"}} source={require("../assets/ellipse.png")} ></Image>
-      <Image style={{top: -320, width: "100%"}} source={require("../assets/ellipse.png")} ></Image>
       <Text>Journal Screen</Text>
     </View>
   );

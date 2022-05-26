@@ -21,7 +21,8 @@ export default StyleSheet.create({
     top: 20,
   },
   profileImageContainer: {
-    top: 30,
+    top: -128,
+    right: -80,
     height: 300,
     width: 300,
     borderRadius: 75,
@@ -39,10 +40,9 @@ export default StyleSheet.create({
     paddingBottom: 10,
   },
   profileImage: {
-    height: 250,
-    width: 250,
+    height: 146,
+    width: 146,
     alignItems: "center",
-    left: 20,
   },
   textInput: {
     fontSize: 20,
@@ -155,6 +155,7 @@ export default StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
+    top: -250
   },
   modalButtons: {
     bottom: 170,
