@@ -7,6 +7,7 @@ import { useIsFocused } from '@react-navigation/native'
 import firebase from "firebase";
 import QRCode from 'react-native-qrcode-svg';
 import Modal from "react-native-modal";
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
@@ -16,7 +17,16 @@ export default function HomeScreen({ navigation }) {
   const db = firebase.firestore();
   const [userData, setUserData] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const [text, setText] = useState('Not yet scanned')
 
+  const askForCameraPermission = () => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })()
+  }
   const profilePics = {
     "../assets/avatars/avatar1.png": require("../assets/avatars/avatar1.png"),
     "../assets/avatars/avatar2.png": require("../assets/avatars/avatar2.png"),
@@ -61,12 +71,46 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     // getImage();
     getUser();
-
+    askForCameraPermission();
   }, [isFocused]);
+
+  // What happens when we scan the bar code
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    setText(data)
+    console.log('Type: ' + type + '\nData: ' + data)
+  };
+
+  // Check permissions and return the screens
+  if (hasPermission === null) {
+    return (
+      <View style={styles.container}>
+        <Text>Requesting for camera permission</Text>
+      </View>)
+  }
+  if (hasPermission === false) {
+    return (
+      <View style={styles.container}>
+        <Text style={{ margin: 10 }}>No access to camera</Text>
+        <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
+      </View>)
+  }
 
   return (
     <View style={styles.container}>
+
+      
+      {/* <View style={styles.barcodebox}>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={{ height: 400, width: 400 }} />
+      </View>
+      <Text style={styles.maintext}>{text}</Text>
+
+      {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />} */}
+
       <Text>Welcome {userData ? userData.displayName : 'None'}</Text>
+
       <View style={styles.profileImageContainer}>
         <Image style={styles.profileImage} resizeMode="contain" source={userData ? profilePics[userData.profilePic] : defaultProfilePic} />
       </View>
