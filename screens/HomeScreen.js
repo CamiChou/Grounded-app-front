@@ -98,7 +98,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image style={{top: -75, width: "100%"}} source={require("../assets/ellipse.png")} ></Image>
+      <Image style={{top: -90, width: "100%"}} source={require("../assets/ellipse.png")} ></Image>
       
       {/* <View style={styles.barcodebox}>
         <BarCodeScanner
