@@ -1,42 +1,56 @@
 import React from "react";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeScreen from "../screens/HomeScreen";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import DiscoverScreen from "../screens/DiscoverScreen";
-import PostScreen from "../screens/PostScreen";
 import MapScreen from "../screens/MapScreen";
 import JournalScreen from "../screens/JournalScreen";
 import CameraScreen from "../screens/CameraScreen";
 import { Image, View } from "react-native";
+import { getFocusedRouteNameFromRoute, Link } from "@react-navigation/native";
 
 export default function HomeStack() {
   const Tab = createBottomTabNavigator();
-  
+
   return (
-    <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, tabBarActiveTintColor: '#9CC991', tabBarInactiveTintColor: 'black', tabBarStyle: {
-        bottom: 0, 
-        elevation:0, 
-        backgroundColor:'#F8F8F8',
-        borderRadius:15, 
-        height:90
-    }}}
-     tabBarOptions={{
-      showLabel: false,
-      style: {
-        position: 'absolute',
-        bottom: 25, 
-        left: 20, 
-        right: 20, 
-        elevation:0, 
-        backgroundColor:'#F8F8F8',
-        borderRadius:15, 
-        height:90}
+    <Tab.Navigator initialRouteName="Home" screenOptions={{
+      headerShown: false, tabBarActiveTintColor: '#9CC991', tabBarInactiveTintColor: 'black', tabBarStyle: {
+        bottom: 0,
+        elevation: 0,
+        backgroundColor: '#F8F8F8',
+        borderRadius: 15,
+        height: 90,
+      }
+    }}
+      tabBarOptions={{
+        showLabel: false,
+        style: {
+          position: 'absolute',
+          bottom: 25,
+          bottom: 25,
+          bottom: 25,
+          bottom: 25,
+          bottom: 25,
+          left: 20,
+          left: 20,
+          left: 20,
+          left: 20,
+          left: 20,
+          right: 20,
+          right: 20,
+          right: 20,
+          right: 20,
+          right: 20,
+          elevation: 0,
+          backgroundColor: '#F8F8F8',
+          borderRadius: 15,
+          height: 90
+        }
       }}
     >
-      <Tab.Screen 
+      <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
@@ -61,12 +75,13 @@ export default function HomeStack() {
       />
 
       <Tab.Screen
-        name="Post"
-        component={PostScreen}
+        name="CameraScreen"
+        component={CameraScreen}
         options={{
-          tabBarIcon: () => (<Image source={require("./../assets/postButton.png")} style={{width: 100, height: 99, bottom: 20}} />)
+          tabBarIcon: () => (<Image source={require("./../assets/postButton.png")} style={{ width: 100, height: 99, bottom: 20 }} />),
+          tabBarStyle: { display: "none" }
         }}
-         />
+      />
       <Tab.Screen
         name="Map"
         component={MapScreen}
@@ -80,7 +95,7 @@ export default function HomeStack() {
           ),
         }}
       />
-      
+
       <Tab.Screen
         name="Journal"
         component={JournalScreen}

@@ -12,7 +12,7 @@ import { uploadCloudStorage } from "../firebase/firebaseFunctions";
 import * as Location from "expo-location";
 import { Icon } from "react-native-elements";
 
-export default function CameraScreen() {
+export default function CameraScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
   const [hasPermission, setHasPermission] = useState(null);
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -86,78 +86,88 @@ export default function CameraScreen() {
         }}
       >
         {previewVisible ? (
-          <ImageBackground
-            source={{ uri: capturedImage && capturedImage.uri }}
-            style={{
-              flex: 1,
-            }}
-          >
-
-            <TouchableOpacity
-              style={{
-                color: "#fff",
-                fontSize: 20,
-                width: 350,
-                height: 350,
-                borderColor: "#fff",
-                borderWidth: 2,
-                marginTop: 200,
-                marginLeft: 20,
-              }}
-            />
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "column",
-                padding: 15,
-                justifyContent: "flex-end",
-              }}
-            >
-              <View
+          <View style={{
+            flex: 1,
+            flexDirection: "column",
+          }}>
+            <View style={{
+              flex: 2,
+              flexDirection: "row"
+            }}>
+              <ImageBackground
+                source={{ uri: capturedImage && capturedImage.uri }}
+                // resizeMode="fit"
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
+                  flex: 3,
                 }}
               >
-                <TouchableOpacity
-                  onPress={() => setPreviewVisible(false)}
+                {/* <TouchableOpacity
                   style={{
-                    width: 130,
-                    height: 40,
-                    alignItems: "center",
-                    borderRadius: 4,
+                    color: "#fff",
+                    fontSize: 20,
+                    width: 350,
+                    height: 350,
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                    marginTop: 200,
+                    marginLeft: 20,
+                  }}
+                />
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    padding: 15,
+                    justifyContent: "flex-end",
                   }}
                 >
-                  <Text
+                  <View
                     style={{
-                      color: "#fff",
-                      fontSize: 20,
+                      flexDirection: "row",
+                      justifyContent: "space-between",
                     }}
                   >
-                    Retake
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => uploadImageAsync(capturedImage.uri)}
-                  style={{
-                    width: 130,
-                    height: 40,
-                    alignItems: "center",
-                    borderRadius: 4,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: "#fff",
-                      fontSize: 20,
-                    }}
-                  >
-                    Save
-                  </Text>
-                </TouchableOpacity>
-              </View>
+                    <TouchableOpacity
+                      onPress={() => setPreviewVisible(false)}
+                      style={{
+                        width: 130,
+                        height: 40,
+                        alignItems: "center",
+                        borderRadius: 4,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 20,
+                        }}
+                      >
+                        Retake
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => uploadImageAsync(capturedImage.uri)}
+                      style={{
+                        width: 130,
+                        height: 40,
+                        alignItems: "center",
+                        borderRadius: 4,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 20,
+                        }}
+                      >
+                        Save
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View> */}
+              </ImageBackground>
             </View>
-          </ImageBackground>
+          </View>
         ) : (
           <Camera
             style={{ flex: 1 }}
@@ -180,7 +190,7 @@ export default function CameraScreen() {
                   top: "10%",
                   left: "4%",
                 }}
-                onPress={() => { }}
+                onPress={() => { navigation.navigate("Home"); }}
               >
                 <Icon name="close" color="white" />
               </TouchableOpacity>
@@ -199,9 +209,9 @@ export default function CameraScreen() {
                 }}
               >
                 {flash === Camera.Constants.FlashMode.on ? (
-                  <Icon name="flash-on" color="yellow" />
+                  <Icon name="flash-on" color="white" />
                 ) : (
-                  <Icon name="flash-off" color="yellow" />
+                  <Icon name="flash-off" color="white" />
                 )}
               </TouchableOpacity>
               <TouchableOpacity
@@ -241,9 +251,8 @@ export default function CameraScreen() {
                   <TouchableOpacity
                     onPress={takePicture}
                     style={{
-                      width: 70,
-                      height: 70,
-                      bottom: 0,
+                      width: 90,
+                      height: 90,
                       borderRadius: 50,
                       backgroundColor: "#fff",
                     }}
