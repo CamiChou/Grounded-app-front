@@ -22,7 +22,7 @@ const isUserEqual = (googleUser, firebaseUser) => {
   for (let i = 0; i < providerData.length; i++) {
     if (
       providerData[i].providerId ===
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
       providerData[i].uid === googleUser.getBasicProfile().getId()
     ) {
       return true;
@@ -90,10 +90,9 @@ export async function logout() {
   }
 }
 
-export async function uploadCloudStorage(blob, user, pin) {
-  console.log(pin);
+export async function uploadCloudStorage(blob, uid, pin, publicState, caption) {
   const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
-  const uploadTask = storageRef.child(`${user.uid}/${timestamp}.jpg`).put(blob);
+  const uploadTask = storageRef.child(`${uid}/${timestamp}.jpg`).put(blob);
 
   uploadTask.on(
     "state_changed",
@@ -120,8 +119,22 @@ export async function uploadCloudStorage(blob, user, pin) {
       // Handle successful uploads on complete
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-        console.log("File available at", downloadURL);
+        let newPhoto = {
+          url: downloadURL,
+          caption: caption,
+          location: pin,
+          public: publicState,
+          timestamp: timestamp,
+        };
         blob.close();
+        db.collection("users")
+          .doc(uid)
+          .update(
+            {
+              photos: firebase.firestore.FieldValue.arrayUnion(newPhoto),
+            },
+            { merge: true }
+          );
       });
     }
   );
@@ -133,52 +146,59 @@ export function createUser(result) {
       uid: result.user.uid,
       profilePic: result.user.photoURL,
       displayName: result.user.displayName,
-      photos: []
+      photos: [],
     })
     .then(() => console.log("user created: " + result.user.displayName));
 }
 
-
 export function changeDisplayName(currentUser, name) {
-  db.collection("users")
-    .doc(currentUser)
-    .update({
-      displayName: name,
-    });
+  db.collection("users").doc(currentUser).update({
+    displayName: name,
+  });
 }
 export function changeProfilePic(currentUser, photo) {
-  db.collection("users")
-    .doc(currentUser)
-    .update({
-      profilePic: photo,
-    });
+  db.collection("users").doc(currentUser).update({
+    profilePic: photo,
+  });
 }
 
 export function addFollowing(currentUser, userToFollow) {
   db.collection("users")
     .doc(currentUser)
-    .set({
-      following: firebase.firestore.FieldValue.arrayUnion(userToFollow),
-    }, { merge: true })
+    .set(
+      {
+        following: firebase.firestore.FieldValue.arrayUnion(userToFollow),
+      },
+      { merge: true }
+    )
     .then(() => {
-      db.collection("users").doc(userToFollow).get().then((doc) => {
-        const data = doc.data();
-        console.log("now following " + data['displayName'])
-      })
+      db.collection("users")
+        .doc(userToFollow)
+        .get()
+        .then((doc) => {
+          const data = doc.data();
+          console.log("now following " + data["displayName"]);
+        });
     });
 }
 
-// qr code? 
+// qr code?
 export function addFriend(currentUser, userToFriend) {
   db.collection("users")
     .doc(currentUser)
-    .set({
-      friends: firebase.firestore.FieldValue.arrayUnion(userToFriend),
-    }, { merge: true })
+    .set(
+      {
+        friends: firebase.firestore.FieldValue.arrayUnion(userToFriend),
+      },
+      { merge: true }
+    )
     .then(() => {
-      db.collection("users").doc(userToFriend).get().then((doc) => {
-        const data = doc.data();
-        console.log("now friends with " + data['displayName'])
-      })
+      db.collection("users")
+        .doc(userToFriend)
+        .get()
+        .then((doc) => {
+          const data = doc.data();
+          console.log("now friends with " + data["displayName"]);
+        });
     });
 }

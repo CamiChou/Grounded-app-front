@@ -23,35 +23,36 @@ export default function CameraScreen({ navigation }) {
   const [capturedImage, setCapturedImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-  const [pin, setPin] = React.useState(null); // pri Create a pin here to show current location
   const [publicPost, setPublic] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [useLocation, setuseLocation] = useState(false);
+  const [caption, setCaption] = useState("");
+  const toggleSwitch = () => setuseLocation((previousState) => !previousState);
+  // const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === "granted");
     })();
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      console.log(location.coords);
-
-      setPin({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      }); // End of the additional code but there is additional code in the style sheet for the gold pin on lines 127-132
-    })();
   }, []);
 
+  async function getUserLocation() {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      setErrorMsg("Permission to access location was denied");
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+
+    return {
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+    };
+  }
+
   async function uploadImageAsync(uri) {
-    console.log(uri, user.uid);
+    // setIsLoading(true);
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.onload = function () {
@@ -66,15 +67,16 @@ export default function CameraScreen({ navigation }) {
       xhr.send(null);
     });
 
-    // const ref = fireStorage.ref().child(new Date().toISOString());
-    // const snapshot = await ref.put(blob);
-    // blob.close();
-    //here
-    await uploadCloudStorage(blob, user, pin);
+    const pin = useLocation ? await getUserLocation() : null;
+    await uploadCloudStorage(blob, user.uid, pin, publicPost, caption);
+
+    setCaption("");
+    // setIsLoading(false);
+    setPreviewVisible(false);
+    setCapturedImage(null);
   }
 
   const takePicture = async () => {
-    console.log(await camera.getAvailablePictureSizesAsync());
     if (!camera) return;
     let photo = await camera.takePictureAsync();
     setPreviewVisible(true);
@@ -214,10 +216,10 @@ export default function CameraScreen({ navigation }) {
                     <Switch
                       style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
                       trackColor={{ false: "#767577", true: "#9CC991" }}
-                      thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
+                      thumbColor={useLocation ? "#f4f3f4" : "#f4f3f4"}
                       ios_backgroundColor="#3e3e3e"
                       onValueChange={toggleSwitch}
-                      value={isEnabled}
+                      value={useLocation}
                     />
                   </View>
                   <View
@@ -253,6 +255,8 @@ export default function CameraScreen({ navigation }) {
                         textAlignVertical: "top",
                         padding: 10,
                       }}
+                      value={caption}
+                      onChangeText={(text) => setCaption(text)}
                       placeholder="Caption:"
                       placeholderTextColor="black"
                       numberOfLines={5}
@@ -275,8 +279,15 @@ export default function CameraScreen({ navigation }) {
                         paddingRight: 20,
                         borderRadius: 20,
                       }}
+                      onPress={() => {
+                        uploadImageAsync(capturedImage.uri);
+                      }}
                     >
+                      {/* {isLoading ? (
+                        <Icon name="sync" color="white" />
+                      ) : ( */}
                       <Text>Share</Text>
+                      {/* )} */}
                     </TouchableOpacity>
                   </View>
                 </View>
