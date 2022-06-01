@@ -8,9 +8,10 @@ import { useIsFocused } from '@react-navigation/native'
 import firebase from "firebase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import CustomSwitch from '../components/CustomSwitch';
-import ListItem from '../components/CustomSwitch';
 
-export default function FriendsScreen({ navigation }) {
+export default function FriendsScreen({ route, navigation }) {
+ const { userDetails } = route.params;
+
   const { user, logout } = useContext(AuthContext);
   const isFocused = useIsFocused()
   const [imageUrl, setImageUrl] = useState();
@@ -22,19 +23,9 @@ export default function FriendsScreen({ navigation }) {
   const [gamesTab, setGamesTab] = useState(1);
   const [friends, setFriends] = useState([]);
   const [following, setFollowing] = useState([]);
-  const [gotFriends, setGotFriends] = useState(false);
-  const [gotFollowing, setGotFollowing] = useState(false);
 
 
   const onSelectSwitch = value => {
-    if (value == 1 && gotFriends == false){
-        userData.friends.map(x=> getFriends(x));
-        setGotFriends(true);
-    }
-    if (value == 2 && gotFollowing == false){
-        userData.following.map(x=> getFollowing(x));
-        setGotFollowing(true);
-    }
     setGamesTab(value);
   };
 
@@ -86,8 +77,9 @@ export default function FriendsScreen({ navigation }) {
   }
 
   useEffect(() => {
-    getUser();
-    
+    userDetails.friends.map(x=> getFriends(x));
+    userDetails.following.map(x=> getFollowing(x));
+
   }, [isFocused]);
 
   return (

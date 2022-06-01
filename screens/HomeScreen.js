@@ -91,7 +91,7 @@ export default function HomeScreen({ navigation }) {
                   onPress={() => { 
                       console.log("viewing friends")
                       console.log(userData ? userData.friends : "none")
-                      navigation.navigate("FriendsScreen");
+                      navigation.navigate("FriendsScreen", {userDetails: userData});
                   }}
               >
                   <Text style={{top: -220, fontSize: 19}}>Friends / Following</Text>

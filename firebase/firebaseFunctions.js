@@ -168,7 +168,9 @@ export function addFollowing(currentUser, userToFollow) {
 }
 
 export function removeFollowing(currentUser, userToUnfollow) {
-  db.collection("users/" + currentUser + "/following")
+  db.collection("users")
+    .doc(currentUser)
+    .doc('following')
     .get().then((documentSnapchat) => {
       if (documentSnapchat.exists) {
         console.log('User Data', documentSnapchat.data());
