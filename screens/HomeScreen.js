@@ -162,7 +162,7 @@ export default function HomeScreen({ navigation }) {
               style={[styles.button, styles.modalButtons]}
               onPress={() => {
                 setModalVisible(false);
-                navigation.navigate("Camera");
+                navigation.navigate("QRScanner");
                 }
               }
             >

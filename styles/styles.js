@@ -139,6 +139,24 @@ export default StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
+  modalView2: {
+    margin: 20,
+    backgroundColor: "#c0dcb4",
+    opacity: 1,
+    borderRadius: 40,
+    padding: 40,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 7,
+      height: 9
+    },
+    height: 480,
+    width: 350,
+    shadowOpacity: 0.3,
+    shadowRadius: 4.5,
+    elevation: 5
+  },
   button: {
     borderRadius: 10,
     padding: 10,
@@ -201,5 +219,33 @@ export default StyleSheet.create({
     width: 300,
     overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: 'tomato'}
+    backgroundColor: 'tomato'},
+
+  scanButton: {
+      bottom: -100,
+      backgroundColor: "black",
+      borderColor: "#9CC991",
+      borderWidth: 5,
+      marginBottom: 10,
+      padding: 9,
+      height: 55,
+      width: 200,
+    },
+  addButton: {
+      bottom: -50,
+      backgroundColor: "black",
+      borderColor: "black",
+      marginBottom: 10,
+      padding: 17,
+      borderRadius: 30,
+      height: 65,
+      width: 275,
+      shadowColor: "#233120",
+      shadowOffset: {
+        width: 2,
+        height: 4
+      },
+      shadowOpacity: 0.7,
+      shadowRadius: 3,
+    },
 });
