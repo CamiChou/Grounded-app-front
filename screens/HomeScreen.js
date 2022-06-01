@@ -86,7 +86,7 @@ export default function HomeScreen({ navigation }) {
       {/* friends/following */}
       <View style={{
                   flexDirection: "row",
-                  alignItems: "center"}}>
+                  alignItems: "center", left: 10}}>
         <TouchableOpacity
                   onPress={() => { 
                       console.log("viewing friends")
@@ -94,16 +94,7 @@ export default function HomeScreen({ navigation }) {
                       navigation.navigate("FriendsScreen");
                   }}
               >
-                  <Text style={{top: -220, fontSize: 19}}>Friends</Text>
-        </TouchableOpacity>
-        <Text style={{top: -220, fontSize: 19}}> / </Text>
-        <TouchableOpacity
-                  onPress={() => { 
-                      console.log("viewing following")
-                      console.log("following: " + userData ? userData.following : "none")
-                  }}
-              >
-                  <Text style={{top: -220, fontSize: 19}}>Following</Text>
+                  <Text style={{top: -220, fontSize: 19}}>Friends / Following</Text>
         </TouchableOpacity>
       </View>
       {/* testers */}

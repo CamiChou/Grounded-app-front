@@ -20,16 +20,21 @@ export default function FriendsScreen({ navigation }) {
   const [text, setText] = useState('Not yet scanned')
   const [value, setValue] = React.useState("");
   const [gamesTab, setGamesTab] = useState(1);
-  const friends = [];
-  const following = [];
+  const [friends, setFriends] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [gotFriends, setGotFriends] = useState(false);
+  const [gotFollowing, setGotFollowing] = useState(false);
+
 
   const onSelectSwitch = value => {
-    // if (value == 1) {
-    //     (userData.friends).map(user => getFriends(user))
-    // }
-    // else if (value == 2) {
-    //     (userData.following).map(user => getFollowing(user))
-    // }
+    if (value == 1 && gotFriends == false){
+        userData.friends.map(x=> getFriends(x));
+        setGotFriends(true);
+    }
+    if (value == 2 && gotFollowing == false){
+        userData.following.map(x=> getFollowing(x));
+        setGotFollowing(true);
+    }
     setGamesTab(value);
   };
 
@@ -58,10 +63,31 @@ export default function FriendsScreen({ navigation }) {
       });
   }
 
+ // get user following
+ const getFollowing = async (uid) => {
+    await Promise.all(db.collection("users")
+      .doc(uid)
+      .get().then((documentSnapchat) => {
+        if (documentSnapchat.exists) {
+            setFollowing(oldArray => [...oldArray, documentSnapchat.data()]);
+        }
+      }));
+  }
+
+  // get user friends 
+ const getFriends = async (uid) => {
+    await Promise.all(db.collection("users")
+      .doc(uid)
+      .get().then((documentSnapchat) => {
+        if (documentSnapchat.exists) {
+            setFriends(oldArray => [...oldArray, documentSnapchat.data()]);
+        }
+      }));
+  }
 
   useEffect(() => {
     getUser();
-
+    
   }, [isFocused]);
 
   return (
@@ -117,20 +143,41 @@ export default function FriendsScreen({ navigation }) {
         <View>
 
         </View>
-        <View style={{position: "absolute", height:200, top: 275, backgroundColor:"white"}}>
-        {gamesTab == 1 && userData ? (userData.friends).map(user => 
-            <View>
-                <Text>{user}</Text> 
+        <View style={{position: "absolute", height:200, top: 245, backgroundColor:"white"}}>
+        {gamesTab == 1 && friends ? friends.map(user => 
+            <View style={{
+                  flexDirection: "row",
+                  alignItems: "center", marginVertical: 10}}>
+                  <Image style={{
+                     height: 53, 
+                     width: 53,
+                     right: 150,
+                     }} resizeMode="contain" source={user ? profilePics[user.profilePic] : defaultProfilePic} />
+                <Text style={{right: 135, fontSize: 16}}>{user.displayName}</Text> 
             </View>
         ) : null}
         </View>
 
 
-        <View style={{position: "absolute", height:200, top: 275, backgroundColor:"white"}}>
-        {gamesTab == 2 && userData ? (userData.following).map(user => 
-            <View style={{marginBottom: 62}}>
-                <Text>{user}</Text> 
-            </View>
+        <View style={{position: "absolute", height:200, top: 245, backgroundColor:"white"}}>
+        {gamesTab == 2 && following ? (following).map(user => 
+            <View style={{
+                flexDirection: "row",
+                alignItems: "center", marginVertical: 10}}>
+               <Image style={{
+                   height: 53, 
+                   width: 53,
+                   right: 150,
+                   }} resizeMode="contain" source={user ? profilePics[user.profilePic] : defaultProfilePic} />
+              <Text style={{right: 135, fontSize: 16}}>{user.displayName}</Text> 
+              <View style={{position:"absolute", left: 200}}>
+                <MaterialCommunityIcons
+                            name="close"
+                            color="black"
+                            size={26}
+                            />
+                </View>
+          </View>
         ) : null}
         </View>
     </View >
