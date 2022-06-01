@@ -10,7 +10,9 @@ import PostScreen from "../screens/PostScreen";
 import MapScreen from "../screens/MapScreen";
 import JournalScreen from "../screens/JournalScreen";
 import CameraScreen from "../screens/CameraScreen";
-import QRScanner from "../screens/QRCodeScanner";
+import ScannerScreen from "../screens/ScannerScreen";
+import FriendsScreen from "../screens/FriendsScreen";
+
 import { Image, View } from "react-native";
 
 export default function HomeStack() {
@@ -111,8 +113,23 @@ export default function HomeStack() {
         }}
       />
       <Tab.Screen
-        name="QRScanner"
-        component={QRScanner}
+        name="ScannerScreen"
+        component={ScannerScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="FriendsScreen"
+        component={FriendsScreen}
         options={{
           tabBarButton: () => null,
           tabBarVisible: false,

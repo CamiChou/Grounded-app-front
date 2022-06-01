@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles/styles.js";
-import { Platform, Pressable, Text, View, Button, Image } from "react-native";
+import { Platform, TouchableOpacity, Pressable, Text, View, Button, Image, Alert } from "react-native";
 import { addFollowing, showimage } from "../firebase/firebaseFunctions.js";
 import { useIsFocused } from '@react-navigation/native'
 import firebase from "firebase";
@@ -17,16 +17,8 @@ export default function HomeScreen({ navigation }) {
   const db = firebase.firestore();
   const [userData, setUserData] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Not yet scanned')
 
-  const askForCameraPermission = () => {
-    (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })()
-  }
   const profilePics = {
     "../assets/avatars/avatar1.png": require("../assets/avatars/avatar1.png"),
     "../assets/avatars/avatar2.png": require("../assets/avatars/avatar2.png"),
@@ -52,76 +44,69 @@ export default function HomeScreen({ navigation }) {
         }
       });
   }
-  // get example photo 
-  const getImage = async () => {
-    await storageRef.child("rK9tNZCypvS39WHieNjl5MGc5EN2/20220507T004515746Z").getDownloadURL().then(function (url) {
-      setImageUrl(url);
-    }).catch(function (error) {
-      console.log(error)
-    });
-  }
-  const getUserPost = async (user, path) => {
-    await storageRef.child(user + "/" + path).getDownloadURL().then(function (url) {
-      return (url);
-    }).catch(function (error) {
-      console.log(error)
-    });
-  }
+  // // get example photo 
+  // const getImage = async () => {
+  //   await storageRef.child("rK9tNZCypvS39WHieNjl5MGc5EN2/20220507T004515746Z").getDownloadURL().then(function (url) {
+  //     setImageUrl(url);
+  //   }).catch(function (error) {
+  //     console.log(error)
+  //   });
+  // }
+  // const getUserPost = async (user, path) => {
+  //   await storageRef.child(user + "/" + path).getDownloadURL().then(function (url) {
+  //     return (url);
+  //   }).catch(function (error) {
+  //     console.log(error)
+  //   });
+  // }
 
   useEffect(() => {
     // getImage();
     getUser();
-    askForCameraPermission();
   }, [isFocused]);
-
-  // What happens when we scan the bar code
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    setText(data)
-    console.log('Type: ' + type + '\nData: ' + data)
-  };
-
-  // Check permissions and return the screens
-  if (hasPermission === null) {
-    return (
-      <View style={styles.container}>
-        <Text>Requesting for camera permission</Text>
-      </View>)
-  }
-  if (hasPermission === false) {
-    return (
-      <View style={styles.container}>
-        <Text style={{ margin: 10 }}>No access to camera</Text>
-        <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
-      </View>)
-  }
 
   return (
     <View style={styles.container}>
       <Image style={{top: -90, width: "100%"}} source={require("../assets/ellipse.png")} ></Image>
-      
-      {/* <View style={styles.barcodebox}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }} />
-      </View>
-      <Text style={styles.maintext}>{text}</Text>
-
-      {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />} */}
 
       <View style={styles.profileImageContainer}>
         <Image style={styles.profileImage} resizeMode="contain" source={userData ? profilePics[userData.profilePic] : defaultProfilePic} />
       </View>
       
       <Text style={{bottom: 270, fontSize: 30}}>{userData ? userData.displayName : 'None'}</Text>
+      
+      {/* show qr code  */}
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
       >
         <Text style={{fontSize:15}}>Show QR</Text>
       </Pressable>
-      <Text style={{top: -220, fontSize: 19}}>Friends / Following</Text>
 
+      {/* friends/following */}
+      <View style={{
+                  flexDirection: "row",
+                  alignItems: "center"}}>
+        <TouchableOpacity
+                  onPress={() => { 
+                      console.log("viewing friends")
+                      console.log(userData ? userData.friends : "none")
+                      navigation.navigate("FriendsScreen");
+                  }}
+              >
+                  <Text style={{top: -220, fontSize: 19}}>Friends</Text>
+        </TouchableOpacity>
+        <Text style={{top: -220, fontSize: 19}}> / </Text>
+        <TouchableOpacity
+                  onPress={() => { 
+                      console.log("viewing following")
+                      console.log("following: " + userData ? userData.following : "none")
+                  }}
+              >
+                  <Text style={{top: -220, fontSize: 19}}>Following</Text>
+        </TouchableOpacity>
+      </View>
+      {/* testers */}
       <Button
         title="Test follow"
         onPress={() =>
@@ -162,7 +147,7 @@ export default function HomeScreen({ navigation }) {
               style={[styles.button, styles.modalButtons]}
               onPress={() => {
                 setModalVisible(false);
-                navigation.navigate("QRScanner");
+                navigation.navigate("ScannerScreen");
                 }
               }
             >

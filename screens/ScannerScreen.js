@@ -8,6 +8,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import styles from "../styles/styles.js";
 import firebase from "firebase";
 import Modal from "react-native-modal";
+import { addFriend } from "../firebase/firebaseFunctions.js";
 
 export default function CameraScreen() {
   const { user, logout } = useContext(AuthContext);
@@ -144,7 +145,7 @@ export default function CameraScreen() {
                 style={[styles.button, styles.addButton]}
                 onPress={() => {
                     setModalVisible(false);
-                    console.log("friend added")
+                    addFriend(user.uid, userData.uid)
                     }
                 }
                 >
