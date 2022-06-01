@@ -167,16 +167,20 @@ export function addFollowing(currentUser, userToFollow) {
     });
 }
 
-export function removeFollowing(currentUser, userToUnfollow) {
-  db.collection("users")
-    .doc(currentUser)
-    .doc('following')
-    .get().then((documentSnapchat) => {
-      if (documentSnapchat.exists) {
-        console.log('User Data', documentSnapchat.data());
-      }
-    });
-}
+// export function removeFollowing (currentUser, userToUnfollow) {
+//   // const unfollowRef = db.doc('users/' + currentUser + '/following/' + userToUnfollow);
+//   // console.log(unfollowRef);
+//   // unfollowRef.delete().then(
+//   //   (doc) => console.log("Document deleted"),
+//   // );
+//   db.collection("users")
+//   .doc(currentUser)
+//   .delete({
+//     following: userToUnfollow
+//   }).then(
+//     (value) => print("deleted"),
+//     );
+// }
 
 // qr code? 
 export function addFriend(currentUser, userToFriend) {

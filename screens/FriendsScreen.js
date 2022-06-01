@@ -46,17 +46,6 @@ export default function FriendsScreen({ route, navigation }) {
 
   const defaultProfilePic = { uri: 'https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png' }
 
-  // get user data
-  const getUser = async () => {
-    await db.collection("users")
-      .doc(user.uid)
-      .get().then((documentSnapchat) => {
-        if (documentSnapchat.exists) {
-            setUserData(documentSnapchat.data())
-        }
-      });
-  }
-
  // get user following
  const getFollowing = async (uid) => {
     await Promise.all(db.collection("users")
@@ -80,13 +69,37 @@ export default function FriendsScreen({ route, navigation }) {
   }
 
   useEffect(() => {
-    if (gotFriends == false){
-        userDetails.friends.map(x=> getFriends(x))
-        setGotFriends(true);
+    if (gotFriends == false || userDetails.friends && friends.length != userDetails.friends.length){
+        setFriends([]);
+        if (userDetails.friends){
+            if (userDetails.friends.length != 0){
+                userDetails.friends.map(x=> getFriends(x))
+                setGotFriends(true);
+            }
+            else {
+                console.log("0 friends")
+            }
+        }
+        else{
+            console.log("no friends")
+            setGotFriends(false);
+        }
     }
-    if (gotFollowing == false){
-        userDetails.following.map(x=> getFollowing(x))
-        setGotFollowing(true);
+    if (gotFollowing == false || userDetails.following && following.length != userDetails.following.length){
+        setFollowing([]);
+        if (userDetails.following){
+            if (userDetails.following.length != 0){
+                userDetails.following.map(x=> getFollowing(x))
+                setGotFollowing(true);
+            }
+            else {
+                console.log("0 following")
+            }
+        }
+        else{
+            console.log("no following")
+            setGotFollowing(false);
+        }
     }
   }, [isFocused]);
 
@@ -157,7 +170,7 @@ export default function FriendsScreen({ route, navigation }) {
               <Text style={{left: -120, position: "absolute", fontSize: 16}}>{user.displayName}</Text> 
               <View style={{position:"absolute", left: 165}}>
                     <TouchableOpacity onPress={() => { 
-                        removeFollowing(user.uid);
+                        removeFollowing(userDetails.uid, userDetails.uid);
                     }}>
                             <MaterialCommunityIcons
                                         name="close"
@@ -185,7 +198,7 @@ export default function FriendsScreen({ route, navigation }) {
               <Text style={{left: -120, position: "absolute", fontSize: 16}}>{user.displayName}</Text> 
               <View style={{position:"absolute", left: 165}}>
                     <TouchableOpacity onPress={() => { 
-                        removeFollowing(user.uid);
+                        removeFollowing(userDetails.uid, userDetails.uid);
                     }}>
                             <MaterialCommunityIcons
                                         name="close"
