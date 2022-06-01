@@ -8,6 +8,7 @@ import { useIsFocused } from '@react-navigation/native'
 import firebase from "firebase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import CustomSwitch from '../components/CustomSwitch';
+import ListItem from '../components/CustomSwitch';
 
 export default function FriendsScreen({ route, navigation }) {
  const { userDetails } = route.params;
@@ -23,6 +24,8 @@ export default function FriendsScreen({ route, navigation }) {
   const [gamesTab, setGamesTab] = useState(1);
   const [friends, setFriends] = useState([]);
   const [following, setFollowing] = useState([]);
+  const [gotFriends, setGotFriends] = useState(false);
+  const [gotFollowing, setGotFollowing] = useState(false);
 
 
   const onSelectSwitch = value => {
@@ -77,9 +80,14 @@ export default function FriendsScreen({ route, navigation }) {
   }
 
   useEffect(() => {
-    userDetails.friends.map(x=> getFriends(x));
-    userDetails.following.map(x=> getFollowing(x));
-
+    if (gotFriends == false){
+        userDetails.friends.map(x=> getFriends(x))
+        setGotFriends(true);
+    }
+    if (gotFollowing == false){
+        userDetails.following.map(x=> getFollowing(x))
+        setGotFollowing(true);
+    }
   }, [isFocused]);
 
   return (
