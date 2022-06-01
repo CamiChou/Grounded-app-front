@@ -94,6 +94,21 @@ export default function HomeStack() {
           ),
         }}
       />
+       <Tab.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
