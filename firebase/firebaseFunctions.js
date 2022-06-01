@@ -167,6 +167,15 @@ export function addFollowing(currentUser, userToFollow) {
     });
 }
 
+export function removeFollowing(currentUser, userToUnfollow) {
+  db.collection("users/" + currentUser + "/following")
+    .get().then((documentSnapchat) => {
+      if (documentSnapchat.exists) {
+        console.log('User Data', documentSnapchat.data());
+      }
+    });
+}
+
 // qr code? 
 export function addFriend(currentUser, userToFriend) {
   db.collection("users")

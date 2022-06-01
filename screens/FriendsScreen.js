@@ -3,7 +3,7 @@ import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles/styles.js";
 import { Platform, TouchableOpacity, Pressable, ScrollView, Text, FlatList, View, Button, Image, Alert } from "react-native";
 import { SearchBar } from "@rneui/themed";
-import { addFollowing, showimage } from "../firebase/firebaseFunctions.js";
+import { addFollowing, removeFollowing } from "../firebase/firebaseFunctions.js";
 import { useIsFocused } from '@react-navigation/native'
 import firebase from "firebase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -146,22 +146,27 @@ export default function FriendsScreen({ navigation }) {
         <View style={{position: "absolute", height:200, top: 245, backgroundColor:"white"}}>
         {gamesTab == 1 && friends ? friends.map(user => 
             <View style={{
-                  flexDirection: "row",
-                  alignItems: "center", marginVertical: 10}}>
-                  <Image style={{
-                     height: 53, 
-                     width: 53,
-                     right: 140,
-                     }} resizeMode="contain" source={user ? profilePics[user.profilePic] : defaultProfilePic} />
-                <Text style={{right: 125, fontSize: 16}}>{user.displayName}</Text> 
-                <View style={{position:"absolute", left: 200}}>
-                <MaterialCommunityIcons
-                            name="close"
-                            color="black"
-                            size={26}
-                            />
+                flexDirection: "row",
+                alignItems: "center", marginVertical: 35}}>
+               <Image style={{
+                   position: "absolute",
+                   height: 53, 
+                   width: 53,
+                   right: 140,
+                   }} resizeMode="contain" source={user ? profilePics[user.profilePic] : defaultProfilePic} />
+              <Text style={{left: -120, position: "absolute", fontSize: 16}}>{user.displayName}</Text> 
+              <View style={{position:"absolute", left: 165}}>
+                    <TouchableOpacity onPress={() => { 
+                        removeFollowing(user.uid);
+                    }}>
+                            <MaterialCommunityIcons
+                                        name="close"
+                                        color="black"
+                                        size={26}
+                                        />
+                    </TouchableOpacity>
                 </View>
-            </View>
+          </View>
         ) : null}
         </View>
 
@@ -170,19 +175,24 @@ export default function FriendsScreen({ navigation }) {
         {gamesTab == 2 && following ? (following).map(user => 
             <View style={{
                 flexDirection: "row",
-                alignItems: "center", marginVertical: 10}}>
+                alignItems: "center", marginVertical: 35}}>
                <Image style={{
+                   position: "absolute",
                    height: 53, 
                    width: 53,
                    right: 140,
                    }} resizeMode="contain" source={user ? profilePics[user.profilePic] : defaultProfilePic} />
-              <Text style={{right: 125, fontSize: 16}}>{user.displayName}</Text> 
-              <View style={{position:"absolute", left: 200}}>
-                <MaterialCommunityIcons
-                            name="close"
-                            color="black"
-                            size={26}
-                            />
+              <Text style={{left: -120, position: "absolute", fontSize: 16}}>{user.displayName}</Text> 
+              <View style={{position:"absolute", left: 165}}>
+                    <TouchableOpacity onPress={() => { 
+                        removeFollowing(user.uid);
+                    }}>
+                            <MaterialCommunityIcons
+                                        name="close"
+                                        color="black"
+                                        size={26}
+                                        />
+                    </TouchableOpacity>
                 </View>
           </View>
         ) : null}
