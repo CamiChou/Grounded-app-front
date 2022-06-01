@@ -31,8 +31,11 @@ export default function CustomSwitch({
         onPress={() => updateSwitchData(1)}
         style={{
           flex: 1,
+          height:40,
           backgroundColor: "white",
-          borderRadius: 10,
+          borderBottomWidth: getSelectionMode == 1 ? 3 : 0,
+          borderBottomColor: "black",
+          borderRadius: 20,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
@@ -51,6 +54,10 @@ export default function CustomSwitch({
         onPress={() => updateSwitchData(2)}
         style={{
           flex: 1,
+          height:40,
+          borderBottomWidth: getSelectionMode == 2 ? 3 : 0,
+          borderBottomColor: "black",
+          borderRadius: 20,
           backgroundColor: "white",
           borderRadius: 10,
           justifyContent: 'center',

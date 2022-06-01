@@ -151,9 +151,16 @@ export default function FriendsScreen({ navigation }) {
                   <Image style={{
                      height: 53, 
                      width: 53,
-                     right: 150,
+                     right: 140,
                      }} resizeMode="contain" source={user ? profilePics[user.profilePic] : defaultProfilePic} />
-                <Text style={{right: 135, fontSize: 16}}>{user.displayName}</Text> 
+                <Text style={{right: 125, fontSize: 16}}>{user.displayName}</Text> 
+                <View style={{position:"absolute", left: 200}}>
+                <MaterialCommunityIcons
+                            name="close"
+                            color="black"
+                            size={26}
+                            />
+                </View>
             </View>
         ) : null}
         </View>
@@ -167,9 +174,9 @@ export default function FriendsScreen({ navigation }) {
                <Image style={{
                    height: 53, 
                    width: 53,
-                   right: 150,
+                   right: 140,
                    }} resizeMode="contain" source={user ? profilePics[user.profilePic] : defaultProfilePic} />
-              <Text style={{right: 135, fontSize: 16}}>{user.displayName}</Text> 
+              <Text style={{right: 125, fontSize: 16}}>{user.displayName}</Text> 
               <View style={{position:"absolute", left: 200}}>
                 <MaterialCommunityIcons
                             name="close"
