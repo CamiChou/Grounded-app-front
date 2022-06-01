@@ -170,7 +170,9 @@ export default function FriendsScreen({ route, navigation }) {
               <Text style={{left: -120, position: "absolute", fontSize: 16}}>{user.displayName}</Text> 
               <View style={{position:"absolute", left: 165}}>
                     <TouchableOpacity onPress={() => { 
-                        removeFollowing(userDetails.uid, userDetails.uid);
+                        // removeFollowing(userDetails.uid, userDetails.uid);
+                        console.log("unfollow")
+
                     }}>
                             <MaterialCommunityIcons
                                         name="close"
@@ -198,7 +200,8 @@ export default function FriendsScreen({ route, navigation }) {
               <Text style={{left: -120, position: "absolute", fontSize: 16}}>{user.displayName}</Text> 
               <View style={{position:"absolute", left: 165}}>
                     <TouchableOpacity onPress={() => { 
-                        removeFollowing(userDetails.uid, userDetails.uid);
+                        // removeFollowing(userDetails.uid, userDetails.uid);
+                        console.log("unfollow")
                     }}>
                             <MaterialCommunityIcons
                                         name="close"
