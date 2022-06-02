@@ -5,7 +5,11 @@ export default StyleSheet.create({
   post: {
     flex: 1,
     width: Dimensions.get("window").width,
+    height: 300,
+    marginBottom: 100,
     flexDirection: "column",
+    borderRadius: 80,
+    backgroundColor: "black"
   },
   postHeader: {
     justifyContent: "space-between",
@@ -13,19 +17,19 @@ export default StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
     width: "100%",
-    height: "25%",
+    height: "40%",
     zIndex: 1,
   },
   userProfile: {
     flex: 1,
     width: "20%",
     height: "100%",
-    backgroundColor: "blue",
+    backgroundColor: "white",
   },
   userInfo: {
     flex: 4,
     height: "100%",
-    backgroundColor: "red",
+    backgroundColor: "white",
   },
   user: {
     flex: 1,
@@ -34,19 +38,19 @@ export default StyleSheet.create({
   userLocation: {
     flex: 1,
     height: "100%",
-    backgroundColor: "green",
+    backgroundColor: "white",
   },
   type: {
     fontSize: 12,
-    color: "grey",
+    color: "black",
   },
   userName: {
     fontSize: 14,
-    color: "white",
+    color: "black",
   },
   userTime: {
     fontSize: 12,
-    color: "grey",
+    color: "black",
     fontStyle: "italic",
   },
   postImage: {

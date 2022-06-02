@@ -91,7 +91,7 @@ export default function HomeStack() {
 
       <Tab.Screen
         name="Journal"
-        component={JournalScreen}
+        component={PostScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="person" color={color} size={26} />

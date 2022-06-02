@@ -21,8 +21,7 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 import firebase from "firebase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import CustomSwitch from "../components/CustomSwitch";
-import ListItem from "../components/CustomSwitch";
+import CustomSwitch from '../components/CustomSwitch';
 
 export default function FriendsScreen({ route, navigation }) {
   const { userDetails } = route.params;
