@@ -68,8 +68,8 @@ export default function HomeStack() {
       />
 
       <Tab.Screen
-        name="CameraScreen"
-        component={CameraScreen}
+        name="Post"
+        component={PostScreen}
         options={{
           tabBarIcon: () => (
             <Image
@@ -77,7 +77,6 @@ export default function HomeStack() {
               style={{ width: 100, height: 99, bottom: 20 }}
             />
           ),
-          tabBarStyle: { display: "none" },
         }}
       />
       <Tab.Screen
@@ -96,6 +95,21 @@ export default function HomeStack() {
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="person" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
+              color={color}
+              size={26}
+            />
           ),
         }}
       />
