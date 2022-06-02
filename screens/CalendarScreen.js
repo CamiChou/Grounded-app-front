@@ -23,19 +23,26 @@ export default function CalendarScreen({ navigation }) {
       (date + "T00:00:00").replace(/-/g, "/").replace(/T.+/, "")
     ).toDateString();
   }
+  function getTodate()
+  {
+    const dateWOTime = new Date();
+    dateWOTime.setHours(0,0,0,0);
+    return dateWOTime;
+  }
   return (
     
     <View style={[styles.container, {flex: 1, backgroundColor: "#eee"}]}>
       <Text style={{paddingTop: 200, fontSize: 25}}>Journal Entries</Text>
       <View style={{backgroundColor: "#fff", width: '90%', marginLeft: 0, marginRight: 0, marginTop: 50, marginBottom: '35%', paddingHorizontal: 45, borderRadius: 50}}>
         <CalendarList
+          maxDate = {getTodate().toDateString()}
           // markingType={'dot'}
           // Callback which gets executed when visible months change in scroll view. Default = undefined
-          onVisibleMonthsChange={(months) => {console.log('now these months are visible', months);}}
+          // onVisibleMonthsChange={(months) => {console.log('now these months are visible', months);}}
           // Max amount of months allowed to scroll to the past. Default = 50
           pastScrollRange={50}
           // Max amount of months allowed to scroll to the future. Default = 50
-          futureScrollRange={50}
+          futureScrollRange={0}
           // Enable or disable scrolling of calendar list
           scrollEnabled={true}
           // Enable or disable vertical scroll indicator. Default = false
