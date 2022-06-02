@@ -22,7 +22,6 @@ import { useIsFocused } from "@react-navigation/native";
 import firebase from "firebase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import CustomSwitch from "../components/CustomSwitch";
-import JournalScreen from "./JournalScreen";
 
 export default function FriendsScreen({ route, navigation }) {
   const { userDetails } = route.params;
@@ -151,7 +150,6 @@ export default function FriendsScreen({ route, navigation }) {
           Friends / Following
         </Text>
       </View>
-      <JournalScreen />
       {/* search bar  */}
       <View style={{ margin: 20, bottom: 240 }}>
         <SearchBar

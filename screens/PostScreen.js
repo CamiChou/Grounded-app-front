@@ -82,7 +82,7 @@ export default function PostScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        style={{ top: -90, width: "100%" }}
+        style={{ top: -135, width: "100%" }}
         source={require("../assets/ellipse.png")}
       ></Image>
 
@@ -96,7 +96,7 @@ export default function PostScreen({ navigation }) {
         />
       </View>
 
-      <Text style={{ bottom: 270, fontSize: 30 }}>
+      <Text style={{ bottom: 335, fontSize: 30 }}>
         {userData ? userData.displayName : "None"}
       </Text>
 
@@ -114,6 +114,7 @@ export default function PostScreen({ navigation }) {
           flexDirection: "row",
           alignItems: "center",
           left: 10,
+          top: -20
         }}
       >
         <TouchableOpacity
@@ -123,10 +124,13 @@ export default function PostScreen({ navigation }) {
             navigation.navigate("FriendsScreen", { userDetails: userData });
           }}
         >
-          <Text style={{ top: -220, fontSize: 19 }}>Friends / Following</Text>
+          <Text style={{ top: -270, fontSize: 19 }}>Friends / Following</Text>
         </TouchableOpacity>
       </View>
+      <View style={{position: 'absolute', bottom:170}}>
       <JournalScreen navigation={navigation} />
+
+      </View >
       {/* testers */}
       {/* <Button
         title="Test follow"
@@ -136,7 +140,10 @@ export default function PostScreen({ navigation }) {
         title="Test camera"
         onPress={() => navigation.navigate("Camera")}
       /> */}
+      <View style={{position: 'absolute', bottom: 60}}>
       <Button title="Log Out" onPress={logout} />
+
+      </View>
 
       {/* modal for qr code */}
       <Modal

@@ -2,23 +2,26 @@ import React, { useState, useEffect, useContext } from "react";
 import styles from "../styles/styles.js";
 import { TouchableOpacity, Text, View, Button, Image } from "react-native";
 import { getDay } from "./CalendarScreen.js";
+import {LinearGradient} from "expo-linear-gradient"
 
 export function JournalIconButton(props) {
   return (
-    <TouchableOpacity
-      style={[styles.journalIcon, styles.shadowBackground]}
-      onPress={() =>
-        props.n.navigate("TempJournalFeed", { selDate: props.date })
-      }
-    >
-      <Text style={{ fontSize: 25, color: "#fff" }}>
-        {
-          /*new Date(props.date).getMonth() + "/" +*/ new Date(
-            props.date
-          ).getDate()
+    <LinearGradient style={{borderRadius: 5, margin: 1}} colors={['#B9D9B1', '#F6FFDA']} >
+      <TouchableOpacity
+        style={[styles.journalIcon]}
+        onPress={() =>
+          props.n.navigate("TempJournalFeed", { selDate: props.date })
         }
-      </Text>
-    </TouchableOpacity>
+      >
+        <Text style={{ fontSize: 25, color: "black" }}>
+          {
+            /*new Date(props.date).getMonth() + "/" +*/ new Date(
+              props.date
+            ).getDate()
+          }
+        </Text>
+      </TouchableOpacity>
+    </LinearGradient>
   );
 }
 
@@ -29,14 +32,13 @@ export default function JournalScreen({ navigation }) {
     ).toDateString();
   }
   return (
-    <View style={styles.container}>
       <View
         style={[
           styles.shadowBackground,
-          { padding: 10, borderRadius: 10, backgroundColor: "#e0edcb" },
+          { padding: 10, borderRadius: 10, backgroundColor: "#FBFFE5" },
         ]}
       >
-        <Text style={{ color: "#b0b1a8", paddingBottom: 5 }}>Last 14 Days</Text>
+        <Text style={{ color: "black", paddingLeft: 10, fontSize: 16, margin: 7}}>Last 14 Days</Text>
         <View style={{ flexDirection: "column" }}>
           <View style={{ flexDirection: "row" }}>
             <JournalIconButton date={getDateString(0)} n={navigation} />
@@ -62,10 +64,9 @@ export default function JournalScreen({ navigation }) {
             style={[styles.navigationButton, styles.shadowBackground]}
             onPress={() => navigation.navigate("Calendar")}
           >
-            <Text>View Journal Entries</Text>
+            <Text>View All</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </View>
   );
 }

@@ -20,7 +20,7 @@ export default StyleSheet.create({
     top: 20,
   },
   profileImageContainer: {
-    top: -128,
+    top: -195,
     right: -80,
     height: 300,
     width: 300,
@@ -172,7 +172,7 @@ export default StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    top: -250,
+    top: -320,
   },
   modalButtons: {
     bottom: 170,
@@ -278,7 +278,6 @@ export default StyleSheet.create({
     borderRadius: 4,
     height: 45,
     width: 45,
-    backgroundColor: "#bad9b2",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -294,13 +293,14 @@ export default StyleSheet.create({
   {
     alignItems: "center",
     backgroundColor: "#fff",
-    padding: 20,
+    padding: 7,
     margin: 10,
     width: '50%',
     borderWidth: 1,
     borderRadius: 5,
     borderColor: "#a5a2a2"
   },
+  
   calendarDate:
   {
     alignContent: "center",
