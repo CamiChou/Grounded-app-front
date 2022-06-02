@@ -17,29 +17,37 @@ import { Image, View } from "react-native";
 
 export default function HomeStack() {
   const Tab = createBottomTabNavigator();
-  
+
   return (
-    <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, tabBarActiveTintColor: '#9CC991', tabBarInactiveTintColor: 'black', tabBarStyle: {
-        bottom: 0, 
-        elevation:0, 
-        backgroundColor:'#F8F8F8',
-        borderRadius:15, 
-        height:90
-    }}}
-     tabBarOptions={{
-      showLabel: false,
-      style: {
-        position: 'absolute',
-        bottom: 25, 
-        left: 20, 
-        right: 20, 
-        elevation:0, 
-        backgroundColor:'#F8F8F8',
-        borderRadius:15, 
-        height:90}
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#9CC991",
+        tabBarInactiveTintColor: "black",
+        tabBarStyle: {
+          bottom: 0,
+          elevation: 0,
+          backgroundColor: "#F8F8F8",
+          borderRadius: 15,
+          height: 90,
+        },
+      }}
+      tabBarOptions={{
+        showLabel: false,
+        style: {
+          position: "absolute",
+          bottom: 25,
+          left: 20,
+          right: 20,
+          elevation: 0,
+          backgroundColor: "#F8F8F8",
+          borderRadius: 15,
+          height: 90,
+        },
       }}
     >
-      <Tab.Screen 
+      <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
@@ -54,11 +62,7 @@ export default function HomeStack() {
         component={DiscoverScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="earth"
-              color={color}
-              size={26}
-            />
+            <MaterialCommunityIcons name="earth" color={color} size={26} />
           ),
         }}
       />
@@ -67,37 +71,34 @@ export default function HomeStack() {
         name="Post"
         component={PostScreen}
         options={{
-          tabBarIcon: () => (<Image source={require("./../assets/postButton.png")} style={{width: 100, height: 99, bottom: 20}} />)
+          tabBarIcon: () => (
+            <Image
+              source={require("./../assets/postButton.png")}
+              style={{ width: 100, height: 99, bottom: 20 }}
+            />
+          ),
         }}
-         />
+      />
       <Tab.Screen
         name="Map"
         component={MapScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="map"
-              color={color}
-              size={26}
-            />
+            <MaterialCommunityIcons name="map" color={color} size={26} />
           ),
         }}
       />
-      
+
       <Tab.Screen
         name="Journal"
         component={JournalScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialIcons
-              name="person"
-              color={color}
-              size={26}
-            />
+            <MaterialIcons name="person" color={color} size={26} />
           ),
         }}
       />
-       <Tab.Screen
+      <Tab.Screen
         name="Camera"
         component={CameraScreen}
         options={{

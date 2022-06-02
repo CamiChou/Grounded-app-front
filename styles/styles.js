@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -53,7 +52,7 @@ export default StyleSheet.create({
     color: "#7cbf8c",
     width: 300,
     borderRadius: 15,
-    backgroundColor: "#E5F5EF"
+    backgroundColor: "#E5F5EF",
   },
   textBox: {
     top: 40,
@@ -63,7 +62,7 @@ export default StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -116,11 +115,11 @@ export default StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     color: "#709467",
-  }, 
+  },
   centeredView: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
   },
   modalView: {
     margin: 20,
@@ -131,13 +130,13 @@ export default StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 2,
-      height: 4
+      height: 4,
     },
     height: 480,
     width: 350,
     shadowOpacity: 0.5,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   modalView2: {
     margin: 20,
@@ -149,18 +148,18 @@ export default StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 7,
-      height: 9
+      height: 9,
     },
     height: 480,
     width: 350,
     shadowOpacity: 0.3,
     shadowRadius: 4.5,
-    elevation: 5
+    elevation: 5,
   },
   button: {
     borderRadius: 10,
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
   buttonOpen: {
     backgroundColor: "#FAEDCD",
@@ -169,11 +168,11 @@ export default StyleSheet.create({
     paddingTop: 5,
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    top: -250
+    top: -250,
   },
   modalButtons: {
     bottom: 170,
@@ -193,14 +192,14 @@ export default StyleSheet.create({
     marginBottom: 30,
     fontSize: 22,
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   QRcode: {
     bottom: 213,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -213,39 +212,40 @@ export default StyleSheet.create({
     margin: 20,
   },
   barcodebox: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     height: 300,
     width: 300,
-    overflow: 'hidden',
+    overflow: "hidden",
     borderRadius: 30,
-    backgroundColor: 'tomato'},
+    backgroundColor: "tomato",
+  },
 
   scanButton: {
-      bottom: -100,
-      backgroundColor: "black",
-      borderColor: "#9CC991",
-      borderWidth: 5,
-      marginBottom: 10,
-      padding: 9,
-      height: 55,
-      width: 200,
-    },
+    bottom: -100,
+    backgroundColor: "black",
+    borderColor: "#9CC991",
+    borderWidth: 5,
+    marginBottom: 10,
+    padding: 9,
+    height: 55,
+    width: 200,
+  },
   addButton: {
-      bottom: -50,
-      backgroundColor: "black",
-      borderColor: "black",
-      marginBottom: 10,
-      padding: 17,
-      borderRadius: 30,
-      height: 65,
-      width: 275,
-      shadowColor: "#233120",
-      shadowOffset: {
-        width: 2,
-        height: 4
-      },
-      shadowOpacity: 0.7,
-      shadowRadius: 3,
+    bottom: -50,
+    backgroundColor: "black",
+    borderColor: "black",
+    marginBottom: 10,
+    padding: 17,
+    borderRadius: 30,
+    height: 65,
+    width: 275,
+    shadowColor: "#233120",
+    shadowOffset: {
+      width: 2,
+      height: 4,
     },
+    shadowOpacity: 0.7,
+    shadowRadius: 3,
+  },
 });
