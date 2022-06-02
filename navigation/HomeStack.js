@@ -8,6 +8,9 @@ import DiscoverScreen from "../screens/DiscoverScreen";
 import MapScreen from "../screens/MapScreen";
 import JournalScreen from "../screens/JournalScreen";
 import CameraScreen from "../screens/CameraScreen";
+import ScannerScreen from "../screens/ScannerScreen";
+import FriendsScreen from "../screens/FriendsScreen";
+
 import { Image, View } from "react-native";
 import { getFocusedRouteNameFromRoute, Link } from "@react-navigation/native";
 
@@ -15,39 +18,32 @@ export default function HomeStack() {
   const Tab = createBottomTabNavigator();
 
   return (
-    <Tab.Navigator initialRouteName="Home" screenOptions={{
-      headerShown: false, tabBarActiveTintColor: '#9CC991', tabBarInactiveTintColor: 'black', tabBarStyle: {
-        bottom: 0,
-        elevation: 0,
-        backgroundColor: '#F8F8F8',
-        borderRadius: 15,
-        height: 90,
-      }
-    }}
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#9CC991",
+        tabBarInactiveTintColor: "black",
+        tabBarStyle: {
+          bottom: 0,
+          elevation: 0,
+          backgroundColor: "#F8F8F8",
+          borderRadius: 15,
+          height: 90,
+        },
+      }}
       tabBarOptions={{
         showLabel: false,
         style: {
-          position: 'absolute',
-          bottom: 25,
-          bottom: 25,
-          bottom: 25,
-          bottom: 25,
+          position: "absolute",
           bottom: 25,
           left: 20,
-          left: 20,
-          left: 20,
-          left: 20,
-          left: 20,
-          right: 20,
-          right: 20,
-          right: 20,
-          right: 20,
           right: 20,
           elevation: 0,
-          backgroundColor: '#F8F8F8',
+          backgroundColor: "#F8F8F8",
           borderRadius: 15,
-          height: 90
-        }
+          height: 90,
+        },
       }}
     >
       <Tab.Screen
@@ -65,11 +61,7 @@ export default function HomeStack() {
         component={DiscoverScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="earth"
-              color={color}
-              size={26}
-            />
+            <MaterialCommunityIcons name="earth" color={color} size={26} />
           ),
         }}
       />
@@ -87,11 +79,7 @@ export default function HomeStack() {
         component={MapScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="map"
-              color={color}
-              size={26}
-            />
+            <MaterialCommunityIcons name="map" color={color} size={26} />
           ),
         }}
       />
@@ -101,8 +89,49 @@ export default function HomeStack() {
         component={JournalScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialIcons
-              name="person"
+            <MaterialIcons name="person" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ScannerScreen"
+        component={ScannerScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="FriendsScreen"
+        component={FriendsScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
               color={color}
               size={26}
             />

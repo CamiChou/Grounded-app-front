@@ -139,6 +139,7 @@ export async function uploadCloudStorage(blob, uid, pin, publicState, caption) {
     }
   );
 }
+
 export function createUser(result) {
   db.collection("users")
     .doc(result.user.uid)
@@ -156,6 +157,7 @@ export function changeDisplayName(currentUser, name) {
     displayName: name,
   });
 }
+
 export function changeProfilePic(currentUser, photo) {
   db.collection("users").doc(currentUser).update({
     profilePic: photo,
@@ -181,6 +183,21 @@ export function addFollowing(currentUser, userToFollow) {
         });
     });
 }
+
+// export function removeFollowing (currentUser, userToUnfollow) {
+//   // const unfollowRef = db.doc('users/' + currentUser + '/following/' + userToUnfollow);
+//   // console.log(unfollowRef);
+//   // unfollowRef.delete().then(
+//   //   (doc) => console.log("Document deleted"),
+//   // );
+//   db.collection("users")
+//   .doc(currentUser)
+//   .delete({
+//     following: userToUnfollow
+//   }).then(
+//     (value) => print("deleted"),
+//     );
+// }
 
 // qr code?
 export function addFriend(currentUser, userToFriend) {
