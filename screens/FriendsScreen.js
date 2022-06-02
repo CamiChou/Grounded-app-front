@@ -134,7 +134,7 @@ export default function FriendsScreen({ route, navigation }) {
       <View style={{ flexDirection: "row", alignItems: "center", bottom: 230 }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Home");
+            navigation.navigate("Journal");
           }}
         >
           <View style={{ right: 100 }}>
@@ -191,6 +191,10 @@ export default function FriendsScreen({ route, navigation }) {
         {gamesTab == 1 &&
           friends &&
           friends.map((user) => (
+            <TouchableOpacity onPress={() => {
+                navigation.navigate("UserProfile");
+            }}>
+
             <View
               style={{
                 flexDirection: "row",
@@ -226,6 +230,8 @@ export default function FriendsScreen({ route, navigation }) {
                 </TouchableOpacity>
               </View>
             </View>
+            </TouchableOpacity>
+
           ))}
       </View>
 
@@ -240,6 +246,10 @@ export default function FriendsScreen({ route, navigation }) {
         {gamesTab == 2 &&
           following &&
           following.map((user, i) => (
+            <TouchableOpacity onPress={() => {
+                navigation.navigate("UserProfile");
+            }}>
+
             <View
               key={i}
               style={{
@@ -276,8 +286,10 @@ export default function FriendsScreen({ route, navigation }) {
                 </TouchableOpacity>
               </View>
             </View>
+            </TouchableOpacity>
           ))}
       </View>
+
     </View>
   );
 }

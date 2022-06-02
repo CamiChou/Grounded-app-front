@@ -18,7 +18,7 @@ import QRCode from "react-native-qrcode-svg";
 import Modal from "react-native-modal";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-export default function HomeScreen({ navigation }) {
+export default function PostScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
   const isFocused = useIsFocused();
   const [imageUrl, setImageUrl] = useState();
@@ -81,7 +81,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        style={{ top: -90, width: "100%" }}
+        style={{ top: -60, width: "100%" }}
         source={require("../assets/ellipse.png")}
       ></Image>
 
@@ -126,6 +126,10 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       {/* testers */}
+      <Button
+        title="Test other user profile"
+        onPress={() => navigation.navigate("FriendsScreen", { userDetails: userData })}
+      />
       <Button
         title="Test follow"
         onPress={() => addFollowing(user.uid, user.uid)}

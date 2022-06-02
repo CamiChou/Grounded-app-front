@@ -12,6 +12,7 @@ import JournalScreen from "../screens/JournalScreen";
 import CameraScreen from "../screens/CameraScreen";
 import ScannerScreen from "../screens/ScannerScreen";
 import FriendsScreen from "../screens/FriendsScreen";
+import UserProfileScreen from "../screens/UserProfileScreen";
 
 import { Image, View } from "react-native";
 
@@ -131,6 +132,21 @@ export default function HomeStack() {
       <Tab.Screen
         name="FriendsScreen"
         component={FriendsScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-box"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="UserProfile"
+        component={UserProfileScreen}
         options={{
           tabBarButton: () => null,
           tabBarVisible: false,
