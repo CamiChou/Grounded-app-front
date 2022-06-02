@@ -61,6 +61,14 @@ export default function NavigationStack() {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="CameraScreen"
+          component={user ? CameraScreen : AuthStack}
+          options={{
+            headerLeft: () => <></>,
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

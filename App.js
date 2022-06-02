@@ -13,6 +13,7 @@ export default function App() {
     "ColorPropType",
     "PointPropType",
     "EdgeInsetsPropType",
+    "Bottom"
   ]);
   return <Providers />;
 }

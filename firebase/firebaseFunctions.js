@@ -90,12 +90,11 @@ export async function logout() {
   }
 }
 
-export async function uploadCloudStorage(blob, user, pin) {
-  console.log(pin);
+export async function uploadCloudStorage(blob, uid, pin, publicState, caption) {
   const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
-  const uploadTask = storageRef.child(`${user.uid}/${timestamp}.jpg`).put(blob);
+  const uploadTask = storageRef.child(`${uid}/${timestamp}.jpg`).put(blob);
 
-  uploadTask.on(
+uploadTask.on(
     "state_changed",
     (snapshot) => {
       // Observe state change events such as progress, pause, and resume
@@ -120,8 +119,22 @@ export async function uploadCloudStorage(blob, user, pin) {
       // Handle successful uploads on complete
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-        console.log("File available at", downloadURL);
+        let newPhoto = {
+          url: downloadURL,
+          caption: caption,
+          location: pin,
+          public: publicState,
+          timestamp: timestamp,
+        };
         blob.close();
+        db.collection("users")
+          .doc(uid)
+          .update(
+            {
+              photos: firebase.firestore.FieldValue.arrayUnion(newPhoto),
+            },
+            { merge: true }
+          );
       });
     }
   );
@@ -134,6 +147,7 @@ export function createUser(result) {
       uid: result.user.uid,
       profilePic: result.user.photoURL,
       displayName: result.user.displayName,
+      photos: [],
     })
     .then(() => console.log("user created: " + result.user.displayName));
 }
