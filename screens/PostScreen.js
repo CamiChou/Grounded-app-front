@@ -18,7 +18,7 @@ import QRCode from "react-native-qrcode-svg";
 import Modal from "react-native-modal";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-export default function HomeScreen({ navigation }) {
+export default function PostScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
   const isFocused = useIsFocused();
   const [imageUrl, setImageUrl] = useState();

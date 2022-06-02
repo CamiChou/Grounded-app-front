@@ -71,7 +71,6 @@ export default function CameraScreen({ navigation }) {
     await uploadCloudStorage(blob, user.uid, pin, publicPost, caption);
 
     setCaption("");
-    // setIsLoading(false);
     setPreviewVisible(false);
     setCapturedImage(null);
   }
@@ -279,8 +278,9 @@ export default function CameraScreen({ navigation }) {
                         paddingRight: 20,
                         borderRadius: 20,
                       }}
-                      onPress={() => {
-                        uploadImageAsync(capturedImage.uri);
+                      onPress={async () => {
+                        await uploadImageAsync(capturedImage.uri);
+                        navigation.navigate("HomeScreen");
                       }}
                     >
                       {/* {isLoading ? (

@@ -13,6 +13,7 @@ import FriendsScreen from "../screens/FriendsScreen";
 
 import { Image, View } from "react-native";
 import { getFocusedRouteNameFromRoute, Link } from "@react-navigation/native";
+import PostScreen from "../screens/PostScreen";
 
 export default function HomeStack() {
   const Tab = createBottomTabNavigator();
@@ -83,52 +84,10 @@ export default function HomeStack() {
           ),
         }}
       />
-
       <Tab.Screen
-        name="Journal"
-        component={JournalScreen}
+        name="PostScreen"
+        component={PostScreen}
         options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="person" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Camera"
-        component={CameraScreen}
-        options={{
-          tabBarButton: () => null,
-          tabBarVisible: false,
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="account-box"
-              color={color}
-              size={26}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="ScannerScreen"
-        component={ScannerScreen}
-        options={{
-          tabBarButton: () => null,
-          tabBarVisible: false,
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="account-box"
-              color={color}
-              size={26}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="FriendsScreen"
-        component={FriendsScreen}
-        options={{
-          tabBarButton: () => null,
-          tabBarVisible: false,
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="account-box"
