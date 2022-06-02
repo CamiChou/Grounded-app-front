@@ -11,6 +11,13 @@ export default function CalendarScreen({ navigation }) {
   const [markedDates, setMarkedDates] = useState({})
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDay, setDay] = useState("");
+  function updateMarkedDates(sDate)
+  {
+    setMarkedDates({
+      ...markedDates,
+      [sDate.dateString]: {marked: true}
+    });    
+  }
   function getDay(date) {
     return new Date(
       (date + "T00:00:00").replace(/-/g, "/").replace(/T.+/, "")
@@ -95,10 +102,7 @@ export default function CalendarScreen({ navigation }) {
                   // const dateStr = [selectedDay.dateString];
                   // const newMarkedDates = markedDates;
                   // newMarkedDates.dateStr = {marked: true};
-                  setMarkedDates({
-                    ...markedDates,
-                    [selectedDay.dateString]: {marked: true}
-                  });     
+                  updateMarkedDates(selectedDay);  
                 }}
                 title="Mark this date"
               />
