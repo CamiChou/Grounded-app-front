@@ -19,6 +19,7 @@ import Modal from "react-native-modal";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import JournalScreen from "./JournalScreen";
 import JournalStyles from "../styles/JournalStyles";
+import ProfileStyles from "../styles/ProfileStyles";
 
 export default function PostScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
@@ -81,15 +82,15 @@ export default function PostScreen({ navigation }) {
   }, [isFocused]);
 
   return (
-    <View style={styles.container}>
+    <View style={ProfileStyles.container}>
       <Image
         style={{ top: -131, width: "100%" }}
         source={require("../assets/ellipse.png")}
       ></Image>
 
-      <View style={styles.profileImageContainer}>
+      <View style={ProfileStyles.profileImageContainer}>
         <Image
-          style={styles.profileImage}
+          style={ProfileStyles.profileImage}
           resizeMode="contain"
           source={
             userData ? profilePics[userData.profilePic] : defaultProfilePic
@@ -103,7 +104,7 @@ export default function PostScreen({ navigation }) {
 
       {/* show qr code  */}
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[ProfileStyles.button, ProfileStyles.buttonOpen]}
         onPress={() => setModalVisible(true)}
       >
         <Text style={{ fontSize: 15 }}>Show QR</Text>
@@ -157,16 +158,16 @@ export default function PostScreen({ navigation }) {
           setModalVisible(!modalVisible);
         }}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>My QR Code</Text>
+        <View style={ProfileStyles.centeredView}>
+          <View style={ProfileStyles.modalView}>
+            <Text style={ProfileStyles.modalText}>My QR Code</Text>
             <Image source={require("../assets/codeFrame.png")} />
-            <View style={styles.QRcode}>
+            <View style={ProfileStyles.QRcode}>
               {/* qr code just holds user uid for now  */}
               <QRCode value={userData ? userData.uid : "none"} size={160} />
             </View>
             <Pressable
-              style={[styles.button, styles.modalButtons]}
+              style={[ProfileStyles.button, ProfileStyles.modalButtons]}
               onPress={() => {
                 setModalVisible(false);
                 navigation.navigate("ScannerScreen");
@@ -180,11 +181,11 @@ export default function PostScreen({ navigation }) {
                 }}
               >
                 <Image source={require("../assets/Camera.png")} />
-                <Text style={styles.textStyle}> Scan QR Code</Text>
+                <Text style={ProfileStyles.textStyle}> Scan QR Code</Text>
               </View>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.modalButtons]}
+              style={[ProfileStyles.button, ProfileStyles.modalButtons]}
               onPress={() => console.log("share code link button pressed")}
             >
               <View
