@@ -20,7 +20,7 @@ export default StyleSheet.create({
     top: 20,
   },
   profileImageContainer: {
-    top: -188,
+    top: -128,
     right: -80,
     height: 300,
     width: 300,
@@ -172,7 +172,7 @@ export default StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    top: -315,
+    top: -250,
   },
   modalButtons: {
     bottom: 170,
