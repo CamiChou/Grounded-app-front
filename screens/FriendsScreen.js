@@ -134,7 +134,7 @@ export default function FriendsScreen({ route, navigation }) {
       <View style={{ flexDirection: "row", alignItems: "center", bottom: 230 }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Home");
+            navigation.navigate("Journal");
           }}
         >
           <View style={{ right: 100 }}>
