@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 
 export default function CustomSwitch({
   selectionMode,
@@ -9,7 +9,7 @@ export default function CustomSwitch({
 }) {
   const [getSelectionMode, setSelectionMode] = useState(selectionMode);
 
-  const updateSwitchData = value => {
+  const updateSwitchData = (value) => {
     setSelectionMode(value);
     onSelectSwitch(value);
   };
@@ -19,33 +19,36 @@ export default function CustomSwitch({
       style={{
         top: 10,
         height: 20,
-        width: '100%',
-        backgroundColor: 'white',
+        width: "100%",
+        backgroundColor: "white",
         borderRadius: 10,
-        borderColor: '#AD40AF',
-        flexDirection: 'row',
-        justifyContent: 'center',
-      }}>
+        borderColor: "#AD40AF",
+        flexDirection: "row",
+        justifyContent: "center",
+      }}
+    >
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => updateSwitchData(1)}
         style={{
           flex: 1,
-          height:40,
+          height: 40,
           backgroundColor: "white",
           borderBottomWidth: getSelectionMode == 1 ? 3 : 0,
           borderBottomColor: "black",
           borderRadius: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Text
           style={{
             letterSpacing: "0.7",
-            color: 'black',
+            color: "black",
             fontSize: 16,
-            fontWeight: getSelectionMode == 1 ? 'bold' : 'normal',
-          }}>
+            fontWeight: getSelectionMode == 1 ? "bold" : "normal",
+          }}
+        >
           {option1}
         </Text>
       </TouchableOpacity>
@@ -54,22 +57,24 @@ export default function CustomSwitch({
         onPress={() => updateSwitchData(2)}
         style={{
           flex: 1,
-          height:40,
+          height: 40,
           borderBottomWidth: getSelectionMode == 2 ? 3 : 0,
           borderBottomColor: "black",
           borderRadius: 20,
           backgroundColor: "white",
           borderRadius: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Text
           style={{
             letterSpacing: "0.7",
-            color: 'black',
+            color: "black",
             fontSize: 16,
-            fontWeight: getSelectionMode == 2 ? 'bold' : 'normal',
-          }}>
+            fontWeight: getSelectionMode == 2 ? "bold" : "normal",
+          }}
+        >
           {option2}
         </Text>
       </TouchableOpacity>

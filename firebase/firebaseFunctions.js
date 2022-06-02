@@ -22,7 +22,7 @@ const isUserEqual = (googleUser, firebaseUser) => {
   for (let i = 0; i < providerData.length; i++) {
     if (
       providerData[i].providerId ===
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
       providerData[i].uid === googleUser.getBasicProfile().getId()
     ) {
       return true;
@@ -126,6 +126,7 @@ export async function uploadCloudStorage(blob, user, pin) {
     }
   );
 }
+
 export function createUser(result) {
   db.collection("users")
     .doc(result.user.uid)
@@ -137,33 +138,35 @@ export function createUser(result) {
     .then(() => console.log("user created: " + result.user.displayName));
 }
 
-
 export function changeDisplayName(currentUser, name) {
-  db.collection("users")
-    .doc(currentUser)
-    .update({
-      displayName: name,
-    });
+  db.collection("users").doc(currentUser).update({
+    displayName: name,
+  });
 }
+
 export function changeProfilePic(currentUser, photo) {
-  db.collection("users")
-    .doc(currentUser)
-    .update({
-      profilePic: photo,
-    });
+  db.collection("users").doc(currentUser).update({
+    profilePic: photo,
+  });
 }
 
 export function addFollowing(currentUser, userToFollow) {
   db.collection("users")
     .doc(currentUser)
-    .set({
-      following: firebase.firestore.FieldValue.arrayUnion(userToFollow),
-    }, { merge: true })
+    .set(
+      {
+        following: firebase.firestore.FieldValue.arrayUnion(userToFollow),
+      },
+      { merge: true }
+    )
     .then(() => {
-      db.collection("users").doc(userToFollow).get().then((doc) => {
-        const data = doc.data();
-        console.log("now following " + data['displayName'])
-      })
+      db.collection("users")
+        .doc(userToFollow)
+        .get()
+        .then((doc) => {
+          const data = doc.data();
+          console.log("now following " + data["displayName"]);
+        });
     });
 }
 
@@ -182,18 +185,23 @@ export function addFollowing(currentUser, userToFollow) {
 //     );
 // }
 
-// qr code? 
+// qr code?
 export function addFriend(currentUser, userToFriend) {
   db.collection("users")
     .doc(currentUser)
-    .set({
-      friends: firebase.firestore.FieldValue.arrayUnion(userToFriend),
-    }, { merge: true })
+    .set(
+      {
+        friends: firebase.firestore.FieldValue.arrayUnion(userToFriend),
+      },
+      { merge: true }
+    )
     .then(() => {
-      db.collection("users").doc(userToFriend).get().then((doc) => {
-        const data = doc.data();
-        console.log("now friends with " + data['displayName'])
-      })
+      db.collection("users")
+        .doc(userToFriend)
+        .get()
+        .then((doc) => {
+          const data = doc.data();
+          console.log("now friends with " + data["displayName"]);
+        });
     });
 }
-
