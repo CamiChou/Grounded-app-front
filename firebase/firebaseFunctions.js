@@ -94,7 +94,7 @@ export async function uploadCloudStorage(blob, uid, pin, publicState, caption) {
   const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
   const uploadTask = storageRef.child(`${uid}/${timestamp}.jpg`).put(blob);
 
-  uploadTask.on(
+uploadTask.on(
     "state_changed",
     (snapshot) => {
       // Observe state change events such as progress, pause, and resume

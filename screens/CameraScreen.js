@@ -280,7 +280,7 @@ export default function CameraScreen({ navigation }) {
                       }}
                       onPress={async () => {
                         await uploadImageAsync(capturedImage.uri);
-                        navigation.navigate("HomeScreen");
+                        navigation.navigate("Home");
                       }}
                     >
                       {/* {isLoading ? (
