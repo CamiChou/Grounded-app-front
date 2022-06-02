@@ -122,8 +122,39 @@ export default StyleSheet.create({
     borderRadius: 4,
     height: 45,
     width: 45,
-    backgroundColor: "#fff",
+    backgroundColor: "#bad9b2",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+  },
+  shadowBackground:
+  {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 1, 
+    elevation: 5 
+  },
+  navigationButton:
+  {
+    alignItems: "center",
+    backgroundColor: "#fff",
+    padding: 20,
+    margin: 10,
+    width: '50%',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "#a5a2a2"
+  },
+  calendarDate:
+  {
+    alignContent: "center",
+    justifyContent: "center",
+    width: 30,
+    height: 30,
+  },
+  marking:
+  {
+    borderWidth: 5,
+    borderColor: "#fff"
   }
 });

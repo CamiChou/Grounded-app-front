@@ -5,8 +5,8 @@ import { getDay } from "./CalendarScreen.js";
 
 export function JournalIconButton(props) {
   return (
-    <TouchableOpacity style={styles.journalIcon} onPress={() => props.n.navigate("TempJournalFeed", {selDate: props.date})}>
-      <Text>{new Date(props.date).getMonth() + "/" + new Date(props.date).getDate()}</Text>
+    <TouchableOpacity style={[styles.journalIcon, styles.shadowBackground]} onPress={() => props.n.navigate("TempJournalFeed", {selDate: props.date})}>
+      <Text style={{fontSize: 25, color: "#fff"}}>{/*new Date(props.date).getMonth() + "/" +*/ new Date(props.date).getDate()}</Text>
     </TouchableOpacity>
   );
 }
@@ -18,9 +18,8 @@ export default function JournalScreen({ navigation }) {
   }
   return (
     <View style={styles.container}>
-      <Text>Journal Screen</Text>
-      <View style={{padding: 10, borderRadius: 10, backgroundColor: "#aaa"}}>
-        <Text>Last 14 Days</Text>
+      <View style={[styles.shadowBackground, {padding: 10, borderRadius: 10, backgroundColor: "#e0edcb"}]}>
+        <Text style={{color: "#b0b1a8", paddingBottom: 5}}>Last 14 Days</Text>
         <View style={{flexDirection: "column"}}>
           <View style={{flexDirection: "row"}}>
             <JournalIconButton date={getDateString(0)} n={navigation}/>
@@ -42,9 +41,11 @@ export default function JournalScreen({ navigation }) {
 
           </View>
         </View>
-        <TouchableOpacity style={[styles.signinButton, {borderRadius: 30, margin: 10}]} onPress={() => navigation.navigate("Calendar")}> 
+        <View style={{alignItems: "center"}}>
+        <TouchableOpacity style={[styles.navigationButton, styles.shadowBackground]} onPress={() => navigation.navigate("Calendar")}> 
           <Text>View Journal Entries</Text>
         </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
