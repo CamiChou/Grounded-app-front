@@ -84,7 +84,7 @@ export default function Post({ data }) {
         <Image style={{height: 40, width:40}} resizeMode="contain" source={require("../assets/avatars/avatar1.png")}></Image>
         <Text style={{fontSize: 18, position: "relative", left: 13, color: "white", bottom: 7}}>{data.user}</Text>
         <Text style={{fontSize: 12, position: "relative", left: 20, color: "#DADADA", bottom: 4.3, fontStyle:"italic"}}>{data.type}</Text>
-        <Text style={{fontSize: 14, position: "relative", right: 96, color: "#DADADA", top: 15, fontStyle:"italic"}}>{data.time}</Text>
+        <Text style={{fontSize: 14, position: "absolute", left: 53 , color: "#DADADA", top:27, fontStyle:"italic"}}>{data.time}</Text>
 
       { data.location ? <View style={{flexDirection: "row",
             alignItems: "center", right: 0, position: 'absolute'}}>
