@@ -20,7 +20,7 @@ export default StyleSheet.create({
     top: 20,
   },
   profileImageContainer: {
-    top: -195,
+    top: -188,
     right: -80,
     height: 300,
     width: 300,
@@ -172,7 +172,7 @@ export default StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    top: -320,
+    top: -315,
   },
   modalButtons: {
     bottom: 170,
@@ -248,69 +248,4 @@ export default StyleSheet.create({
     shadowOpacity: 0.7,
     shadowRadius: 3,
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  },
-  journalIcon: {
-    margin: 4,
-    borderRadius: 4,
-    height: 45,
-    width: 45,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  shadowBackground:
-  {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1, 
-    elevation: 5 
-  },
-  navigationButton:
-  {
-    alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 7,
-    margin: 10,
-    width: '50%',
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "#a5a2a2"
-  },
-  
-  calendarDate:
-  {
-    alignContent: "center",
-    justifyContent: "center",
-    width: 30,
-    height: 30,
-  },
-  marking:
-  {
-    borderWidth: 5,
-    borderColor: "#fff"
-  }
 });

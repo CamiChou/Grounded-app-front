@@ -6,7 +6,7 @@ import { Dimensions } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import {LinearGradient} from "expo-linear-gradient"
-import styles from "../styles/styles.js";
+import JournalStyles from "../styles/JournalStyles.js";
 
 export default function CalendarMonth({ data }) {
     const [markedDates, setMarkedDates] = useState({})
@@ -74,7 +74,7 @@ export default function CalendarMonth({ data }) {
             }
             return (
               <LinearGradient style={{borderRadius: 5, height: 40, width: 49}} colors={['#B9D9B1', '#F6FFDA']} >
-                <TouchableOpacity style={[/*isMarked ? styles.marking : null,*/ styles.calendarDate]} onPress={() => onPress(date)} onLongPress={() => onLongPress(date)}>
+                <TouchableOpacity style={[/*isMarked ? styles.marking : null,*/ JournalStyles.calendarDate]} onPress={() => onPress(date)} onLongPress={() => onLongPress(date)}>
                   <Text style={{includeFontPadding: false, textAlign: 'center', fontSize: 9}}></Text>
                   <Text style={{includeFontPadding: false, fontSize: 20, left: 10, top: 6, textAlign: 'center', color: 'black'}}>{date.day}</Text>
                   <Text style={{includeFontPadding: false, textAlign: 'center', fontSize: 9}}>{isMarked ? '\u2B24' : ''}</Text>
@@ -125,10 +125,10 @@ export default function CalendarMonth({ data }) {
             setModalVisible(!modalVisible);
           }}
         >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>You have selected the date:</Text>
-              <Text style={styles.modalText}>{getDay(selectedDay.dateString)}</Text>
+          <View style={JournalStyles.centeredView}>
+            <View style={JournalStyles.modalView}>
+              <Text style={JournalStyles.modalText}>You have selected the date:</Text>
+              <Text style={JournalStyles.modalText}>{getDay(selectedDay.dateString)}</Text>
               <Button
                 style={{marginBottom: 20}}
                 onPress={() => {

@@ -18,6 +18,7 @@ import QRCode from "react-native-qrcode-svg";
 import Modal from "react-native-modal";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import JournalScreen from "./JournalScreen";
+import JournalStyles from "../styles/JournalStyles";
 
 export default function PostScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
@@ -82,7 +83,7 @@ export default function PostScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        style={{ top: -135, width: "100%" }}
+        style={{ top: -131, width: "100%" }}
         source={require("../assets/ellipse.png")}
       ></Image>
 
@@ -96,7 +97,7 @@ export default function PostScreen({ navigation }) {
         />
       </View>
 
-      <Text style={{ bottom: 335, fontSize: 30 }}>
+      <Text style={{ bottom: 330, fontSize: 30 }}>
         {userData ? userData.displayName : "None"}
       </Text>
 
@@ -127,10 +128,10 @@ export default function PostScreen({ navigation }) {
           <Text style={{ top: -270, fontSize: 19 }}>Friends / Following</Text>
         </TouchableOpacity>
       </View>
-      <View style={{position: 'absolute', bottom:170}}>
-      <JournalScreen navigation={navigation} />
+        <View style={{position: 'absolute', bottom:170}}>
+        <JournalScreen navigation={navigation} />
 
-      </View >
+        </View >
       {/* testers */}
       {/* <Button
         title="Test follow"

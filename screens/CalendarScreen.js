@@ -4,6 +4,7 @@ import { TouchableOpacity, Modal, Text, View, Button, Image } from "react-native
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { FlatList } from "react-native-gesture-handler";
 import CalendarMonth from "../components/Calendar.js";
+import JournalStyles from "../styles/JournalStyles";
 
 
 
@@ -14,7 +15,7 @@ export default function CalendarScreen({ navigation }) {
 
   return (
     
-    <View style={[styles.container, {flex: 1, backgroundColor: "#fff"}]}>
+    <View style={[JournalStyles.container, {flex: 1, backgroundColor: "#fff"}]}>
       <View style={{flexDirection: "row", alignContent: "center", right: 100, zIndex: 1, top: 80, marginBottom: 0}}>
       <TouchableOpacity
           onPress={() => {

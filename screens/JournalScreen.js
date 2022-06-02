@@ -3,12 +3,13 @@ import styles from "../styles/styles.js";
 import { TouchableOpacity, Text, View, Button, Image } from "react-native";
 import { getDay } from "./CalendarScreen.js";
 import {LinearGradient} from "expo-linear-gradient"
+import JournalStyles from "../styles/JournalStyles";
 
 export function JournalIconButton(props) {
   return (
     <LinearGradient style={{borderRadius: 5, margin: 1}} colors={['#B9D9B1', '#F6FFDA']} >
       <TouchableOpacity
-        style={[styles.journalIcon]}
+        style={[JournalStyles.journalIcon]}
         onPress={() =>
           props.n.navigate("TempJournalFeed", { selDate: props.date })
         }
@@ -34,7 +35,7 @@ export default function JournalScreen({ navigation }) {
   return (
       <View
         style={[
-          styles.shadowBackground,
+          JournalStyles.shadowBackground,
           { padding: 10, borderRadius: 10, backgroundColor: "#FBFFE5" },
         ]}
       >
@@ -61,7 +62,7 @@ export default function JournalScreen({ navigation }) {
         </View>
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
-            style={[styles.navigationButton, styles.shadowBackground]}
+            style={[JournalStyles.navigationButton, JournalStyles.shadowBackground]}
             onPress={() => navigation.navigate("Calendar")}
           >
             <Text>View All</Text>
