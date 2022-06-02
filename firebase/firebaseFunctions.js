@@ -90,11 +90,11 @@ export async function logout() {
   }
 }
 
-export async function uploadCloudStorage(blob, user) {
+export async function uploadCloudStorage(blob, uid, pin, publicState, caption) {
   const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
-  const uploadTask = storageRef.child(`${user.uid}/${timestamp}.jpg`).put(blob);
+  const uploadTask = storageRef.child(`${uid}/${timestamp}.jpg`).put(blob);
 
-  uploadTask.on(
+uploadTask.on(
     "state_changed",
     (snapshot) => {
       // Observe state change events such as progress, pause, and resume
@@ -119,12 +119,27 @@ export async function uploadCloudStorage(blob, user) {
       // Handle successful uploads on complete
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-        console.log("File available at", downloadURL);
+        let newPhoto = {
+          url: downloadURL,
+          caption: caption,
+          location: pin,
+          public: publicState,
+          timestamp: timestamp,
+        };
         blob.close();
+        db.collection("users")
+          .doc(uid)
+          .update(
+            {
+              photos: firebase.firestore.FieldValue.arrayUnion(newPhoto),
+            },
+            { merge: true }
+          );
       });
     }
   );
 }
+
 export function createUser(result) {
   db.collection("users")
     .doc(result.user.uid)
@@ -132,6 +147,7 @@ export function createUser(result) {
       uid: result.user.uid,
       profilePic: result.user.photoURL,
       displayName: result.user.displayName,
+      photos: [],
     })
     .then(() => console.log("user created: " + result.user.displayName));
 }
@@ -142,12 +158,13 @@ export function changeDisplayName(currentUser, name) {
   });
 }
 
-export function addFollowing(currentUser, userToFollow) {
-  // (db.collection("users").doc(currentUser).get().then((doc) => {
-  //   const data = doc.data();
-  //   console.log(data['displayName']);
-  // }))
+export function changeProfilePic(currentUser, photo) {
+  db.collection("users").doc(currentUser).update({
+    profilePic: photo,
+  });
+}
 
+export function addFollowing(currentUser, userToFollow) {
   db.collection("users")
     .doc(currentUser)
     .set(
@@ -167,12 +184,38 @@ export function addFollowing(currentUser, userToFollow) {
     });
 }
 
-// export function addFriend(currentUser, userToFriend) {
-//   console.log(userToFollow)
+// export function removeFollowing (currentUser, userToUnfollow) {
+//   // const unfollowRef = db.doc('users/' + currentUser + '/following/' + userToUnfollow);
+//   // console.log(unfollowRef);
+//   // unfollowRef.delete().then(
+//   //   (doc) => console.log("Document deleted"),
+//   // );
 //   db.collection("users")
-//     .doc(currentUser)
-//     .set({
-//       following: userToFollow,
-//     }, {merge: true})
-//     .then(() => console.log("now following " + userToFollow));
+//   .doc(currentUser)
+//   .delete({
+//     following: userToUnfollow
+//   }).then(
+//     (value) => print("deleted"),
+//     );
 // }
+
+// qr code?
+export function addFriend(currentUser, userToFriend) {
+  db.collection("users")
+    .doc(currentUser)
+    .set(
+      {
+        friends: firebase.firestore.FieldValue.arrayUnion(userToFriend),
+      },
+      { merge: true }
+    )
+    .then(() => {
+      db.collection("users")
+        .doc(userToFriend)
+        .get()
+        .then((doc) => {
+          const data = doc.data();
+          console.log("now friends with " + data["displayName"]);
+        });
+    });
+}

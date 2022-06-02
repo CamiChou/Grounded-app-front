@@ -65,8 +65,10 @@ export default StyleSheet.create({
   },
   buttonToggle: {
     alignSelf: "center",
-    width: "100%",
-    height: "50%",
+    // width: "100%",
+    // height: "50%",
+    width: 40,
+    height: 40,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
