@@ -49,21 +49,9 @@ export default function PostScreen({ navigation }) {
     <SafeAreaView style={styles.container}>        
         {/* friends / following title  */}
         <View style={{flexDirection: "row", alignItems: "center", bottom: -20}}>
-            <TouchableOpacity onPress={() => { 
-                      navigation.navigate("Home");
-                  }}>
-                <View style={{right:100}}>
-                    <MaterialCommunityIcons
-                        name="arrow-left"
-                        color="black"
-                        size={26}
-                        />
-                </View>
-            </TouchableOpacity>
             <Text style={{
-                fontSize: 17,
-                textAlign: "center",
-            }}>Friends / Following</Text>
+              fontSize: 32, color: "#709467", right: 115, marginBottom: 10
+            }}>grounded</Text>
         </View>
       <FlatList style={{bottom: -30}}
         data={posts}
