@@ -170,7 +170,7 @@ export default function HomeScreen({ navigation }) {
                 }}
               >
                 <Image source={require("../assets/Camera.png")} />
-                <Text style={styles.textStyle}> Scan QR Code</Text>
+                <Text style={styles.textStyle}>   Scan QR Code</Text>
               </View>
             </Pressable>
             <Pressable
