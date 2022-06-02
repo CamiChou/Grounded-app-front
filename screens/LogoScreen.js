@@ -3,11 +3,10 @@ import styles from "../styles/styles.js";
 import { View, Image } from "react-native";
 
 export default function LogoScreen({ navigation }) {
-  
   return (
     <View
       style={styles.container}
-      onTouchStart={() => navigation.navigate("AvatarScreen")}
+      onTouchStart={() => navigation.navigate("CreateProfile")}
     >
       <Image
         source={require("../assets/logo.png")}
