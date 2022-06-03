@@ -36,10 +36,9 @@ export default function CreateProfile({ navigation }) {
     inika: Inika_400Regular
     });
 
-
-  useEffect(() => {
-    setProfilePic(user.photoURL);
-  }, []); //ComponentDidMount
+    if (!loaded) {
+      return <AppLoading/>
+    }
 
   const checkTextInput = () => {
     //Check for the Name TextInput
