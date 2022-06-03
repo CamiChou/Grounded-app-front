@@ -42,6 +42,12 @@ export default StyleSheet.create({
     height: 146,
     width: 146,
     alignItems: "center",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 0,
   },
   textInput: {
     fontSize: 20,

@@ -53,7 +53,6 @@ export default function PostScreen({ navigation }) {
       .get()
       .then((documentSnapchat) => {
         if (documentSnapchat.exists) {
-          console.log("User Data", documentSnapchat.data());
           setUserData(documentSnapchat.data());
         }
       });
