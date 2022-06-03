@@ -5,8 +5,26 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import Post from "../components/Post.js";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import {
+  Inika_400Regular,
+} from '@expo-google-fonts/inika'
+import {
+  Inter_400Regular,
+} from '@expo-google-fonts/inter'
+import {useFonts} from 'expo-font';
+import AppLoading from 'expo-app-loading'
+
 
 export default function PostScreen({ navigation }) {
+
+  const [loaded] = useFonts({
+    inter: Inter_400Regular,
+    inika: Inika_400Regular
+});
+
+if (!loaded) {
+  return <AppLoading/>
+}
   const posts = [
     {
       id: 1,
@@ -54,7 +72,7 @@ export default function PostScreen({ navigation }) {
         {/* friends / following title  */}
         <View style={{flexDirection: "row", alignItems: "center", bottom: -20}}>
             <Text style={{
-              fontSize: 32, color: "#709467", right: 115, marginBottom: 10
+              fontSize: 32, color: "#709467", right: 115, marginBottom: 10, fontFamily: "inika",
             }}>grounded</Text>
         </View>
       <FlatList style={{bottom: -30}}

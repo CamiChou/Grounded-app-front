@@ -16,12 +16,26 @@ import AwesomeButtonRick from "react-native-really-awesome-button/src/themes/ric
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { changeDisplayName } from "../firebase/firebaseFunctions.js";
+import {
+  Inika_400Regular,
+} from '@expo-google-fonts/inika'
+import {
+  Inter_400Regular,
+} from '@expo-google-fonts/inter'
+import {useFonts} from 'expo-font';
+import AppLoading from 'expo-app-loading'
+
 
 export default function CreateProfile({ navigation }) {
   const { user, logout } = useContext(AuthContext);
   const [profilePic, setProfilePic] = useState(null);
   const [text, onChangeText] = React.useState(null);
   const [username, setUsername] = useState("");
+  const [loaded] = useFonts({
+    inter: Inter_400Regular,
+    inika: Inika_400Regular
+    });
+
 
   useEffect(() => {
     setProfilePic(user.photoURL);
@@ -46,7 +60,11 @@ export default function CreateProfile({ navigation }) {
       {/* example logo */}
       <View style={styles.styledContainer}>
         {/* page title */}
-        <Text style={styles.pageTitle}>grounded</Text>
+        <Text style={{    fontSize: 60,
+    fontWeight: "bold",
+    color: "#709467",
+    paddingTop: 40,
+    paddingBottom: 10, fontFamily:"inika"}}>grounded</Text>
 
         {/* avatar */}
         <Image
