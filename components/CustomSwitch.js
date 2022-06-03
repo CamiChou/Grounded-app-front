@@ -44,7 +44,7 @@ export default function CustomSwitch({
       >
         <Text
           style={{
-            letterSpacing: "0.7",
+            letterSpacing: 0.7,
             color: "black",
             fontSize: 16,
             fontWeight: getSelectionMode == 1 ? "bold" : "normal",
@@ -70,7 +70,7 @@ export default function CustomSwitch({
       >
         <Text
           style={{
-            letterSpacing: "0.7",
+            letterSpacing: 0.7,
             color: "black",
             fontSize: 16,
             fontWeight: getSelectionMode == 2 ? "bold" : "normal",

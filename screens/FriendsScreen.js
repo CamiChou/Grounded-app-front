@@ -156,7 +156,7 @@ export default function FriendsScreen({ route, navigation }) {
           platform="ios"
           containerStyle={{}}
           inputContainerStyle={{ backgroundColor: "#F3F3F3" }}
-          inputStyle={{ fontStyle: "italic", letterSpacing: "0.7" }}
+          inputStyle={{ fontStyle: "italic", letterSpacing: 0.7 }}
           leftIconContainerStyle={{}}
           rightIconContainerStyle={{}}
           loadingProps={{}}
@@ -190,8 +190,14 @@ export default function FriendsScreen({ route, navigation }) {
       >
         {gamesTab == 1 &&
           friends &&
-          friends.map((user) => (
-            <View
+          friends.map((user, i) => (
+
+            <TouchableOpacity             key={i}
+            onPress={() => {
+              navigation.navigate("UserProfile", {userData: user, type: 'friend'});
+            }}>
+
+            <View              
               style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -226,6 +232,8 @@ export default function FriendsScreen({ route, navigation }) {
                 </TouchableOpacity>
               </View>
             </View>
+            </TouchableOpacity>
+
           ))}
       </View>
 
@@ -240,8 +248,11 @@ export default function FriendsScreen({ route, navigation }) {
         {gamesTab == 2 &&
           following &&
           following.map((user, i) => (
+            <TouchableOpacity key={i} onPress={() => {
+                navigation.navigate("UserProfile", {userData: user, type: 'following'});
+            }}>
+
             <View
-              key={i}
               style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -276,8 +287,10 @@ export default function FriendsScreen({ route, navigation }) {
                 </TouchableOpacity>
               </View>
             </View>
+            </TouchableOpacity>
           ))}
       </View>
+
     </View>
   );
 }
