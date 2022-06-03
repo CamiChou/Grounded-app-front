@@ -53,6 +53,7 @@ export default function PostScreen({ navigation }) {
       .get()
       .then((documentSnapchat) => {
         if (documentSnapchat.exists) {
+          console.log("User Data", documentSnapchat.data());
           setUserData(documentSnapchat.data());
         }
       });
@@ -81,7 +82,7 @@ export default function PostScreen({ navigation }) {
   return (
     <View style={QRCodeStyles.container}>
       <Image
-        style={{ top: -60, width: "100%" }}
+        style={{ top: -90, width: "100%" }}
         source={require("../assets/ellipse.png")}
       ></Image>
 
@@ -126,10 +127,6 @@ export default function PostScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       {/* testers */}
-      <Button
-        title="Test other user profile"
-        onPress={() => navigation.navigate("FriendsScreen", { userDetails: userData })}
-      />
       <Button
         title="Test follow"
         onPress={() => addFollowing(user.uid, user.uid)}
