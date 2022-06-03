@@ -190,12 +190,14 @@ export default function FriendsScreen({ route, navigation }) {
       >
         {gamesTab == 1 &&
           friends &&
-          friends.map((user) => (
-            <TouchableOpacity onPress={() => {
+          friends.map((user, i) => (
+
+            <TouchableOpacity             key={i}
+            onPress={() => {
               navigation.navigate("UserProfile", {userData: user, type: 'friend'});
             }}>
 
-            <View
+            <View              
               style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -246,12 +248,11 @@ export default function FriendsScreen({ route, navigation }) {
         {gamesTab == 2 &&
           following &&
           following.map((user, i) => (
-            <TouchableOpacity onPress={() => {
+            <TouchableOpacity key={i} onPress={() => {
                 navigation.navigate("UserProfile", {userData: user, type: 'following'});
             }}>
 
             <View
-              key={i}
               style={{
                 flexDirection: "row",
                 alignItems: "center",
