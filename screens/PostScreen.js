@@ -88,7 +88,9 @@ export default function PostScreen({ navigation }) {
         style={{ top: -131, width: "100%" }}
         source={require("../assets/ellipse.png")}
       ></Image>
-
+      <TouchableOpacity           onPress={() => {
+            navigation.navigate("EditAvatarScreen", { userDetails: userData });
+          }}>
       <View style={ProfileStyles.profileImageContainer}>
         <Image
           style={ProfileStyles.profileImage}
@@ -98,7 +100,7 @@ export default function PostScreen({ navigation }) {
           }
         />
       </View>
-
+      </TouchableOpacity>
       <Text style={{ bottom: 330, fontSize: 30 }}>
         {userData ? userData.displayName : "None"}
       </Text>

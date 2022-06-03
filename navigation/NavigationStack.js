@@ -15,6 +15,7 @@ import CreateProfile from "../screens/CreateProfile";
 import IconScreen from "../screens/IconScreen";
 import { Calendar } from "react-native-calendars";
 import JournalFeedScreen from "../screens/JournalFeedScreen";
+import EditAvatarScreen from "../screens/EditAvatarScreen";
 
 export default function NavigationStack() {
   const { user, setUser } = useContext(AuthContext);
@@ -83,6 +84,14 @@ export default function NavigationStack() {
         <Stack.Screen
           name="CameraScreen"
           component={user ? CameraScreen : AuthStack}
+          options={{
+            headerLeft: () => <></>,
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="EditAvatarScreen"
+          component={EditAvatarScreen}
           options={{
             headerLeft: () => <></>,
             headerShown: false,
