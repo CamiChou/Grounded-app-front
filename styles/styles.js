@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({
+export default StyleSheet.create(
+  {
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -92,4 +93,18 @@ export default StyleSheet.create({
     marginLeft: "10%",
     marginRight: "10%",
   },
+  header: {
+    width: '100%',
+    height: 60,
+    backgroundColor: '#fff',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginLeft: '10%',
+},
+headerText: {
+    fontWeight: 'bold',
+    fontSize: 25,
+    color: '#709467',
+    letterSpacing: 1,
+},
 });
