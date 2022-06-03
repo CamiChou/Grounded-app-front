@@ -34,7 +34,7 @@ export default function CalendarScreen({ navigation }) {
         <FlatList style={{bottom: -30, margin: 0, padding:10}}
           data={months}
           renderItem={({ item }) => <CalendarMonth data={item} />}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item}
         ></FlatList>
       </View>
       </View>
